@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Caveat:wght@700&family=Nunito:wght@700&display=swap" rel="stylesheet">
   
+  <!-- خطوط تصميم الهاتف -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Sriracha&family=Titan+One&display=swap" rel="stylesheet">
   
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -107,55 +108,17 @@
       filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5)); 
       animation: imageFloat 4.5s ease-in-out infinite; 
     }
-    .gift-wrap:hover {
-      transform: scale(1.15);
-    }
+    .gift-wrap:hover { transform: scale(1.15); }
 
-    .notes-grid { 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      gap: 15px; 
-      width: 100%; 
-      z-index: 2; 
-    }
-    
+    .notes-grid { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; z-index: 2; }
     .magic-note {
-      position: relative; 
-      display: flex; 
-      width: fit-content;
-      min-width: 300px;
-      height: 3.8rem; 
-      align-items: center; 
-      justify-content: center; 
-      gap: 12px;
-      border: 2px solid var(--party-ink); 
-      border-radius: 50px; 
-      background: #ff7882; 
-      color: var(--party-ink); 
-      padding: 0 25px;
-      box-shadow: 0 0 20px rgba(255, 120, 130, 0.5), inset 0 4px 6px rgba(255,255,255,0.3); 
-      
-      transform: translateY(40px);
-      opacity: 0;
-      animation: popInNote 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
-      
-      transition: transform 0.3s ease, box-shadow 0.3s ease; 
-      cursor: default;
+      position: relative; display: flex; width: fit-content; min-width: 300px; height: 3.8rem; align-items: center; justify-content: center; gap: 12px;
+      border: 2px solid var(--party-ink); border-radius: 50px; background: #ff7882; color: var(--party-ink); padding: 0 25px;
+      box-shadow: 0 0 20px rgba(255, 120, 130, 0.5), inset 0 4px 6px rgba(255,255,255,0.3); transform: translateY(40px); opacity: 0;
+      animation: popInNote 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;
     }
-    
-    .magic-note:hover { 
-      transform: translateY(-3px) scale(1.02) !important; 
-      box-shadow: 0 0 30px rgba(255, 120, 130, 0.8), inset 0 4px 6px rgba(255,255,255,0.5); 
-    }
-    
-    .magic-note p { 
-      font-family: 'Bubblegum Sans', sans-serif; 
-      font-size: 1.3rem; 
-      font-weight: bold; 
-      margin: 0; 
-      letter-spacing: 0.5px;
-    }
+    .magic-note:hover { transform: translateY(-3px) scale(1.02) !important; box-shadow: 0 0 30px rgba(255, 120, 130, 0.8), inset 0 4px 6px rgba(255,255,255,0.5); }
+    .magic-note p { font-family: 'Bubblegum Sans', sans-serif; font-size: 1.3rem; font-weight: bold; margin: 0; letter-spacing: 0.5px; }
     
     .note-1 { animation-delay: 1.0s; }
     .note-2 { animation-delay: 2.9s; } 
@@ -167,45 +130,22 @@
     @keyframes confetti-fall { 0% { transform: translate3d(0, -12vh, 0) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate3d(36px, 112vh, 0) rotate(760deg); opacity: 0.8; } }
     @keyframes imageFloat { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-15px) rotate(2deg); } }
     @keyframes soft-pulse { 0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.92); } 50% { opacity: 0.95; transform: translate(-50%, -50%) scale(1.08); } }
-    
-    @keyframes popInNote { 
-      0% { transform: translateY(40px); opacity: 0; } 
-      100% { transform: translateY(0); opacity: 1; } 
-    }
+    @keyframes popInNote { 0% { transform: translateY(40px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
 
-    #fireworks-overlay {
-      position: fixed; top: -100vh; left: 0; width: 100%; height: 200vh; background-color: #000; z-index: 999999; 
-    }
+    #fireworks-overlay { position: fixed; top: -100vh; left: 0; width: 100%; height: 200vh; background-color: #000; z-index: 999999; }
     .title .happy span, .title .birthday span { position: relative !important; display: inline-block !important; margin: 0 2px !important; }
     .date__of__birth span, .name span { position: relative !important; display: inline-block !important; }
     
     #wrapper { display: none; opacity: 0; transition: opacity 3s ease-in-out; }
 
-    .text__letter {
-      max-height: 270px !important; 
-      overflow-y: auto !important;
-      padding-right: 8px;
-    }
-
-    .text__letter::-webkit-scrollbar {
-      width: 5px;
-    }
-    .text__letter::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .text__letter::-webkit-scrollbar-thumb {
-      background-color: #ff7882;
-      border-radius: 10px;
-    }
-
-    .text__letter p {
-      line-height: 1.5 !important;
-      margin: 0 !important;
-    }
+    .text__letter { max-height: 270px !important; overflow-y: auto !important; padding-right: 8px; }
+    .text__letter::-webkit-scrollbar { width: 5px; }
+    .text__letter::-webkit-scrollbar-track { background: transparent; }
+    .text__letter::-webkit-scrollbar-thumb { background-color: #ff7882; border-radius: 10px; }
+    .text__letter p { line-height: 1.5 !important; margin: 0 !important; }
 
     @media (max-width: 768px) {
-      .flag__birthday .flag__left, 
-      .flag__birthday .flag__right { width: 120px !important; }
+      .flag__birthday .flag__left, .flag__birthday .flag__right { width: 120px !important; }
       .content { flex-direction: column !important; align-items: center !important; padding-top: 40px !important; }
       .content .left, .content .right { width: 100% !important; display: flex !important; flex-direction: column !important; align-items: center !important; margin-bottom: 20px !important; }
       .title .happy span, .title .birthday span { font-size: 2rem !important; }
@@ -312,21 +252,13 @@
   <div id="start-screen">
     <div class="party-grid"></div>
     <div class="ambient-glow"></div>
-    <div class="bunting bunting-left">
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-    </div>
-    <div class="bunting bunting-right">
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-    </div>
+    <div class="bunting bunting-left"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="bunting bunting-right"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="confetti-layer" id="confetti-container"></div>
     <img src="./Images/balloon1.png" alt="Balloon" class="start-balloon balloon-left">
     <img src="./Images/balloon2.png" alt="Balloon" class="start-balloon balloon-right">
-    
-    <span class="spark spark-one">✦</span>
-    <span class="spark spark-two">✦</span>
-    <span class="start-heart heart-one">♥</span>
-    <span class="start-heart heart-two">♥</span>
-
+    <span class="spark spark-one">✦</span><span class="spark spark-two">✦</span>
+    <span class="start-heart heart-one">♥</span><span class="start-heart heart-two">♥</span>
     <p class="eyebrow">A little birthday magic</p>
     <h1 class="title-glow">For Amy...</h1>
     
@@ -336,21 +268,9 @@
     </div>
     
     <div class="notes-grid">
-      <div class="magic-note note-1">
-        <span class="note-star">★</span>
-        <p>1. Count to 5 before clicking...</p>
-        <span class="note-icon">⏳</span>
-      </div>
-      <div class="magic-note note-2">
-        <span class="note-star">★</span>
-        <p>2. Turn up your volume...</p>
-        <span class="note-icon">🔊</span>
-      </div>
-      <div class="magic-note note-3">
-        <span class="note-star">★</span>
-        <p>3. I hope you like it...</p>
-        <span class="note-icon">😉</span>
-      </div>
+      <div class="magic-note note-1"><span class="note-star">★</span><p>1. Count to 5 before clicking...</p><span class="note-icon">⏳</span></div>
+      <div class="magic-note note-2"><span class="note-star">★</span><p>2. Turn up your volume...</p><span class="note-icon">🔊</span></div>
+      <div class="magic-note note-3"><span class="note-star">★</span><p>3. I hope you like it...</p><span class="note-icon">😉</span></div>
     </div>
   </div>
 
@@ -358,6 +278,9 @@
       <canvas id="c"></canvas>
   </div>
 
+  <!-- =========================================
+       التصميم الأصلي للحاسوب
+       ========================================= -->
   <div id="wrapper">
     <div class="flag__birthday">
       <img src="./Images/1.png" alt="" width="350" class="flag__left">
@@ -368,61 +291,32 @@
       <div class="left">
         <div class="title">
           <h1 class="happy">
-            <span style="--t: 4s;">H</span>
-            <span style="--t: 4.2s;">a</span>
-            <span style="--t: 4.4s;">p</span>
-            <span style="--t: 4.6s;">p</span>
-            <span style="--t: 4.8s;">y</span>
+            <span style="--t: 4s;">H</span><span style="--t: 4.2s;">a</span><span style="--t: 4.4s;">p</span><span style="--t: 4.6s;">p</span><span style="--t: 4.8s;">y</span>
           </h1>
           <h1 class="birthday">
-            <span style="--t: 5s;">B</span>
-            <span style="--t: 5.2s;">i</span>
-            <span style="--t: 5.4s;">r</span>
-            <span style="--t: 5.6s;">t</span>
-            <span style="--t: 5.8s;">h</span>
-            <span style="--t: 6s;">d</span>
-            <span style="--t: 6.2s;">a</span>
-            <span style="--t: 6.4s;">y</span>
+            <span style="--t: 5s;">B</span><span style="--t: 5.2s;">i</span><span style="--t: 5.4s;">r</span><span style="--t: 5.6s;">t</span><span style="--t: 5.8s;">h</span><span style="--t: 6s;">d</span><span style="--t: 6.2s;">a</span><span style="--t: 6.4s;">y</span>
           </h1>
           <div class="hat">
             <img src="./Images/hat.png" alt="" width="130">
           </div>
         </div>
-
-        <div class="date__of__birth">
-          <span></span>
-        </div>
-
-        <div class="scroll-arrows arrow-one"><span></span><span></span><span></span></div>
-
+        <div class="date__of__birth"><span></span></div>
         <div class="btn">
           <button id="btn__letter">
-            Click here 
-            <i class="fa-regular fa-envelope"></i>
+            Click here <i class="fa-regular fa-envelope"></i>
           </button>
         </div>
       </div>
 
       <div class="right">
         <div class="box__account">
-          <div class="image">
-            <img src="./Images/amy.png" alt="">
-          </div>
+          <div class="image"><img src="./Images/amy.png" alt=""></div>
           <div class="name">
-            <i class="fa-solid fa-heart"></i>
-            <span>Our Princess🥳</span>
-            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-heart"></i><span>Our Princess🥳</span><i class="fa-solid fa-heart"></i>
           </div>
-          <div class="balloon_one">
-            <img width="100px" src="./Images/balloon1.png" alt="">
-          </div>
-          <div class="balloon_two">
-            <img width="100px" src="./Images/balloon2.png" alt="">
-          </div>
+          <div class="balloon_one"><img width="100px" src="./Images/balloon1.png" alt=""></div>
+          <div class="balloon_two"><img width="100px" src="./Images/balloon2.png" alt=""></div>
         </div>
-
-        <div class="scroll-arrows arrow-two"><span></span><span></span><span></span></div>
-
         <div class="cricle">
           <div class="text__cricle">
             <span style="--i: 1;">h</span><span style="--i: 2;">a</span><span style="--i: 3;">p</span><span style="--i: 4;">p</span><span style="--i: 5;">y</span><span style="--i: 6;">-</span><span style="--i: 7;">b</span><span style="--i: 8;">i</span><span style="--i: 9;">r</span><span style="--i: 10;">t</span><span style="--i: 11;">h</span><span style="--i: 12;">d</span><span style="--i: 13;">a</span><span style="--i: 14;">y</span><span style="--i: 15;">-</span>
@@ -432,62 +326,26 @@
       </div>
     </div>
 
+    <!-- زينة الحاسوب -->
     <div class="decorate_star star1" style="--t: 15s;"></div>
     <div class="decorate_star star2" style="--t: 15.2s;"></div>
     <div class="decorate_star star3" style="--t: 15.4s;"></div>
     <div class="decorate_star star4" style="--t: 15.6s;"></div>
     <div class="decorate_star star5" style="--t: 15.8s;"></div>
-
-    <div class="decorate_flower--one" style="--t: 15s;">
-      <img width="20" src="./Images/decorate_flower.png" alt="">
-    </div>
-    <div class="decorate_flower--two" style="--t: 15.3s;">
-      <img width="20" src="./Images/decorate_flower.png" alt="">
-    </div>
-    <div class="decorate_flower--three" style="--t: 15.6s;">
-      <img width="20" src="./Images/decorate_flower.png" alt="">
-    </div>
-
-    <div class="decorate_bottom">
-      <img src="./Images/decorate.png" alt="" width="100">
-    </div>
-    <div class="smiley__icon">
-      <img src="./Images/smiley_icon.png" alt="" width="100">
-    </div>
-
-    <div class="box__letter">
-      <div class="letter__border">
-        <div class="letter">
-          <div class="title__letter"></div>
-          <div class="content__letter">
-            <div class="left">
-              <img id="heart__letter" src="https://media0.giphy.com/media/c76IJLufpNwSULPk77/giphy.gif" alt="">
-              <img class="heart heart_1" style="--t: 0.2s" width="20" src="./Images/heart.png" alt="">
-              <img class="heart heart_2" style="--t: 0.4s" width="20" src="./Images/heart.png" alt="">
-              <img class="heart heart_3" style="--t: 0.6s" width="20" src="./Images/heart.png" alt="">
-              <img class="heart heart_4" style="--t: 0.8s" width="20" src="./Images/heart.png" alt="">
-            </div>
-            <div class="right">
-              <div class="love__img">
-                <img src="https://media4.giphy.com/media/W4jyjmIpnw6e38B6Qc/giphy.gif" alt="" width="220">
-              </div>
-              <div class="text__letter">
-                <p></p>
-              </div>
-              <img id="mewmew" width="80" src="./Images/mewmew.gif" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="close">
-          <i class="fa-solid fa-xmark"></i>
-        </div>
-      </div>
-    </div>
+    <div class="decorate_flower--one" style="--t: 15s;"><img width="20" src="./Images/decorate_flower.png" alt=""></div>
+    <div class="decorate_flower--two" style="--t: 15.3s;"><img width="20" src="./Images/decorate_flower.png" alt=""></div>
+    <div class="decorate_flower--three" style="--t: 15.6s;"><img width="20" src="./Images/decorate_flower.png" alt=""></div>
+    <div class="decorate_bottom"><img src="./Images/decorate.png" alt="" width="100"></div>
+    <div class="smiley__icon"><img src="./Images/smiley_icon.png" alt="" width="100"></div>
   </div>
 
 
+  <!-- 🔥 كود واجهة الهاتف المعدل تماماً 🔥 -->
   <style>
     @media screen and (max-width: 800px) {
+      /* إصلاح مشكلة الاسكرول نهائياً */
+      html, body { overflow-y: auto !important; height: auto !important; min-height: 100vh; }
+      
       #wrapper { display: none !important; }
       #mobile-wrapper {
         --font-display: "Titan One", sans-serif;
@@ -502,8 +360,13 @@
         --shadow: oklch(0.2 0.025 280 / 22%);
         --card: oklch(0.99 0.012 70);
         --grid-line: oklch(1 0 0 / 58%);
-        display: block; width: 100%;
+        display: block; width: 100%; position: relative;
       }
+      
+      /* إظهار زينة الحاسوب داخل الهاتف بنفس الأماكن */
+      #mobile-wrapper .decorate_star, #mobile-wrapper .decorate_flower--one, #mobile-wrapper .decorate_flower--two, #mobile-wrapper .decorate_flower--three { display: block !important; position: absolute; z-index: 1; }
+      #mobile-wrapper .decorate_bottom, #mobile-wrapper .smiley__icon { display: block !important; position: absolute; z-index: 1; }
+
       #mobile-wrapper .birthday-page {
         min-height: 100svh; background-color: var(--background);
         background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
@@ -513,58 +376,81 @@
         position: relative; display: flex; min-height: 100svh; width: 100%; flex-direction: column; align-items: center; justify-content: center;
         scroll-snap-align: start; scroll-snap-stop: always; padding: 2rem 1rem; overflow: hidden;
       }
-      #mobile-wrapper .birthday-title { font-family: var(--font-display); font-size: 4rem; line-height: 1.1; text-align: center; margin: 0; }
-      #mobile-wrapper .birthday-title span { display: block; opacity: 0; transform: translateY(35px); animation: title-arrive .75s forwards; -webkit-text-stroke: 1px var(--foreground); filter: drop-shadow(3px 4px 0 var(--foreground)); }
-      #mobile-wrapper .birthday-title span:first-child { color: var(--secondary); }
-      #mobile-wrapper .birthday-title span:last-child { color: var(--primary); animation-delay: .35s; }
-      #mobile-wrapper .party-hat { position: absolute; top: -100px; right: 10px; width: 80px; transform: translateY(-100vh); animation: hat-drop 1.15s 1s forwards; z-index: 5; }
-      #mobile-wrapper .party-hat img { width: 100%; transform: rotate(14deg); filter: drop-shadow(2px 4px 0px rgba(0,0,0,0.3)); }
-      #mobile-wrapper .birthday-date { margin-top: 2rem; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: .5rem 1rem; font: 700 1.1rem var(--font-hand); box-shadow: 0 5px 0 var(--shadow); animation: date-pop .65s 1.6s both; }
-      #mobile-wrapper .scroll-cue { position: absolute; bottom: 30px; display: flex; flex-direction: column; color: var(--primary); font-size: 1.5rem; text-decoration: none; }
+      
+      /* حركات الكلمات (حرفاً حرفاً) للهاتف */
+      #mobile-wrapper .title { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+      #mobile-wrapper .title .happy, #mobile-wrapper .title .birthday { display: flex; justify-content: center; font-family: var(--font-display); }
+      #mobile-wrapper .title span {
+        font-size: 3.5rem !important; display: inline-block; transform: translateY(50px); opacity: 0; visibility: hidden;
+        animation: txtTranslateY 0.5s var(--t) forwards;
+        text-shadow: 3px 3px #333, -3px 3px #333, 3px -3px #333, -3px -3px #333, 3px 6px 0 #333;
+      }
+      #mobile-wrapper .title .happy span { color: #fff; }
+      #mobile-wrapper .title .birthday span { color: #ff7882; }
+      
+      /* ضبط مكان القبعة للهاتف */
+      #mobile-wrapper .hat {
+        position: absolute; right: 10px; top: -50px; transform: rotate(-40deg); z-index: -1;
+        animation: topHat 2s 2.8s forwards ease; opacity: 0;
+      }
+      
+      #mobile-wrapper .birthday-date { margin-top: 2rem; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: .5rem 1rem; font: 700 1.2rem var(--font-hand); box-shadow: 0 5px 0 var(--shadow); width: 0; opacity: 0; visibility: hidden; animation: dateOfBirth 2s 3s forwards; overflow: hidden; white-space: nowrap; display: flex; align-items: center; justify-content: center; }
+      #mobile-wrapper .scroll-cue { position: absolute; bottom: 30px; display: flex; flex-direction: column; color: var(--primary); font-size: 1.5rem; text-decoration: none; z-index: 10; }
       #mobile-wrapper .scroll-cue i { margin-top: -8px; animation: cue-down 1.5s infinite; }
       #mobile-wrapper .scroll-cue i:nth-child(2) { animation-delay: .15s; }
       #mobile-wrapper .scroll-cue i:nth-child(3) { animation-delay: .3s; }
-      #mobile-wrapper .photo-reveal { width: 85vw; opacity: 0; transform: scale(.5); filter: blur(10px); transition: all 1s; }
+      #mobile-wrapper .photo-reveal { width: 85vw; opacity: 0; transform: scale(.5); filter: blur(10px); transition: all 1s; z-index: 5; }
       #mobile-wrapper .photo-reveal.is-visible { opacity: 1; transform: scale(1); filter: blur(0); }
       #mobile-wrapper .photo-frame { aspect-ratio: 1; border: 5px solid var(--border); border-radius: 50%; background: var(--secondary); box-shadow: 0 10px 0 var(--shadow); overflow: hidden; }
       #mobile-wrapper .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
       #mobile-wrapper .princess-label { display: flex; justify-content: center; align-items: center; gap: 10px; width: 90%; margin: -15px auto 0; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: .5rem; font: 700 1.1rem var(--font-hand); box-shadow: 0 5px 0 var(--shadow); position: relative; z-index: 2; }
       #mobile-wrapper .princess-label i { color: var(--destructive); }
-      #mobile-wrapper .balloon { position: absolute; width: 80px; animation: balloon-float 3s infinite ease-in-out; z-index: -1; }
+      #mobile-wrapper .balloon { position: absolute; width: 90px; animation: balloon-float 3s infinite ease-in-out; z-index: 1; }
       #mobile-wrapper .balloon-left { top: 15%; left: 10px; transform: rotate(-10deg); }
       #mobile-wrapper .balloon-right { bottom: 25%; right: 10px; transform: rotate(10deg); animation-delay: -1.5s; }
-      #mobile-wrapper .letter-button { display: flex; align-items: center; justify-content: center; gap: 10px; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: 1rem 2rem; font: 700 1.3rem var(--font-hand); box-shadow: 0 8px 0 var(--foreground); cursor: pointer; transition: 0.2s; outline: none; margin: 0 auto; color: var(--foreground); }
-      #mobile-wrapper .letter-button:active { transform: translateY(5px); box-shadow: 0 3px 0 var(--foreground); }
-      #mobile-wrapper .letter-backdrop { position: fixed; inset: 0; z-index: 50000; display: none; place-items: center; background: rgba(0,0,0,0.8); padding: 1rem; }
-      #mobile-wrapper .letter-paper { width: 100%; max-height: 90vh; overflow-y: auto; border: 5px solid var(--secondary); border-radius: 15px; background: var(--card); padding: 2rem 1.5rem; text-align: left; position: relative; animation: letter-open .5s both; }
-      #mobile-wrapper .letter-close { position: absolute; top: 10px; right: 10px; width: 35px; height: 35px; border: 2px solid var(--border); border-radius: 50%; background: var(--secondary); font-size: 1.2rem; cursor: pointer; display:flex; justify-content:center; align-items:center; color: var(--foreground); }
-      #mobile-wrapper h2 { font: 700 2.2rem var(--font-letter); text-align: center; margin-bottom: 15px; color: var(--foreground); }
-      #mobile-wrapper p { font: 700 1.2rem/1.6 var(--font-letter); color: var(--foreground); margin-top: 0; }
       
-      @keyframes title-arrive { to { opacity: 1; transform: translateY(0); } }
-      @keyframes hat-drop { to { transform: translateY(0); } }
-      @keyframes date-pop { from { opacity: 0; transform: scaleX(.2); } to { opacity: 1; transform: scaleX(1); } }
+      #mobile-wrapper #btn__letter_mob {
+        background-color: #ff7882; outline: none; padding: 10px 25px; font-size: 1.4rem; border-radius: 50px; 
+        border: 3px solid #333; font-family: 'Sriracha', cursive; display: flex; align-items: center; justify-content: center; 
+        cursor: pointer; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); font-weight: bold; box-shadow: rgba(0,0,0,0.4) 0px 5px 10px; z-index: 10;
+        transition: 0.3s;
+      }
+      #mobile-wrapper #btn__letter_mob:active { transform: scale(0.9); }
+      
       @keyframes cue-down { 0%,100% { opacity: .3; transform: translateY(-3px); } 50% { opacity: 1; transform: translateY(5px); } }
       @keyframes balloon-float { 50% { transform: translateY(-15px); } }
-      @keyframes letter-open { from { opacity: 0; transform: scale(.8); } }
     }
   </style>
 
   <div id="mobile-wrapper" style="display: none; opacity: 0; transition: opacity 2s ease-in-out;">
+    <!-- زينة الهاتف لتشبه الحاسوب -->
+    <div class="decorate_star star1" style="--t: 1s; top: 10%; left: 10%;"></div>
+    <div class="decorate_star star2" style="--t: 1.2s; top: 5%; right: 15%;"></div>
+    <div class="decorate_star star3" style="--t: 1.4s; top: 40%; left: 80%;"></div>
+    <div class="decorate_star star4" style="--t: 1.6s; bottom: 10%; left: 10%;"></div>
+    <div class="decorate_flower--one" style="--t: 1s; top: 20%; left: 5%;"><img width="20" src="./Images/decorate_flower.png" alt=""></div>
+    <div class="decorate_flower--two" style="--t: 1.3s; top: 15%; right: 10%;"><img width="20" src="./Images/decorate_flower.png" alt=""></div>
+    <div class="decorate_bottom" style="bottom: 0; right: 0;"><img src="./Images/decorate.png" alt="" width="80"></div>
+    <div class="smiley__icon" style="bottom: 10%; right: 40%;"><img src="./Images/smiley_icon.png" alt="" width="60"></div>
+
     <main class="birthday-page">
       <section class="birthday-scene" id="welcome">
-        <div style="position: relative;">
-          <div class="party-hat"><img src="./Images/hat.png" alt="Hat"></div>
-          <h1 class="birthday-title">
-            <span>Happy</span>
-            <span>Birthday</span>
+        <div class="title">
+          <div class="hat">
+            <img src="./Images/hat.png" alt="Hat" width="90">
+          </div>
+          <h1 class="happy">
+            <span style="--t: 0.2s;">H</span><span style="--t: 0.4s;">a</span><span style="--t: 0.6s;">p</span><span style="--t: 0.8s;">p</span><span style="--t: 1.0s;">y</span>
+          </h1>
+          <h1 class="birthday">
+            <span style="--t: 1.2s;">B</span><span style="--t: 1.4s;">i</span><span style="--t: 1.6s;">r</span><span style="--t: 1.8s;">t</span><span style="--t: 2.0s;">h</span><span style="--t: 2.2s;">d</span><span style="--t: 2.4s;">a</span><span style="--t: 2.6s;">y</span>
           </h1>
         </div>
-        <div class="birthday-date"><span>★</span> 19 September 2002 <span>★</span></div>
+        <div class="birthday-date">
+          <span>★ 19 September 2002 ★</span>
+        </div>
         <a class="scroll-cue" href="#amy">
-          <i class="fa-solid fa-chevron-down"></i>
-          <i class="fa-solid fa-chevron-down"></i>
-          <i class="fa-solid fa-chevron-down"></i>
+          <i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i>
         </a>
       </section>
 
@@ -582,29 +468,51 @@
           </div>
         </div>
         <a class="scroll-cue" href="#letter-mob">
-          <i class="fa-solid fa-chevron-down"></i>
-          <i class="fa-solid fa-chevron-down"></i>
-          <i class="fa-solid fa-chevron-down"></i>
+          <i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i>
         </a>
       </section>
 
       <section class="birthday-scene" id="letter-mob">
-        <h2 style="font-family: var(--font-letter); font-size: 2.5rem; margin-bottom: 20px;">One last surprise…</h2>
-        <button class="letter-button" id="open-btn-mob">
-          <i class="fa-regular fa-envelope"></i> Click here
+        <button id="btn__letter_mob">
+          Click here <i class="fa-regular fa-envelope" style="margin-left: 10px;"></i>
         </button>
       </section>
-
-      <div class="letter-backdrop" id="modal-mob">
-        <section class="letter-paper">
-          <button class="letter-close" id="close-btn-mob"><i class="fa-solid fa-xmark"></i></button>
-          <h2>For Amy, with love</h2>
-          <div style="width: 60px; height: 3px; background: var(--primary); margin: 0 auto 15px;"></div>
-          <p>Happy Birthday, Amy! 🎉✨ Your amazing content and fun personality never fail to brighten up our days. I wanted to do something special, so I designed this little magical surprise specifically for you. I truly hope it brings a big smile to your face, and I hope you like it and enjoy this gift! Wishing you endless happiness, good health, and all the success in achieving everything you dream of this year. Keep shining, and have the most amazing birthday! 🎂🎈😊</p>
-        </section>
-      </div>
     </main>
   </div>
+
+  <!-- =========================================
+       صندوق الرسالة الورقية المشترك (للحاسوب والهاتف معاً)
+       تم إخراجه ليعمل في الحالتين
+       ========================================= -->
+  <div class="box__letter">
+    <div class="letter__border">
+      <div class="letter">
+        <div class="title__letter"></div>
+        <div class="content__letter">
+          <div class="left">
+            <img id="heart__letter" src="https://media0.giphy.com/media/c76IJLufpNwSULPk77/giphy.gif" alt="">
+            <img class="heart heart_1" style="--t: 0.2s" width="20" src="./Images/heart.png" alt="">
+            <img class="heart heart_2" style="--t: 0.4s" width="20" src="./Images/heart.png" alt="">
+            <img class="heart heart_3" style="--t: 0.6s" width="20" src="./Images/heart.png" alt="">
+            <img class="heart heart_4" style="--t: 0.8s" width="20" src="./Images/heart.png" alt="">
+          </div>
+          <div class="right">
+            <div class="love__img">
+              <img src="https://media4.giphy.com/media/W4jyjmIpnw6e38B6Qc/giphy.gif" alt="" width="220">
+            </div>
+            <div class="text__letter">
+              <p></p>
+            </div>
+            <img id="mewmew" width="80" src="./Images/mewmew.gif" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="close">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+  </div>
+
   <script src="frontendfocus.js"></script>
 
   <script>
@@ -650,14 +558,16 @@
 
       setTimeout(function(){
         timeDatetxt = setInterval(function(){
-          if(currentIndex < charArrDate.length){
+          if(currentIndex < charArrDate.length && date__of__birth){
             date__of__birth.textContent += charArrDate[currentIndex];
             currentIndex++;
           } else {
             let i = document.createElement("i");
             i.className = "fa-solid fa-star";
-            document.querySelector(".date__of__birth").prepend(i);
-            document.querySelector(".date__of__birth").appendChild(i.cloneNode(true));
+            if(document.querySelector(".date__of__birth")){
+               document.querySelector(".date__of__birth").prepend(i);
+               document.querySelector(".date__of__birth").appendChild(i.cloneNode(true));
+            }
             clearInterval(timeDatetxt);
           }
         },100)
@@ -665,7 +575,9 @@
 
       var intervalContent;
       var intervalTitle;
-      $("#btn__letter").on("click", function(){
+      
+      // هنا السر: الزر في الهاتف أو الحاسوب سيفتح الرسالة الورقية الأصلية
+      $("#btn__letter, #btn__letter_mob").on("click", function(){
         $(".box__letter").slideDown();
         setTimeout(function(){ $(".letter__border").slideDown(); },1000);
         setTimeout(function(){
@@ -718,7 +630,6 @@
       });
     }
 
-    // 🔥 تعديل دالة الانتقال الذكية 🔥
     var transitionTriggered = false;
     window.startBirthdayTransition = function() {
       if (transitionTriggered) return; 
@@ -736,7 +647,6 @@
         
         setTimeout(function() {
           
-          // الكود السحري: هل الشاشة هاتف أم حاسوب؟
           if (window.innerWidth <= 800) {
             mobileWrapper.style.display = 'block';
             setTimeout(function() {
@@ -744,18 +654,16 @@
               
               var bdAudio = document.getElementById("birthday-audio");
               bdAudio.play().catch(e=>{});
+              
+              // تفعيل وظائف الرسالة في الموبايل
+              startCelebration();
 
-              // تفعيل حركة الصورة للهاتف
               const photo = document.getElementById('photo-reveal');
               const observer = new IntersectionObserver(entries => {
                 if (entries[0].isIntersecting) photo.classList.add('is-visible');
               }, { threshold: 0.4 });
               if(photo) observer.observe(photo);
 
-              // تفعيل زر الرسالة للهاتف
-              const modal = document.getElementById('modal-mob');
-              document.getElementById('open-btn-mob').onclick = () => { modal.style.display = 'grid'; document.body.classList.add('letter-is-open'); };
-              document.getElementById('close-btn-mob').onclick = () => { modal.style.display = 'none'; document.body.classList.remove('letter-is-open'); };
             }, 50);
 
           } else {
