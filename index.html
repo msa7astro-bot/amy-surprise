@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- خطوط التصميم -->
   <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Caveat:wght@700&family=Nunito:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Sriracha&family=Titan+One&display=swap" rel="stylesheet">
   
@@ -21,7 +20,7 @@
 
   <style>
     /* =========================================
-       إعدادات الشاشة الافتتاحية (ألوان HEX آمنة 100%)
+       إعدادات الشاشة الافتتاحية (ألوان HEX آمنة)
        ========================================= */
     :root {
       --party-pink: #ff7882;
@@ -77,7 +76,7 @@
     #wrapper { display: none; opacity: 0; transition: opacity 3s ease-in-out; }
 
     /* =========================================
-       إعدادات صندوق الرسالة (للحاسوب)
+       إعدادات صندوق الرسالة (للحاسوب فقط)
        ========================================= */
     .text__letter { max-height: 270px !important; overflow-y: auto !important; padding-right: 8px; }
     .text__letter::-webkit-scrollbar { width: 5px; }
@@ -86,70 +85,17 @@
     .text__letter p { line-height: 1.5 !important; margin: 0 !important; }
 
     /* =========================================
-       تصميم الهاتف الكامل والمزين
+       تصميم الهاتف الكامل (واجهة + رسالة Lovable)
        ========================================= */
     @media screen and (max-width: 800px) {
       html, body { overflow-x: hidden !important; overflow-y: auto !important; height: auto !important; min-height: 100vh; }
       #wrapper { display: none !important; }
       
-      /* تكبير الألعاب النارية للهاتف */
+      /* إخفاء رسالة الحاسوب تماماً عن الهاتف لتجنب التعارض */
+      .box__letter { display: none !important; }
+      
       #fireworks-overlay canvas { transform: scale(1.6); transform-origin: center center; }
 
-      /* 🌟 إصلاح شكل الرسالة لتملأ الشاشة وتكون واضحة للقراءة 🌟 */
-      .box__letter {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        width: 92% !important; /* تملأ معظم عرض الهاتف */
-        max-width: 450px !important;
-        margin: 0 !important;
-        transform: translate(-50%, -50%) !important; /* إلغاء التصغير المبالغ فيه */
-        z-index: 999999 !important;
-      }
-      .letter__border { width: 100% !important; }
-      .letter { 
-        width: 100% !important; 
-        height: auto !important; 
-        max-height: 85vh !important; /* لا تتعدى طول الشاشة */
-        padding: 25px 15px !important; 
-        overflow-y: auto !important; 
-        overflow-x: hidden !important;
-      }
-      .content__letter { 
-        flex-direction: column !important; /* الترتيب العمودي لتناسب الهاتف */
-        align-items: center !important; 
-        gap: 10px !important; 
-      }
-      .content__letter .left, .content__letter .right { 
-        width: 100% !important; 
-        display: flex !important; 
-        flex-direction: column !important; 
-        align-items: center !important; 
-        text-align: center !important; 
-      }
-      #heart__letter { width: 90px !important; margin-bottom: 10px !important; }
-      .heart { display: none !important; } /* إخفاء القلوب الصغيرة الجانبية لمنع الزحام */
-      .love__img img { width: 160px !important; margin: 0 auto !important; }
-      .text__letter { 
-        width: 100% !important; 
-        margin-top: 15px !important; 
-        max-height: 250px !important; 
-        overflow-y: auto !important; 
-      }
-      .text__letter p { 
-        font-size: 1.15rem !important; 
-        line-height: 1.6 !important; 
-        text-align: left !important; /* لسهولة قراءة الإنجليزية */
-      }
-      #mewmew { width: 60px !important; margin-top: 15px !important; }
-      .close { 
-        top: 10px !important; 
-        right: 10px !important; 
-        font-size: 1.5rem !important; 
-        z-index: 100 !important; 
-      }
-
-      /* تنسيقات واجهة الهاتف الساحرة */
       #mobile-wrapper {
         display: none; opacity: 0; transition: opacity 2s ease-in-out;
         background-color: #ffeef2;
@@ -163,15 +109,12 @@
         scroll-snap-align: start; scroll-snap-stop: always; padding: 2rem 1rem;
       }
 
-      /* 🌟 الأعلام العلوية - ثابتة ومستمرة 🌟 */
       .mob-flag { position: fixed !important; top: -5px; width: 55%; max-width: 250px; z-index: 1000; opacity: 0; animation: fadeInArrows 1s 1s forwards; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); pointer-events: none; }
       .mob-flag-left { left: -15px; transform: rotate(-5deg); }
       .mob-flag-right { right: -15px; transform: rotate(5deg) scaleX(-1); }
 
-      /* 🌟 الديكورات الموزعة 🌟 */
       .mob-decor { position: absolute; z-index: 1; opacity: 0; animation: popDecor 1s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-      /* 🌟 الكلمات العملاقة لتملأ الشاشة 🌟 */
       #mobile-wrapper .title { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; z-index: 40; }
       #mobile-wrapper .title .happy, #mobile-wrapper .title .birthday { display: flex; justify-content: center; font-family: "Titan One", sans-serif; width: 100%; }
       #mobile-wrapper .title span {
@@ -183,22 +126,19 @@
       #mobile-wrapper .title .happy span { color: #fff; }
       #mobile-wrapper .title .birthday span { color: #ff7882; }
       
-      /* 🌟 القبعة: تظهر من خلف الكلمات وتستقر فوقها 🌟 */
       #mobile-wrapper .hat {
-        position: absolute; right: 5%; top: -35px; z-index: 30; /* القبعة خلف الحروف */
+        position: absolute; right: 5%; top: -35px; z-index: 30; 
         animation: mobileHatPop 1.5s 3.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0;
       }
       #mobile-wrapper .hat img { width: clamp(100px, 28vw, 150px) !important; filter: drop-shadow(2px 5px 0px rgba(0,0,0,0.4)); }
 
       #mobile-wrapper .birthday-date { margin-top: 2rem; border: 3px solid #daccbf; border-radius: 999px; background: #ff7882; padding: .8rem 1.8rem; font: 700 1.4rem "Sriracha", cursive; box-shadow: 0 5px 0 rgba(0,0,0,0.15); width: 0; opacity: 0; visibility: hidden; animation: dateOfBirthMob 1.5s 3.5s forwards; overflow: hidden; white-space: nowrap; display: flex; align-items: center; justify-content: center; z-index: 20; color: #333; }
       
-      /* 🌟 تأخير الأسهم لـ 8.5 ثوانٍ 🌟 */
       #mobile-wrapper .scroll-cue { position: absolute; bottom: 25px; display: flex; flex-direction: column; color: #ff7882; font-size: 2rem; text-decoration: none; z-index: 50; opacity: 0; animation: fadeInArrows 1s 8.5s forwards !important; }
       #mobile-wrapper .scroll-cue i { margin-top: -12px; animation: cue-down 1.5s infinite; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); }
       #mobile-wrapper .scroll-cue i:nth-child(2) { animation-delay: .15s; }
       #mobile-wrapper .scroll-cue i:nth-child(3) { animation-delay: .3s; }
 
-      /* صورة الأفاتار بإطار Lovable */
       #mobile-wrapper .photo-reveal { width: 85vw; max-width: 350px; opacity: 0; transform: scale(.5); filter: blur(10px); transition: all 1s; z-index: 10; margin-top: 20px; }
       #mobile-wrapper .photo-reveal.is-visible { opacity: 1; transform: scale(1); filter: blur(0); }
       #mobile-wrapper .photo-frame { aspect-ratio: 1; border: 6px solid #333333; border-radius: 50%; background: #fff0f5; box-shadow: 0 12px 0 rgba(0,0,0,0.15); overflow: hidden; position: relative; }
@@ -208,12 +148,10 @@
       #mobile-wrapper .princess-label { display: flex; justify-content: center; align-items: center; gap: 10px; width: 95%; margin: -20px auto 0; border: 4px solid #333333; border-radius: 999px; background: #ff7882; padding: .6rem; font: 700 1.4rem "Sriracha", cursive; box-shadow: 0 6px 0 rgba(0,0,0,0.15); position: relative; z-index: 15; color: #333; }
       #mobile-wrapper .princess-label i { color: #dc143c; font-size: 1.5rem; }
       
-      /* البالونات */
       #mobile-wrapper .balloon { position: absolute; width: 110px; animation: balloon-float 3s infinite ease-in-out; z-index: 5; }
       #mobile-wrapper .balloon-left { top: 12%; left: -10px; transform: rotate(-10deg); }
       #mobile-wrapper .balloon-right { bottom: 20%; right: -10px; transform: rotate(10deg); animation-delay: -1.5s; }
       
-      /* الزر */
       #mobile-wrapper #btn__letter_mob {
         background-color: #ff7882; outline: none; padding: 15px 35px; font-size: 1.6rem; border-radius: 50px; 
         border: 4px solid #333333; font-family: 'Sriracha', cursive; display: flex; align-items: center; justify-content: center; 
@@ -226,18 +164,51 @@
       #mobile-wrapper .heart-one { top: 25%; left: 15%; transform: rotate(-15deg); }
       #mobile-wrapper .heart-two { right: 15%; bottom: 25%; transform: rotate(15deg); animation-delay: .55s; }
 
+      /* 🌟 تنسيقات رسالة الهاتف (Lovable Modal) 🌟 */
+      #mobile-letter-backdrop {
+        position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.8);
+        display: none; place-items: center; padding: 1.5rem;
+        opacity: 0; transition: opacity 0.3s ease;
+      }
+      .letter-paper-mob {
+        background: #fff8e4;
+        width: 100%; max-width: 450px; max-height: 85vh;
+        border-radius: 25px; border: 5px solid #333333;
+        padding: 30px 20px; text-align: center;
+        position: relative; overflow-y: auto; overflow-x: hidden;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        animation: popInNote 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .letter-paper-mob::-webkit-scrollbar { width: 6px; }
+      .letter-paper-mob::-webkit-scrollbar-track { background: transparent; }
+      .letter-paper-mob::-webkit-scrollbar-thumb { background-color: #ff7882; border-radius: 10px; }
+      
+      .letter-close-mob {
+        position: absolute; top: 15px; right: 15px; background: #ff7882;
+        border: 3px solid #333; border-radius: 50%; width: 40px; height: 40px;
+        font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
+        color: #333; cursor: pointer; box-shadow: 0 4px 0 rgba(0,0,0,0.3); z-index: 10;
+      }
+      .letter-close-mob:active { transform: translateY(4px); box-shadow: 0 0px 0 rgba(0,0,0,0.3); }
+      
+      .letter-stamp-mob { color: #dc143c; font-size: 2.5rem; margin-bottom: 5px; }
+      .letter-paper-mob h2 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #333; margin: 0 0 15px 0; }
+      .letter-rule-mob { width: 80px; height: 4px; background: #ff7882; margin: 0 auto 20px; border-radius: 5px; }
+      .letter-gif-mob { display: block; margin: 0 auto 20px; max-width: 100%; height: auto; border-radius: 10px; }
+      
+      .letter-text-container-mob { 
+        font-family: 'Sriracha', cursive; font-size: 1.3rem; line-height: 1.7; 
+        color: #444; text-align: left; margin-bottom: 25px; min-height: 100px; 
+      }
+      .letter-signoff-mob { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #dc143c; margin-top: 15px; font-weight: bold; }
+
       @keyframes txtTranslateY { 100% { transform: translateY(0); opacity: 1; visibility: visible; } }
       @keyframes dateOfBirthMob { 0% { width: 0px; opacity: 0; visibility: hidden; } 10% { width: 0px; opacity: 1; visibility: visible; } 100% { width: 85%; max-width: 320px; opacity: 1; visibility: visible; } }
       @keyframes cue-down { 0%,100% { opacity: .3; transform: translateY(-3px); } 50% { opacity: 1; transform: translateY(5px); } }
       @keyframes balloon-float { 50% { transform: translateY(-15px); } }
       @keyframes fadeInArrows { to { opacity: 1; } }
       @keyframes heart-beat { 50% { transform: scale(1.25); } }
-      
-      /* 🌟 أنيميشن القبعة المنبثقة من الخلف 🌟 */
-      @keyframes mobileHatPop { 
-        0% { opacity: 0; transform: translateY(40px) scale(0.5) rotate(0deg); } 
-        100% { opacity: 1; transform: translateY(0) scale(1.1) rotate(-25deg); } 
-      }
+      @keyframes mobileHatPop { 0% { opacity: 0; transform: translateY(40px) scale(0.5) rotate(0deg); } 100% { opacity: 1; transform: translateY(0) scale(1.1) rotate(-25deg); } }
       @keyframes popDecor { 0% { opacity: 0; transform: scale(0) rotate(-20deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
     }
   </style>
@@ -276,9 +247,6 @@
       <canvas id="c"></canvas>
   </div>
 
-  <!-- =========================================
-       التصميم الأصلي للحاسوب
-       ========================================= -->
   <div id="wrapper">
     <div class="flag__birthday">
       <img src="./Images/1.png" alt="" width="350" class="flag__left">
@@ -324,7 +292,6 @@
       </div>
     </div>
 
-    <!-- زينة الحاسوب -->
     <div class="decorate_star star1" style="--t: 15s;"></div>
     <div class="decorate_star star2" style="--t: 15.2s;"></div>
     <div class="decorate_star star3" style="--t: 15.4s;"></div>
@@ -337,90 +304,6 @@
     <div class="smiley__icon"><img src="./Images/smiley_icon.png" alt="" width="100"></div>
   </div>
 
-
-  <!-- =========================================
-       تصميم الهاتف (الآمن والمزين بالكامل)
-       ========================================= -->
-  <div id="mobile-wrapper">
-    <!-- 🌟 الأعلام العلوية (1.png) ثابتة وتظهر في كل الأقسام 🌟 -->
-    <img src="./Images/1.png" class="mob-flag mob-flag-left" alt="">
-    <img src="./Images/1.png" class="mob-flag mob-flag-right" alt="">
-
-    <main class="birthday-page">
-      
-      <!-- القسم الأول: مليء بالزينة والكلمات العملاقة -->
-      <section class="birthday-scene" id="welcome">
-        <div class="mob-decor decorate_star" style="width:35px; height:35px; top:18%; left:8%; animation-delay: 1.5s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
-        <div class="mob-decor decorate_star" style="width:25px; height:25px; top:25%; right:12%; animation-delay: 2s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
-        <div class="mob-decor decorate_star" style="width:20px; height:20px; bottom:28%; left:20%; animation-delay: 2.2s; background-color: #ff7882; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
-        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:45px; top:45%; left:6%; animation-delay: 2.5s;" alt="">
-        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:40px; bottom:22%; right:10%; animation-delay: 3s;" alt="">
-        <img src="./Images/smiley_icon.png" class="mob-decor" style="width:75px; bottom:15%; left:12%; animation-delay: 3.5s;" alt="">
-
-        <div class="title">
-          <div class="hat"><img src="./Images/hat.png" alt="Hat"></div>
-          <h1 class="happy">
-            <span style="--t: 0.2s;">H</span><span style="--t: 0.4s;">a</span><span style="--t: 0.6s;">p</span><span style="--t: 0.8s;">p</span><span style="--t: 1.0s;">y</span>
-          </h1>
-          <h1 class="birthday">
-            <span style="--t: 1.2s;">B</span><span style="--t: 1.4s;">i</span><span style="--t: 1.6s;">r</span><span style="--t: 1.8s;">t</span><span style="--t: 2.0s;">h</span><span style="--t: 2.2s;">d</span><span style="--t: 2.4s;">a</span><span style="--t: 2.6s;">y</span>
-          </h1>
-        </div>
-        <div class="birthday-date date__of__birth_mob"><span></span></div>
-        <a class="scroll-cue" href="#amy">
-          <i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i>
-        </a>
-      </section>
-
-      <!-- القسم الثاني: الصورة والبالونات والسمايلي -->
-      <section class="birthday-scene" id="amy">
-        <div class="mob-decor decorate_star" style="width:25px; height:25px; top:10%; left:25%; animation-delay: 0.5s; background-color: #e91e63; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
-        <div class="mob-decor decorate_star" style="width:30px; height:30px; bottom:15%; right:22%; animation-delay: 1s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
-        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:50px; top:20%; right:5%; animation-delay: 1.5s;" alt="">
-        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:35px; bottom:30%; left:8%; animation-delay: 1.8s;" alt="">
-        <img src="./Images/decorate.png" class="mob-decor" style="width:110px; bottom:5%; left:2%; animation-delay: 2s;" alt="">
-
-        <img src="./Images/balloon1.png" class="balloon balloon-left" alt="">
-        <img src="./Images/balloon2.png" class="balloon balloon-right" alt="">
-        
-        <div id="photo-reveal" class="photo-reveal">
-          <div class="photo-frame"><img src="./Images/amy.png" alt="Amy"></div>
-          <div class="princess-label">
-            <i class="fa-solid fa-heart"></i><span>Our Princess 🥳</span><i class="fa-solid fa-heart"></i>
-          </div>
-        </div>
-        
-        <img src="./Images/smiley_icon.png" class="mob-decor" style="width:75px; bottom: 10%; right: 25%; animation-delay: 2.5s; z-index: 20;" alt="">
-        
-        <a class="scroll-cue" href="#letter-mob" style="animation: fadeInArrows 1s 2s forwards !important;">
-          <i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i>
-        </a>
-      </section>
-
-      <!-- القسم الثالث: الرسالة -->
-      <section class="birthday-scene" id="letter-mob">
-        <div class="mob-decor decorate_star" style="width:35px; height:35px; top:12%; right:15%; animation-delay: 0.5s; background-color: #ff7882; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
-        <div class="mob-decor decorate_star" style="width:25px; height:25px; bottom:32%; left:10%; animation-delay: 1s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
-        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:45px; top:35%; left:15%; animation-delay: 1.5s;" alt="">
-        <img src="./Images/smiley_icon.png" class="mob-decor" style="width:65px; top:50%; right:10%; animation-delay: 1.8s;" alt="">
-        <img src="./Images/decorate.png" class="mob-decor" style="width:130px; bottom:0%; right:0%; animation-delay: 2s;" alt="">
-
-        <span class="letter-heart heart-one">♥</span>
-        <span class="letter-heart heart-two">♥</span>
-        
-        <h2 style="font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin-bottom: 10px; color: #333; position: relative; z-index: 20; text-shadow: 2px 2px 0px rgba(255,255,255,0.8);">One last surprise…</h2>
-        <p style="font-family: 'Sriracha', cursive; color: #555; font-size: 1.3rem; margin-bottom: 30px; position: relative; z-index: 20;">Made especially for Amy</p>
-        
-        <button id="btn__letter_mob">
-          <i class="fa-regular fa-envelope" style="margin-right: 12px;"></i> Open your letter
-        </button>
-      </section>
-    </main>
-  </div>
-
-  <!-- =========================================
-       صندوق الرسالة الورقية المشترك (للحاسوب والهاتف معاً)
-       ========================================= -->
   <div class="box__letter">
     <div class="letter__border">
       <div class="letter">
@@ -448,6 +331,103 @@
         <i class="fa-solid fa-xmark"></i>
       </div>
     </div>
+  </div>
+
+
+  <div id="mobile-wrapper">
+    <img src="./Images/1.png" class="mob-flag mob-flag-left" alt="">
+    <img src="./Images/1.png" class="mob-flag mob-flag-right" alt="">
+
+    <main class="birthday-page">
+      
+      <section class="birthday-scene" id="welcome">
+        <div class="mob-decor decorate_star" style="width:35px; height:35px; top:18%; left:8%; animation-delay: 1.5s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
+        <div class="mob-decor decorate_star" style="width:25px; height:25px; top:25%; right:12%; animation-delay: 2s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
+        <div class="mob-decor decorate_star" style="width:20px; height:20px; bottom:28%; left:20%; animation-delay: 2.2s; background-color: #ff7882; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
+        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:45px; top:45%; left:6%; animation-delay: 2.5s;" alt="">
+        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:40px; bottom:22%; right:10%; animation-delay: 3s;" alt="">
+        <img src="./Images/smiley_icon.png" class="mob-decor" style="width:75px; bottom:15%; left:12%; animation-delay: 3.5s;" alt="">
+
+        <div class="title">
+          <div class="hat"><img src="./Images/hat.png" alt="Hat"></div>
+          <h1 class="happy">
+            <span style="--t: 0.2s;">H</span><span style="--t: 0.4s;">a</span><span style="--t: 0.6s;">p</span><span style="--t: 0.8s;">p</span><span style="--t: 1.0s;">y</span>
+          </h1>
+          <h1 class="birthday">
+            <span style="--t: 1.2s;">B</span><span style="--t: 1.4s;">i</span><span style="--t: 1.6s;">r</span><span style="--t: 1.8s;">t</span><span style="--t: 2.0s;">h</span><span style="--t: 2.2s;">d</span><span style="--t: 2.4s;">a</span><span style="--t: 2.6s;">y</span>
+          </h1>
+        </div>
+        <div class="birthday-date date__of__birth_mob"><span></span></div>
+        <a class="scroll-cue" href="#amy">
+          <i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i>
+        </a>
+      </section>
+
+      <section class="birthday-scene" id="amy">
+        <div class="mob-decor decorate_star" style="width:25px; height:25px; top:10%; left:25%; animation-delay: 0.5s; background-color: #e91e63; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
+        <div class="mob-decor decorate_star" style="width:30px; height:30px; bottom:15%; right:22%; animation-delay: 1s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
+        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:50px; top:20%; right:5%; animation-delay: 1.5s;" alt="">
+        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:35px; bottom:30%; left:8%; animation-delay: 1.8s;" alt="">
+        <img src="./Images/decorate.png" class="mob-decor" style="width:110px; bottom:5%; left:2%; animation-delay: 2s;" alt="">
+
+        <img src="./Images/balloon1.png" class="balloon balloon-left" alt="">
+        <img src="./Images/balloon2.png" class="balloon balloon-right" alt="">
+        
+        <div id="photo-reveal" class="photo-reveal">
+          <div class="photo-frame"><img src="./Images/amy.png" alt="Amy"></div>
+          <div class="princess-label">
+            <i class="fa-solid fa-heart"></i><span>Our Princess 🥳</span><i class="fa-solid fa-heart"></i>
+          </div>
+        </div>
+        
+        <img src="./Images/smiley_icon.png" class="mob-decor" style="width:75px; bottom: 10%; right: 25%; animation-delay: 2.5s; z-index: 20;" alt="">
+        
+        <a class="scroll-cue" href="#letter-mob" style="animation: fadeInArrows 1s 2s forwards !important;">
+          <i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i>
+        </a>
+      </section>
+
+      <section class="birthday-scene" id="letter-mob">
+        <div class="mob-decor decorate_star" style="width:35px; height:35px; top:12%; right:15%; animation-delay: 0.5s; background-color: #ff7882; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
+        <div class="mob-decor decorate_star" style="width:25px; height:25px; bottom:32%; left:10%; animation-delay: 1s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
+        <img src="./Images/decorate_flower.png" class="mob-decor" style="width:45px; top:35%; left:15%; animation-delay: 1.5s;" alt="">
+        <img src="./Images/smiley_icon.png" class="mob-decor" style="width:65px; top:50%; right:10%; animation-delay: 1.8s;" alt="">
+        <img src="./Images/decorate.png" class="mob-decor" style="width:130px; bottom:0%; right:0%; animation-delay: 2s;" alt="">
+
+        <span class="letter-heart heart-one">♥</span>
+        <span class="letter-heart heart-two">♥</span>
+        
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin-bottom: 10px; color: #333; position: relative; z-index: 20; text-shadow: 2px 2px 0px rgba(255,255,255,0.8);">One last surprise…</h2>
+        <p style="font-family: 'Sriracha', cursive; color: #555; font-size: 1.3rem; margin-bottom: 30px; position: relative; z-index: 20;">Made especially for Amy</p>
+        
+        <button id="btn__letter_mob">
+          <i class="fa-regular fa-envelope" style="margin-right: 12px;"></i> Open your letter
+        </button>
+      </section>
+
+      <div id="mobile-letter-backdrop">
+        <section class="letter-paper-mob">
+          <button class="letter-close-mob" id="close-letter-mob">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          
+          <div class="letter-stamp-mob">♥</div>
+          <h2>For Amy, with love</h2>
+          <div class="letter-rule-mob"></div>
+          
+          <img class="letter-gif-mob" src="https://media0.giphy.com/media/c76IJLufpNwSULPk77/giphy.gif" alt="" style="width: 150px;">
+          
+          <div class="letter-text-container-mob">
+            <p id="mobile-letter-text"></p>
+          </div>
+          
+          <img class="letter-gif-mob" src="https://media4.giphy.com/media/W4jyjmIpnw6e38B6Qc/giphy.gif" alt="" style="width: 220px;">
+          
+          <div class="letter-signoff-mob">Happy Birthday! ♡</div>
+        </section>
+      </div>
+
+    </main>
   </div>
 
   <script src="frontendfocus.js"></script>
@@ -481,21 +461,10 @@
 
     function startCelebration() {
       let datetxt = " 19 September 2002 ";
-      let datatxtletter = "---------------------------------------------------------------Happy Birthday, Amy! 🎉✨ Your amazing content and fun personality never fail to brighten up our days. I wanted to do something special, so I designed this little magical surprise specifically for you. I truly hope it brings a big smile to your face, and I hope you like it and enjoy this gift! Wishing you endless happiness, good health, and all the success in achieving everything you dream of this year. Keep shining, and have the most amazing birthday! 🎂🎈😊";
-      let titleLetter = "To you";
       let charArrDate = datetxt.split('');
-      let charArrDateLetter = datatxtletter.split('');
-      let charArrTitle = titleLetter.split('');
       let currentIndex = 0;
-      let currentIndexLetter = 0;
-      let currentIndexTitle = 0;
-      
       let isMobile = window.innerWidth <= 800;
-      let date__of__birth = document.querySelector(".date__of__birth span");
-      let date__of__birth_mob = document.querySelector(".date__of__birth_mob span");
-      let text__letter = document.querySelector(".text__letter p");
-      
-      let targetDate = isMobile ? date__of__birth_mob : date__of__birth;
+      let targetDate = isMobile ? document.querySelector(".date__of__birth_mob span") : document.querySelector(".date__of__birth span");
 
       if(targetDate) {
         setTimeout(function(){
@@ -510,7 +479,6 @@
               let i2 = document.createElement("i");
               i2.className = "fa-solid fa-star";
               i2.style.marginLeft = "8px";
-              
               targetDate.parentElement.prepend(i1);
               targetDate.parentElement.appendChild(i2);
               clearInterval(timeDatetxt);
@@ -519,21 +487,33 @@
         }, isMobile ? 4500 : 12000); 
       }
 
-      var intervalContent;
-      var intervalTitle;
+      // ==========================================
+      // 🌟 برمجة الرسالة للحاسوب 🌟
+      // ==========================================
+      let datatxtletterDesktop = "---------------------------------------------------------------Happy Birthday, Amy! 🎉✨ Your amazing content and fun personality never fail to brighten up our days. I wanted to do something special, so I designed this little magical surprise specifically for you. I truly hope it brings a big smile to your face, and I hope you like it and enjoy this gift! Wishing you endless happiness, good health, and all the success in achieving everything you dream of this year. Keep shining, and have the most amazing birthday! 🎂🎈😊";
+      let titleLetterDesktop = "To you";
+      let charArrDateLetterDesktop = datatxtletterDesktop.split('');
+      let charArrTitleDesktop = titleLetterDesktop.split('');
       
-      $("#btn__letter, #btn__letter_mob").on("click", function(){
+      var intervalContentDesk;
+      var intervalTitleDesk;
+      
+      $("#btn__letter").on("click", function(){
+        let currentIndexLetterDesk = 0;
+        let currentIndexTitleDesk = 0;
+        let text__letterDesk = document.querySelector(".text__letter p");
+        
         $(".box__letter").slideDown();
         setTimeout(function(){ $(".letter__border").slideDown(); },1000);
         setTimeout(function(){
-          intervalTitle = setInterval(function(){
-            if(currentIndexTitle < charArrTitle.length){
-              document.querySelector(".title__letter").textContent += charArrTitle[currentIndexTitle];
+          intervalTitleDesk = setInterval(function(){
+            if(currentIndexTitleDesk < charArrTitleDesktop.length){
+              document.querySelector(".title__letter").textContent += charArrTitleDesktop[currentIndexTitleDesk];
               let i = document.createElement("i");
               i.className = "fa-solid fa-heart";
               document.querySelector(".title__letter").appendChild(i);
-              currentIndexTitle++;
-            } else { clearInterval(intervalTitle); }
+              currentIndexTitleDesk++;
+            } else { clearInterval(intervalTitleDesk); }
           },100);
         },2000);
         setTimeout(function(){
@@ -547,31 +527,71 @@
         
         setTimeout(function(){
           let containerBox = document.querySelector(".text__letter"); 
-          
-          intervalContent = setInterval(function(){
-            if(currentIndexLetter < charArrDateLetter.length){
-              text__letter.textContent += charArrDateLetter[currentIndexLetter];
+          intervalContentDesk = setInterval(function(){
+            if(currentIndexLetterDesk < charArrDateLetterDesktop.length){
+              text__letterDesk.textContent += charArrDateLetterDesktop[currentIndexLetterDesk];
               containerBox.scrollTop = containerBox.scrollHeight;
-              currentIndexLetter++;
+              currentIndexLetterDesk++;
             } else { 
-              clearInterval(intervalContent); 
+              clearInterval(intervalContentDesk); 
             }
           }, 50);
         }, 6000);
       });
 
       $(".close").on("click", function(){
-        clearInterval(intervalContent);
+        clearInterval(intervalContentDesk);
+        clearInterval(intervalTitleDesk);
         document.querySelector(".title__letter").textContent = "";
-        text__letter.textContent = "";
-        currentIndexLetter = 0;
-        currentIndexTitle = 0;
+        document.querySelector(".text__letter p").textContent = "";
         document.querySelector("#heart__letter").classList.remove("animationOp");
         document.querySelector(".love__img").classList.remove("animationOp");
         document.querySelector("#mewmew").classList.remove("animationOp");
         document.querySelectorAll(".heart").forEach((item)=>{ item.classList.remove("animation"); });
         $(".box__letter").slideUp();
         $(".letter__border").slideUp();
+      });
+
+      // ==========================================
+      // 🌟 برمجة الرسالة للهاتف (Lovable Style) 🌟
+      // ==========================================
+      let datatxtletterMobile = "Happy Birthday, Amy! 🎉✨ Your amazing content and fun personality never fail to brighten up our days. I wanted to do something special, so I designed this little magical surprise specifically for you. I truly hope it brings a big smile to your face, and I hope you like it and enjoy this gift! Wishing you endless happiness, good health, and all the success in achieving everything you dream of this year. Keep shining, and have the most amazing birthday! 🎂🎈😊";
+      let charArrDateLetterMobile = datatxtletterMobile.split('');
+      var intervalContentMob;
+
+      $("#btn__letter_mob").on("click", function(){
+        let currentIndexLetterMob = 0;
+        let mobText = document.querySelector("#mobile-letter-text");
+        let containerBoxMob = document.querySelector(".letter-paper-mob");
+        
+        // إظهار الرسالة
+        $("#mobile-letter-backdrop").css("display", "grid");
+        setTimeout(() => $("#mobile-letter-backdrop").css("opacity", "1"), 10);
+        
+        mobText.textContent = "";
+        
+        // كتابة النص
+        setTimeout(function(){
+          intervalContentMob = setInterval(function(){
+            if(currentIndexLetterMob < charArrDateLetterMobile.length){
+              mobText.textContent += charArrDateLetterMobile[currentIndexLetterMob];
+              containerBoxMob.scrollTop = containerBoxMob.scrollHeight; // النزول التلقائي
+              currentIndexLetterMob++;
+            } else { 
+              clearInterval(intervalContentMob); 
+            }
+          }, 45); // سرعة ممتازة للقراءة
+        }, 800);
+      });
+
+      $("#close-letter-mob, #mobile-letter-backdrop").on("click", function(e){
+        // إغلاق الرسالة فقط إذا تم الضغط على زر X أو الخلفية الشفافة (وليس الورقة نفسها)
+        if(e.target.id === "mobile-letter-backdrop" || $(e.target).closest('#close-letter-mob').length > 0) {
+          clearInterval(intervalContentMob);
+          document.querySelector("#mobile-letter-text").textContent = "";
+          $("#mobile-letter-backdrop").css("opacity", "0");
+          setTimeout(() => $("#mobile-letter-backdrop").css("display", "none"), 300);
+        }
       });
     }
 
