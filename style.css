@@ -643,25 +643,28 @@ img {
 }
 
 /* =========================================
-   📱 تأثير ظهور الصورة من العدم للهواتف فقط
+   📱 إعدادات الصفحات الأولى (الألعاب النارية والترحيب) للهاتف
    ========================================= */
-/* نستخدم max-device-width لاستهداف شاشة الموبايل الفعلية متجاهلين تعديل الـ viewport */
-@media screen and (max-device-width: 800px) {
-  /* استبدل .box__account باسم الكلاس الخاص بالصورة إذا كان مختلفاً */
-  .box__account { 
-    animation: appearFromNothing 2.5s ease-out forwards !important;
-    animation: appearFromNothing 2.5s ease-out 7s both !important;
+@media screen and (max-width: 768px) {
+  /* جعل الشاشات الأولى مرنة وتتطابق مع عرض الهاتف */
+  .fireworks-container, .intro-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
   }
 }
 
-/* تفاصيل حركة الظهور من العدم أثناء الصعود لأعلى */
-@keyframes appearFromNothing {
-  0% {
-    opacity: 0; /* مخفية تماماً (في العدم) */
-    transform: translateY(150px) scale(0.5); /* تبدأ من الأسفل وبحجم صغير */
+/* =========================================
+   💻 إجبار صفحة الاحتفال النهائية على ظهور شكل الحاسوب في الهاتف
+   ========================================= */
+@media screen and (max-width: 768px) {
+  /* استبدل .content أو اسم الكلاس الخاص بصندوق الاحتفال والرسالة لديك */
+  .content {
+    min-width: 1100px !important; /* فرض عرض الحاسوب الثابت */
   }
-  100% {
-    opacity: 1; /* تظهر بالكامل */
-    transform: translateY(0) scale(1); /* تستقر في مكانها وحجمها الطبيعي */
+  
+  /* جعل الحاوية الخاصة بصفحة الاحتفال قابلة للتمرير الأفقي بسلاسة إذا احتجت */
+  body.celebration-active {
+    overflow-x: auto !important;
   }
 }
