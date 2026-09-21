@@ -641,3 +641,26 @@ img {
     .box__account .image img { width: 150px; }
     .btn button { font-size: 14px; padding: 8px 16px; }
 }
+
+/* =========================================
+   📱 تأثير ظهور الصورة من العدم للهواتف فقط
+   ========================================= */
+/* نستخدم max-device-width لاستهداف شاشة الموبايل الفعلية متجاهلين تعديل الـ viewport */
+@media screen and (max-device-width: 800px) {
+  /* استبدل .box__account باسم الكلاس الخاص بالصورة إذا كان مختلفاً */
+  .box__account { 
+    animation: appearFromNothing 2.5s ease-out forwards !important;
+  }
+}
+
+/* تفاصيل حركة الظهور من العدم أثناء الصعود لأعلى */
+@keyframes appearFromNothing {
+  0% {
+    opacity: 0; /* مخفية تماماً (في العدم) */
+    transform: translateY(150px) scale(0.5); /* تبدأ من الأسفل وبحجم صغير */
+  }
+  100% {
+    opacity: 1; /* تظهر بالكامل */
+    transform: translateY(0) scale(1); /* تستقر في مكانها وحجمها الطبيعي */
+  }
+}
