@@ -642,78 +642,73 @@ img {
     .btn button { font-size: 14px; padding: 8px 16px; }
 }
 
-/* إخفاء الأسهم في الحاسوب */
+/* إخفاء الأسهم في الكمبيوتر */
 .scroll-arrows { display: none; }
 
 /* =========================================
-   📱 رحلة الموبايل (العنوان يسار، والباقي في المنتصف)
+   📱 رحلة الموبايل (CSS Grid - 3 أقسام مرتبة إجبارياً)
    ========================================= */
 @media screen and (max-width: 768px) {
-  body {
+  /* منع أي تمرير أفقي والسماح بالتمرير العمودي فقط */
+  body, html {
     overflow-x: hidden !important;
     overflow-y: auto !important;
+    width: 100% !important;
   }
   
+  /* استخدام Grid لفرض عمود واحد صلب */
   .content {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100vw !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
   }
 
-  /* فك ارتباط الأقسام لترتيبها بحرية */
+  /* تفريغ الحاويات القديمة لترتيب الأبناء بحرية */
   .left, .right {
     display: contents !important; 
   }
 
-  /* 1️⃣ القسم الأول: العنوان والقبعة (محاذاة لليسار وحجم كبير جداً) */
+  /* 1️⃣ القسم الأول: العنوان (على اليسار، كبير جداً، ويأخذ شاشة كاملة) */
   .title {
-    order: 1;
-    width: 100% !important;
-    min-height: 85vh !important;
+    grid-row: 1 !important;
+    min-height: 85vh !important; /* يأخذ معظم الشاشة الأولى */
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    align-items: flex-start !important; /* إجبار المحاذاة لليسار */
-    padding-left: 20px !important; /* مسافة من الحافة */
+    align-items: flex-start !important;
+    padding-left: 20px !important;
     position: relative !important;
+    width: 100% !important;
   }
   
-  /* تكبير الحروف ومنعها من الانكماش أو التداخل */
   .title .happy span, .title .birthday span {
-    font-size: 3.5rem !important; 
+    font-size: 3.5rem !important; /* خط ضخم وواضح */
     display: inline-block !important;
-    line-height: 1.1 !important;
-  }
-  
-  /* إبعاد كلمة Birthday عن Happy قليلاً للأسفل */
-  .title .birthday {
-    margin-top: 15px !important;
+    line-height: 1.2 !important;
   }
 
-  /* إخراج القبعة من زحمة الكلمات ووضعها في الأعلى يميناً */
   .title .hat {
     position: absolute !important;
-    top: 25% !important;
-    right: 30px !important;
-    transform: scale(1.4) !important; /* تكبير القبعة */
+    top: 20% !important; 
+    right: 25px !important; 
+    transform: scale(1.6) !important; /* تكبير القبعة */
   }
 
-  /* 2️⃣ السهم الأول (في المنتصف تماماً) */
+  /* السهم الأول (أسفل العنوان) */
   .arrow-one {
-    order: 2;
-    width: 100% !important;
+    grid-row: 2 !important;
+    min-height: 15vh !important;
     display: flex !important;
     justify-content: center !important;
-    align-items: center !important;
-    margin-bottom: 50px !important;
-    animation: revealArrows 1s ease 6s both !important; /* يظهر بعد 6 ثوانٍ */
+    align-items: flex-start !important;
+    width: 100% !important;
+    animation: fadeIn 2s ease forwards !important; 
   }
 
-  /* 3️⃣ الصورة (في المنتصف تماماً) */
+  /* 2️⃣ القسم الثاني: الصورة (في المنتصف، وتأخذ شاشة كاملة) */
   .box__account {
-    order: 3;
-    width: 100% !important;
-    min-height: 80vh !important;
+    grid-row: 3 !important;
+    min-height: 85vh !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
@@ -721,36 +716,48 @@ img {
     position: relative !important;
     top: auto !important; right: auto !important; left: auto !important;
     margin: 0 auto !important;
-    transform: scale(1.1) !important;
+    transform: scale(1.2) !important; /* تكبير الصورة */
+    width: 100% !important;
+    animation: appearFromNothing 2s ease-out forwards !important;
   }
 
-  /* 4️⃣ السهم الثاني (في المنتصف تماماً) */
+  /* السهم الثاني (أسفل الصورة) */
   .arrow-two {
-    order: 4;
-    width: 100% !important;
+    grid-row: 4 !important;
+    min-height: 15vh !important;
     display: flex !important;
     justify-content: center !important;
-    align-items: center !important;
-    margin-bottom: 50px !important;
-    animation: revealArrows 1s ease 2s both !important;
+    align-items: flex-start !important;
+    width: 100% !important;
   }
 
-  /* 5️⃣ زر الرسالة (في المنتصف تماماً وشاشة كاملة) */
+  /* 3️⃣ القسم الثالث: زر الرسالة (في المنتصف، ويأخذ شاشة كاملة) */
   .btn {
-    order: 5;
-    width: 100% !important;
-    min-height: 80vh !important;
+    grid-row: 5 !important;
+    min-height: 100vh !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+    width: 100% !important;
     margin: 0 !important;
   }
   
   #btn__letter {
-    transform: scale(1.4) !important; /* تكبير الزر */
+    transform: scale(1.5) !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
   }
 
-  /* إخفاء الزخارف التي تسبب الفوضى */
+  /* 4️⃣ صندوق الرسالة (مخفي حتى يتم الضغط) */
+  .box__letter {
+    grid-row: 6 !important;
+    width: 95% !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    top: auto !important; left: auto !important;
+    transform: none !important;
+  }
+
+  /* تنظيف الشاشة من الزخارف الجانبية في الهاتف */
   .date__of__birth, .cricle, .decorate_star, .decorate_flower--one, .decorate_flower--two, .decorate_flower--three, .decorate_bottom, .smiley__icon {
     display: none !important;
   }
@@ -765,7 +772,7 @@ img {
     display: block;
     width: 25px !important;
     height: 25px !important;
-    border-bottom: 5px solid #ff1493 !important;
+    border-bottom: 5px solid #ff1493 !important; /* لون وردي غامق وواضح */
     border-right: 5px solid #ff1493 !important;
     transform: rotate(45deg);
     animation: arrowBounce 1.5s infinite;
@@ -775,12 +782,18 @@ img {
   .scroll-arrows span:nth-child(3) { animation-delay: 0s; }
 }
 
-/* 🎬 حركات الظهور للأسهم */
+/* =========================================
+   🎬 الحركات
+   ========================================= */
 @keyframes arrowBounce {
   0%, 100% { transform: rotate(45deg) translate(-5px, -5px); opacity: 0; }
   50% { transform: rotate(45deg) translate(5px, 5px); opacity: 1; }
 }
-@keyframes revealArrows {
-  0% { opacity: 0; visibility: hidden; }
-  100% { opacity: 1; visibility: visible; }
+@keyframes appearFromNothing {
+  0% { opacity: 0; transform: translateY(100px) scale(0.8); }
+  100% { opacity: 1; transform: translateY(0) scale(1.2); }
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
