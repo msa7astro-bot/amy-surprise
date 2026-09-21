@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
+  <!-- خطوط التصميم -->
   <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Caveat:wght@700&family=Nunito:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Sriracha&family=Titan+One&display=swap" rel="stylesheet">
   
@@ -20,7 +21,7 @@
 
   <style>
     /* =========================================
-       إعدادات الشاشة الافتتاحية 
+       إعدادات الشاشة الافتتاحية (ألوان HEX آمنة 100%)
        ========================================= */
     :root {
       --party-pink: #ff7882;
@@ -75,6 +76,9 @@
     #fireworks-overlay { position: fixed; top: -100vh; left: 0; width: 100%; height: 200vh; background-color: #000; z-index: 999999; }
     #wrapper { display: none; opacity: 0; transition: opacity 3s ease-in-out; }
 
+    /* =========================================
+       إعدادات صندوق الرسالة (للحاسوب)
+       ========================================= */
     .text__letter { max-height: 270px !important; overflow-y: auto !important; padding-right: 8px; }
     .text__letter::-webkit-scrollbar { width: 5px; }
     .text__letter::-webkit-scrollbar-track { background: transparent; }
@@ -82,61 +86,31 @@
     .text__letter p { line-height: 1.5 !important; margin: 0 !important; }
 
     /* =========================================
-       إصلاح صندوق الرسالة (للهاتف) - تغطية كاملة
+       تصميم الهاتف الكامل والمزين
        ========================================= */
-    @media (max-width: 800px) {
-      .box__letter {
-        position: fixed !important;
-        inset: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        background: rgba(0, 0, 0, 0.85) !important;
-        z-index: 9999999 !important;
-        margin: 0 !important;
-        left: 0 !important;
-        top: 0 !important;
-        transform: none !important;
-      }
-      .letter__border {
-        width: 92% !important;
-        max-width: 400px !important;
-        margin: 0 auto !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-      }
-      .letter {
-        width: 100% !important;
-        height: auto !important;
-        max-height: 85vh !important;
-        padding: 20px 15px !important;
-        overflow-y: auto !important;
-      }
-      .content__letter { flex-direction: column !important; align-items: center !important; }
-      .content__letter .left, .content__letter .right {
-        width: 100% !important;
-        text-align: center !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .love__img img { width: 160px !important; margin: 0 auto 10px !important; }
-      .text__letter { margin-top: 15px !important; width: 100% !important; }
-    }
-  </style>
-
-  <!-- 🔥 واجهة الهاتف بـ Lovable Design 🔥 -->
-  <style>
     @media screen and (max-width: 800px) {
       html, body { overflow-x: hidden !important; overflow-y: auto !important; height: auto !important; min-height: 100vh; }
       #wrapper { display: none !important; }
       
+      /* 🌟 جعل الرسالة تظهر كما في الحاسوب تماماً (بشكل أفقي) وتصغيرها لتظهر الخلفية 🌟 */
+      .box__letter {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        width: 750px !important; /* إجبارها على أخذ عرض الحاسوب */
+        margin: 0 !important;
+        transform: translate(-50%, -50%) scale(0.48) !important; /* تصغيرها لترى الزينة الجانبية */
+        transform-origin: center center !important;
+        z-index: 999999 !important; /* حل مشكلة تداخل الخلفية */
+      }
+
+      /* تنسيقات واجهة الهاتف الساحرة بألوان HEX آمنة */
       #mobile-wrapper {
-        display: block; width: 100%; position: relative; overflow-x: hidden;
+        display: none; opacity: 0; transition: opacity 2s ease-in-out;
         background-color: #ffeef2;
         background-image: linear-gradient(rgba(255,120,130,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,120,130,0.2) 1px, transparent 1px);
         background-size: 38px 38px; color: #333333; font-family: sans-serif;
+        width: 100%; position: relative; overflow-x: hidden;
       }
       
       #mobile-wrapper .birthday-scene {
@@ -144,16 +118,19 @@
         scroll-snap-align: start; scroll-snap-stop: always; padding: 2rem 1rem;
       }
 
+      /* 🌟 الأعلام العلوية - ثابتة ومستمرة 🌟 */
       .mob-flag { position: fixed !important; top: -5px; width: 55%; max-width: 250px; z-index: 1000; opacity: 0; animation: fadeInArrows 1s 1s forwards; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); pointer-events: none; }
       .mob-flag-left { left: -15px; transform: rotate(-5deg); }
       .mob-flag-right { right: -15px; transform: rotate(5deg) scaleX(-1); }
 
+      /* 🌟 الديكورات الموزعة 🌟 */
       .mob-decor { position: absolute; z-index: 1; opacity: 0; animation: popDecor 1s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-      #mobile-wrapper .title { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; z-index: 20; }
+      /* 🌟 الكلمات العملاقة لتملأ الشاشة 🌟 */
+      #mobile-wrapper .title { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; z-index: 40; } /* Z-index أعلى من القبعة */
       #mobile-wrapper .title .happy, #mobile-wrapper .title .birthday { display: flex; justify-content: center; font-family: "Titan One", sans-serif; width: 100%; }
       #mobile-wrapper .title span {
-        font-size: clamp(3.5rem, 16vw, 6rem) !important;
+        font-size: clamp(3.5rem, 16vw, 6rem) !important; position: relative; z-index: 40;
         display: inline-block; transform: translateY(50px); opacity: 0; visibility: hidden;
         animation: txtTranslateY 0.5s var(--t) forwards; margin: 0 -2px;
         text-shadow: 3px 3px #333, -3px 3px #333, 3px -3px #333, -3px -3px #333, 3px 8px 0 #333;
@@ -161,20 +138,22 @@
       #mobile-wrapper .title .happy span { color: #fff; }
       #mobile-wrapper .title .birthday span { color: #ff7882; }
       
-      /* 🌟 القبعة المضبوطة 🌟 */
+      /* 🌟 القبعة: تظهر من خلف الكلمات وتستقر فوقها 🌟 */
       #mobile-wrapper .hat {
-        position: absolute; right: 8%; top: 40px; z-index: 30;
-        animation: mobileHatDrop 1.5s 3.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0;
+        position: absolute; right: 5%; top: -35px; z-index: 30; /* القبعة خلف الحروف (z-index أقل) */
+        animation: mobileHatPop 1.5s 3.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0;
       }
-      #mobile-wrapper .hat img { width: clamp(80px, 22vw, 120px) !important; filter: drop-shadow(2px 5px 0px rgba(0,0,0,0.4)); }
+      #mobile-wrapper .hat img { width: clamp(100px, 28vw, 150px) !important; filter: drop-shadow(2px 5px 0px rgba(0,0,0,0.4)); }
 
       #mobile-wrapper .birthday-date { margin-top: 2rem; border: 3px solid #daccbf; border-radius: 999px; background: #ff7882; padding: .8rem 1.8rem; font: 700 1.4rem "Sriracha", cursive; box-shadow: 0 5px 0 rgba(0,0,0,0.15); width: 0; opacity: 0; visibility: hidden; animation: dateOfBirthMob 1.5s 3.5s forwards; overflow: hidden; white-space: nowrap; display: flex; align-items: center; justify-content: center; z-index: 20; color: #333; }
       
+      /* 🌟 تأخير الأسهم لـ 8.5 ثوانٍ 🌟 */
       #mobile-wrapper .scroll-cue { position: absolute; bottom: 25px; display: flex; flex-direction: column; color: #ff7882; font-size: 2rem; text-decoration: none; z-index: 50; opacity: 0; animation: fadeInArrows 1s 8.5s forwards !important; }
       #mobile-wrapper .scroll-cue i { margin-top: -12px; animation: cue-down 1.5s infinite; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); }
       #mobile-wrapper .scroll-cue i:nth-child(2) { animation-delay: .15s; }
       #mobile-wrapper .scroll-cue i:nth-child(3) { animation-delay: .3s; }
 
+      /* صورة الأفاتار بإطار Lovable */
       #mobile-wrapper .photo-reveal { width: 85vw; max-width: 350px; opacity: 0; transform: scale(.5); filter: blur(10px); transition: all 1s; z-index: 10; margin-top: 20px; }
       #mobile-wrapper .photo-reveal.is-visible { opacity: 1; transform: scale(1); filter: blur(0); }
       #mobile-wrapper .photo-frame { aspect-ratio: 1; border: 6px solid #333333; border-radius: 50%; background: #fff0f5; box-shadow: 0 12px 0 rgba(0,0,0,0.15); overflow: hidden; position: relative; }
@@ -184,6 +163,7 @@
       #mobile-wrapper .princess-label { display: flex; justify-content: center; align-items: center; gap: 10px; width: 95%; margin: -20px auto 0; border: 4px solid #333333; border-radius: 999px; background: #ff7882; padding: .6rem; font: 700 1.4rem "Sriracha", cursive; box-shadow: 0 6px 0 rgba(0,0,0,0.15); position: relative; z-index: 15; color: #333; }
       #mobile-wrapper .princess-label i { color: #dc143c; font-size: 1.5rem; }
       
+      /* البالونات */
       #mobile-wrapper .balloon { position: absolute; width: 110px; animation: balloon-float 3s infinite ease-in-out; z-index: 5; }
       #mobile-wrapper .balloon-left { top: 12%; left: -10px; transform: rotate(-10deg); }
       #mobile-wrapper .balloon-right { bottom: 20%; right: -10px; transform: rotate(10deg); animation-delay: -1.5s; }
@@ -207,7 +187,12 @@
       @keyframes balloon-float { 50% { transform: translateY(-15px); } }
       @keyframes fadeInArrows { to { opacity: 1; } }
       @keyframes heart-beat { 50% { transform: scale(1.25); } }
-      @keyframes mobileHatDrop { 0% { opacity: 0; transform: translateY(-50px) scale(0) rotate(-60deg); } 100% { opacity: 1; transform: translateY(0) scale(1) rotate(-15deg); } }
+      
+      /* 🌟 أنيميشن القبعة المنبثقة من الخلف 🌟 */
+      @keyframes mobileHatPop { 
+        0% { opacity: 0; transform: translateY(40px) scale(0.5) rotate(0deg); } 
+        100% { opacity: 1; transform: translateY(0) scale(1.1) rotate(-25deg); } 
+      }
       @keyframes popDecor { 0% { opacity: 0; transform: scale(0) rotate(-20deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
     }
   </style>
@@ -309,16 +294,16 @@
 
 
   <!-- =========================================
-       تصميم الهاتف الكامل والمزين
+       تصميم الهاتف (الآمن والمزين بالكامل)
        ========================================= -->
   <div id="mobile-wrapper">
-    <!-- الأعلام العلوية -->
+    <!-- 🌟 الأعلام العلوية (1.png) ثابتة وتظهر في كل الأقسام 🌟 -->
     <img src="./Images/1.png" class="mob-flag mob-flag-left" alt="">
     <img src="./Images/1.png" class="mob-flag mob-flag-right" alt="">
 
     <main class="birthday-page">
       
-      <!-- القسم الأول: الكلمات والقبعة -->
+      <!-- القسم الأول: مليء بالزينة والكلمات العملاقة -->
       <section class="birthday-scene" id="welcome">
         <div class="mob-decor decorate_star" style="width:35px; height:35px; top:18%; left:8%; animation-delay: 1.5s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
         <div class="mob-decor decorate_star" style="width:25px; height:25px; top:25%; right:12%; animation-delay: 2s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
@@ -342,7 +327,7 @@
         </a>
       </section>
 
-      <!-- القسم الثاني: الصورة والبالونات -->
+      <!-- القسم الثاني: الصورة والبالونات والسمايلي -->
       <section class="birthday-scene" id="amy">
         <div class="mob-decor decorate_star" style="width:25px; height:25px; top:10%; left:25%; animation-delay: 0.5s; background-color: #e91e63; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
         <div class="mob-decor decorate_star" style="width:30px; height:30px; bottom:15%; right:22%; animation-delay: 1s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
@@ -359,6 +344,8 @@
             <i class="fa-solid fa-heart"></i><span>Our Princess 🥳</span><i class="fa-solid fa-heart"></i>
           </div>
         </div>
+        
+        <img src="./Images/smiley_icon.png" class="mob-decor" style="width:75px; bottom: 10%; right: 25%; animation-delay: 2.5s; z-index: 20;" alt="">
         
         <a class="scroll-cue" href="#letter-mob" style="animation: fadeInArrows 1s 2s forwards !important;">
           <i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i>
@@ -387,7 +374,7 @@
   </div>
 
   <!-- =========================================
-       صندوق الرسالة الورقية المغلق تماماً
+       صندوق الرسالة الورقية المشترك (للحاسوب والهاتف معاً)
        ========================================= -->
   <div class="box__letter">
     <div class="letter__border">
@@ -491,7 +478,7 @@
       var intervalTitle;
       
       $("#btn__letter, #btn__letter_mob").on("click", function(){
-        $(".box__letter").css('display', 'flex').hide().fadeIn();
+        $(".box__letter").slideDown();
         setTimeout(function(){ $(".letter__border").slideDown(); },1000);
         setTimeout(function(){
           intervalTitle = setInterval(function(){
@@ -538,9 +525,8 @@
         document.querySelector(".love__img").classList.remove("animationOp");
         document.querySelector("#mewmew").classList.remove("animationOp");
         document.querySelectorAll(".heart").forEach((item)=>{ item.classList.remove("animation"); });
-        $(".letter__border").slideUp(function(){
-          $(".box__letter").fadeOut();
-        });
+        $(".box__letter").slideUp();
+        $(".letter__border").slideUp();
       });
     }
 
@@ -552,6 +538,8 @@
       var overlay = document.getElementById('fireworks-overlay');
       var wrapper = document.getElementById('wrapper');
       var mobileWrapper = document.getElementById('mobile-wrapper');
+      
+      var delayBeforeSlide = window.innerWidth <= 800 ? 2500 : 1300;
       
       setTimeout(function() {
         overlay.style.transition = 'transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 3s ease 3s';
@@ -592,7 +580,7 @@
           overlay.style.display = 'none';
         }, 6500);
 
-      }, 1300); 
+      }, delayBeforeSlide); 
     };
   </script>
 
