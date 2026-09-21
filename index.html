@@ -19,7 +19,7 @@
 
   <style>
     /* =========================================
-       إعدادات الشاشة الافتتاحية (مع ألوان احتياطية قوية)
+       إعدادات الشاشة الافتتاحية 
        ========================================= */
     :root {
       --party-pink: #ff7882; --party-pink-ok: oklch(0.72 0.18 18);
@@ -30,7 +30,7 @@
       --party-magenta: #e91e63; --party-magenta-ok: oklch(0.68 0.22 345);
     }
     
-    #start-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--party-ink); background-color: var(--party-ink-ok); background-image: linear-gradient(180deg, #1a0b2e, #0b0213); background-image: radial-gradient(circle at 50% 38%, color-mix(in oklab, var(--party-blue-ok) 30%, transparent), transparent 32%), linear-gradient(180deg, color-mix(in oklab, var(--party-ink-ok) 88%, var(--party-blue-ok)), var(--party-ink-ok)); z-index: 10000000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; overflow: hidden; transition: opacity 1.5s ease-in-out, visibility 1.5s; }
+    #start-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--party-ink); background-color: var(--party-ink-ok); background-image: radial-gradient(circle at 50% 38%, color-mix(in oklab, var(--party-blue-ok) 30%, transparent), transparent 32%), linear-gradient(180deg, color-mix(in oklab, var(--party-ink-ok) 88%, var(--party-blue-ok)), var(--party-ink-ok)); z-index: 10000000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; overflow: hidden; transition: opacity 1.5s ease-in-out, visibility 1.5s; }
     .party-grid { position: absolute; inset: 0; z-index: -20; background-image: linear-gradient(rgba(255,248,228,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,248,228,0.07) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(to bottom, black, transparent 72%); -webkit-mask-image: linear-gradient(to bottom, black, transparent 72%); }
     .ambient-glow { position: absolute; inset: 0; z-index: -10; background: radial-gradient(circle at 18% 24%, rgba(255,120,130,0.17) 0 4%, transparent 18%), radial-gradient(circle at 82% 34%, rgba(233,30,99,0.16) 0 3%, transparent 20%), radial-gradient(circle at 50% 72%, rgba(255,193,7,0.13), transparent 25%); }
     .bunting { position: absolute; top: 1.5rem; z-index: 1; display: flex; transform: rotate(7deg); }
@@ -83,7 +83,10 @@
     .text__letter::-webkit-scrollbar-thumb { background-color: #ff7882; border-radius: 10px; }
     .text__letter p { line-height: 1.5 !important; margin: 0 !important; }
 
-    @media (max-width: 768px) {
+    @media (max-width: 800px) {
+      /* تكبير الألعاب النارية للهاتف بنسبة 60% إضافية */
+      #fireworks-overlay canvas { transform: scale(1.6); transform-origin: center center; }
+
       .box__letter { width: 90% !important; left: 5% !important; margin-left: 0 !important; top: 10% !important; transform: none !important; }
       .letter__border { width: 100% !important; }
       .letter { width: 100% !important; height: auto !important; min-height: 60vh !important; padding: 15px !important; }
@@ -125,8 +128,8 @@
         scroll-snap-align: start; scroll-snap-stop: always; padding: 2rem 1rem;
       }
 
-      /* 🌟 الأعلام العلوية (1.png) - واضحة وكبيرة 🌟 */
-      .mob-flag { position: absolute; top: -5px; width: 55%; max-width: 250px; z-index: 10; opacity: 0; animation: fadeInArrows 1s 1s forwards; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); }
+      /* 🌟 الأعلام العلوية (1.png) - أصبحت ثابتة ومستمرة Fixed 🌟 */
+      .mob-flag { position: fixed !important; top: -5px; width: 55%; max-width: 250px; z-index: 1000; opacity: 0; animation: fadeInArrows 1s 1s forwards; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); pointer-events: none; }
       .mob-flag-left { left: -15px; transform: rotate(-5deg); }
       .mob-flag-right { right: -15px; transform: rotate(5deg) scaleX(-1); }
 
@@ -145,14 +148,14 @@
       #mobile-wrapper .title .happy span { color: #fff; }
       #mobile-wrapper .title .birthday span { color: var(--primary-color); color: var(--primary-color-ok); }
       
-      /* 🌟 القبعة: تظهر وتستقر فوق الكلمات 🌟 */
+      /* 🌟 القبعة: تظهر وتستقر فوق الكلمات بشكل ممتاز 🌟 */
       #mobile-wrapper .hat {
-        position: absolute; right: 8%; top: -55px; z-index: 30;
+        position: absolute; right: 5%; top: -35px; z-index: 30;
         animation: mobileHatDrop 1.5s 3.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0;
       }
-      #mobile-wrapper .hat img { width: clamp(90px, 25vw, 140px) !important; filter: drop-shadow(2px 5px 0px rgba(0,0,0,0.4)); }
+      #mobile-wrapper .hat img { width: clamp(100px, 28vw, 150px) !important; filter: drop-shadow(2px 5px 0px rgba(0,0,0,0.4)); }
 
-      #mobile-wrapper .birthday-date { margin-top: 2rem; border: 3px solid var(--border-color); border-radius: 999px; background: var(--primary-color); padding: .8rem 1.8rem; font: 700 1.4rem var(--font-hand); box-shadow: 0 5px 0 rgba(0,0,0,0.15); width: 0; opacity: 0; visibility: hidden; animation: dateOfBirth 2s 3.5s forwards; overflow: hidden; white-space: nowrap; display: flex; align-items: center; justify-content: center; z-index: 20; }
+      #mobile-wrapper .birthday-date { margin-top: 2rem; border: 3px solid var(--border-color); border-radius: 999px; background: var(--primary-color); padding: .8rem 1.8rem; font: 700 1.4rem var(--font-hand); box-shadow: 0 5px 0 rgba(0,0,0,0.15); width: 0; opacity: 0; visibility: hidden; animation: dateOfBirthMob 1.5s 3.5s forwards; overflow: hidden; white-space: nowrap; display: flex; align-items: center; justify-content: center; z-index: 20; color: #333; }
       
       /* 🌟 تأخير ظهور الأسهم لـ 8.5 ثوانٍ 🌟 */
       #mobile-wrapper .scroll-cue { position: absolute; bottom: 25px; display: flex; flex-direction: column; color: var(--primary-color); font-size: 2rem; text-decoration: none; z-index: 50; opacity: 0; animation: fadeInArrows 1s 8.5s forwards !important; }
@@ -189,206 +192,26 @@
       #mobile-wrapper .heart-two { right: 15%; bottom: 25%; transform: rotate(15deg); animation-delay: .55s; }
 
       @keyframes txtTranslateY { 100% { transform: translateY(0); opacity: 1; visibility: visible; } }
-      @keyframes dateOfBirth { 20%, 40% { width: 0px; opacity: 1; visibility: visible; } 45% { width: 300px; } 50%, 100% { width: 300px; opacity: 1; visibility: visible; } }
+      @keyframes dateOfBirthMob { 0% { width: 0px; opacity: 0; visibility: hidden; } 10% { width: 0px; opacity: 1; visibility: visible; } 100% { width: 85%; max-width: 320px; opacity: 1; visibility: visible; } }
       @keyframes cue-down { 0%,100% { opacity: .3; transform: translateY(-3px); } 50% { opacity: 1; transform: translateY(5px); } }
       @keyframes balloon-float { 50% { transform: translateY(-15px); } }
       @keyframes fadeInArrows { to { opacity: 1; } }
       @keyframes heart-beat { 50% { transform: scale(1.25); } }
-      @keyframes mobileHatDrop { 0% { opacity: 0; transform: translateY(-50px) scale(0) rotate(-60deg); } 100% { opacity: 1; transform: translateY(0) scale(1) rotate(-30deg); } }
+      @keyframes mobileHatDrop { 0% { opacity: 0; transform: translateY(-50px) scale(0) rotate(-60deg); } 100% { opacity: 1; transform: translateY(0) scale(1.1) rotate(-25deg); } }
       @keyframes popDecor { 0% { opacity: 0; transform: scale(0) rotate(-20deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
     }
   </style>
 
-  <script type="text/javascript">
-  var colours = ['#ff3366', '#ff6699', '#ff33cc', '#ff99cc', '#ff66b2', '#ff0066']; 
-  var minisize = 16; var maxisize = 28; var hearts = 66; var over_or_under = "over"; 
-  var x = ox = 400, y = oy = 300, swide = 800, shigh = 600, sleft = sdown = 0;
-  var herz = [], herzx = [], herzy = [], herzs = [];
-  var kiss = false;
-
-  if (typeof('addRVLoadEvent') != 'function') function addRVLoadEvent(funky) {
-    var oldonload = window.onload;
-    if (typeof(oldonload) != 'function') window.onload = funky;
-    else window.onload = function() { if (oldonload) oldonload(); funky(); }
-  }
-  addRVLoadEvent(mwah);
-
-  function mwah() { if (document.getElementById) {
-    var i, heart;
-    for (i = 0; i < hearts; i++) {
-      heart = createDiv("auto", "auto");
-      heart.style.visibility = "hidden";
-      heart.style.zIndex = (over_or_under == "over") ? "1001" : "0";
-      heart.style.color = colours[i % colours.length];
-      heart.style.pointerEvents = "none";
-      heart.style.opacity = 0.75;
-      heart.appendChild(document.createTextNode(String.fromCharCode(9829)));
-      document.body.appendChild(heart);
-      herz[i] = heart; herzy[i] = false;
-    }
-    set_scroll(); set_width(); herzle();
-  }}
-
-  function herzle() {
-    var c;
-    if (Math.abs(x - ox) > 1 || Math.abs(y - oy) > 1) {
-      ox = x; oy = y;
-      for (c = 0; c < hearts; c++) if (herzy[c] === false) {
-        herz[c].firstChild.nodeValue = String.fromCharCode(9829);
-        herz[c].style.left = (herzx[c] = x - minisize / 2) + "px";
-        herz[c].style.top = (herzy[c] = y - minisize) + "px";
-        herz[c].style.fontSize = minisize + "px";
-        herz[c].style.fontWeight = 'normal';
-        herz[c].style.visibility = 'visible';
-        herzs[c] = minisize;
-        break;
-      }
-    }
-    for (c = 0; c < hearts; c++) if (herzy[c] !== false) blow_me_a_kiss(c);
-    setTimeout(herzle, 40);
-  }
-
-  document.onmousedown = pucker;
-  document.onmouseup = function() { clearTimeout(kiss); };
-  function pucker() { ox = -1; oy = -1; kiss = setTimeout(pucker, 100); }
-
-  function blow_me_a_kiss(i) {
-    herzy[i] -= herzs[i] / minisize + i % 2;
-    herzx[i] += (i % 5 - 2) / 5;
-    if (herzy[i] < sdown - herzs[i] || herzx[i] < sleft - herzs[i] || herzx[i] > sleft + swide - herzs[i]) {
-      herz[i].style.visibility = "hidden"; herzy[i] = false;
-    } else if (herzs[i] > minisize + 2 && Math.random() < .5 / hearts) break_my_heart(i);
-    else {
-      if (Math.random() < maxisize / herzy[i] && herzs[i] < maxisize) herz[i].style.fontSize = (++herzs[i]) + "px";
-      herz[i].style.top = herzy[i] + "px";
-      herz[i].style.left = herzx[i] + "px";
-    }
-  }
-
-  function break_my_heart(i) {
-    herz[i].firstChild.nodeValue = String.fromCharCode(9676);
-    herz[i].style.fontWeight = 'bold';
-    herzy[i] = false;
-    setTimeout(() => herz[i].style.visibility = "hidden", 400);
-  }
-  document.onmousemove = mouse;
-  function mouse(e) { if (e) { y = e.pageY; x = e.pageX; } else { set_scroll(); y = event.y + sdown; x = event.x + sleft; } }
-  window.onresize = set_width;
-  function set_width() { swide = window.innerWidth || document.documentElement.clientWidth; shigh = window.innerHeight || document.documentElement.clientHeight; }
-  window.onscroll = set_scroll;
-  function set_scroll() { sdown = window.pageYOffset || document.documentElement.scrollTop; sleft = window.pageXOffset || document.documentElement.scrollLeft; }
-  function createDiv(height, width) { var div = document.createElement("div"); div.style.position = "absolute"; div.style.height = height; div.style.width = width; div.style.overflow = "hidden"; div.style.backgroundColor = "transparent"; return div; }
-  </script>
-</head>
-
-<body>
-  
-  <audio id="birthday-audio" src="./audio/birthday.mp3" loop></audio>
-
-  <div id="start-screen">
-    <div class="party-grid"></div>
-    <div class="ambient-glow"></div>
-    <div class="bunting bunting-left"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="bunting bunting-right"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="confetti-layer" id="confetti-container"></div>
-    <img src="./Images/balloon1.png" alt="Balloon" class="start-balloon balloon-left">
-    <img src="./Images/balloon2.png" alt="Balloon" class="start-balloon balloon-right">
-    <span class="spark spark-one">✦</span><span class="spark spark-two">✦</span>
-    <span class="start-heart heart-one">♥</span><span class="start-heart heart-two">♥</span>
-    <p class="eyebrow">A little birthday magic</p>
-    <h1 class="title-glow">For Amy...</h1>
-    
-    <div class="gift-wrap">
-      <div class="gift-halo"></div>
-      <img src="./Images/gift.png" alt="A magical birthday gift" class="gift-image">
-    </div>
-    
-    <div class="notes-grid">
-      <div class="magic-note note-1"><span class="note-star">★</span><p>1. Count to 5 before clicking...</p><span class="note-icon">⏳</span></div>
-      <div class="magic-note note-2"><span class="note-star">★</span><p>2. Turn up your volume...</p><span class="note-icon">🔊</span></div>
-      <div class="magic-note note-3"><span class="note-star">★</span><p>3. I hope you like it...</p><span class="note-icon">😉</span></div>
-    </div>
-  </div>
-
-  <div id="fireworks-overlay">
-      <canvas id="c"></canvas>
-  </div>
-
-  <!-- =========================================
-       التصميم الأصلي للحاسوب
-       ========================================= -->
-  <div id="wrapper">
-    <div class="flag__birthday">
-      <img src="./Images/1.png" alt="" width="350" class="flag__left">
-      <img src="./Images/1.png" alt="" width="350" class="flag__right">
-    </div>
-
-    <div class="content">
-      <div class="left">
-        <div class="title">
-          <h1 class="happy">
-            <span style="--t: 4s;">H</span><span style="--t: 4.2s;">a</span><span style="--t: 4.4s;">p</span><span style="--t: 4.6s;">p</span><span style="--t: 4.8s;">y</span>
-          </h1>
-          <h1 class="birthday">
-            <span style="--t: 5s;">B</span><span style="--t: 5.2s;">i</span><span style="--t: 5.4s;">r</span><span style="--t: 5.6s;">t</span><span style="--t: 5.8s;">h</span><span style="--t: 6s;">d</span><span style="--t: 6.2s;">a</span><span style="--t: 6.4s;">y</span>
-          </h1>
-          <div class="hat">
-            <img src="./Images/hat.png" alt="" width="130">
-          </div>
-        </div>
-        <div class="date__of__birth"><span></span></div>
-        <div class="btn">
-          <button id="btn__letter">
-            Click here <i class="fa-regular fa-envelope"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="right">
-        <div class="box__account">
-          <div class="image"><img src="./Images/amy.png" alt=""></div>
-          <div class="name">
-            <i class="fa-solid fa-heart"></i><span>Our Princess🥳</span><i class="fa-solid fa-heart"></i>
-          </div>
-          <div class="balloon_one"><img width="100px" src="./Images/balloon1.png" alt=""></div>
-          <div class="balloon_two"><img width="100px" src="./Images/balloon2.png" alt=""></div>
-        </div>
-        <div class="cricle">
-          <div class="text__cricle">
-            <span style="--i: 1;">h</span><span style="--i: 2;">a</span><span style="--i: 3;">p</span><span style="--i: 4;">p</span><span style="--i: 5;">y</span><span style="--i: 6;">-</span><span style="--i: 7;">b</span><span style="--i: 8;">i</span><span style="--i: 9;">r</span><span style="--i: 10;">t</span><span style="--i: 11;">h</span><span style="--i: 12;">d</span><span style="--i: 13;">a</span><span style="--i: 14;">y</span><span style="--i: 15;">-</span>
-          </div>
-          <i class="fa-solid fa-heart"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- زينة الحاسوب -->
-    <div class="decorate_star star1" style="--t: 15s;"></div>
-    <div class="decorate_star star2" style="--t: 15.2s;"></div>
-    <div class="decorate_star star3" style="--t: 15.4s;"></div>
-    <div class="decorate_star star4" style="--t: 15.6s;"></div>
-    <div class="decorate_star star5" style="--t: 15.8s;"></div>
-    <div class="decorate_flower--one" style="--t: 15s;"><img width="20" src="./Images/decorate_flower.png" alt=""></div>
-    <div class="decorate_flower--two" style="--t: 15.3s;"><img width="20" src="./Images/decorate_flower.png" alt=""></div>
-    <div class="decorate_flower--three" style="--t: 15.6s;"><img width="20" src="./Images/decorate_flower.png" alt=""></div>
-    <div class="decorate_bottom"><img src="./Images/decorate.png" alt="" width="100"></div>
-    <div class="smiley__icon"><img src="./Images/smiley_icon.png" alt="" width="100"></div>
-  </div>
-
-
-  <!-- =========================================
-       تصميم الهاتف (مُزيّن بالكامل)
-       ========================================= -->
   <div id="mobile-wrapper" style="display: none; opacity: 0; transition: opacity 2s ease-in-out;">
+    <!-- 🌟 الأعلام العلوية (1.png) - أصبحت ثابتة وتظهر في كل الأقسام 🌟 -->
+    <img src="./Images/1.png" class="mob-flag mob-flag-left" alt="">
+    <img src="./Images/1.png" class="mob-flag mob-flag-right" alt="">
+
     <main class="birthday-page">
       
       <!-- ================= القسم الأول: مليء بالزينة والكلمات العملاقة ================= -->
       <section class="birthday-scene" id="welcome">
         
-        <!-- الأعلام العلوية (1.png) -->
-        <img src="./Images/1.png" class="mob-flag mob-flag-left" alt="">
-        <img src="./Images/1.png" class="mob-flag mob-flag-right" alt="">
-
         <!-- ديكورات منتشرة في القسم الأول -->
         <div class="mob-decor decorate_star" style="width:35px; height:35px; top:18%; left:8%; animation-delay: 1.5s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
         <div class="mob-decor decorate_star" style="width:25px; height:25px; top:25%; right:12%; animation-delay: 2s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
@@ -408,8 +231,8 @@
             <span style="--t: 1.2s;">B</span><span style="--t: 1.4s;">i</span><span style="--t: 1.6s;">r</span><span style="--t: 1.8s;">t</span><span style="--t: 2.0s;">h</span><span style="--t: 2.2s;">d</span><span style="--t: 2.4s;">a</span><span style="--t: 2.6s;">y</span>
           </h1>
         </div>
-        <div class="birthday-date">
-          <span>★ 19 September 2002 ★</span>
+        <div class="birthday-date date__of__birth_mob">
+          <span></span>
         </div>
         
         <!-- الأسهم (تتأخر 8.5 ثواني) -->
@@ -418,7 +241,7 @@
         </a>
       </section>
 
-      <!-- ================= القسم الثاني: الصورة والبالونات ================= -->
+      <!-- ================= القسم الثاني: الصورة والبالونات والسمايلي ================= -->
       <section class="birthday-scene" id="amy">
         
         <!-- ديكورات القسم الثاني -->
@@ -441,6 +264,9 @@
             <i class="fa-solid fa-heart"></i>
           </div>
         </div>
+        
+        <!-- 🌟 إضافة السمايلي تحت الصورة 🌟 -->
+        <img src="./Images/smiley_icon.png" class="mob-decor" style="width:75px; bottom: 10%; right: 25%; animation-delay: 2.5s; z-index: 20;" alt="">
         
         <a class="scroll-cue" href="#letter-mob" style="animation: fadeInArrows 1s 2s forwards !important;">
           <i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i><i class="fa-solid fa-chevron-down"></i>
@@ -532,7 +358,7 @@
     });
 
     function startCelebration() {
-      let datetxt = "19 September 2002";
+      let datetxt = " 19 September 2002 ";
       let datatxtletter = "---------------------------------------------------------------Happy Birthday, Amy! 🎉✨ Your amazing content and fun personality never fail to brighten up our days. I wanted to do something special, so I designed this little magical surprise specifically for you. I truly hope it brings a big smile to your face, and I hope you like it and enjoy this gift! Wishing you endless happiness, good health, and all the success in achieving everything you dream of this year. Keep shining, and have the most amazing birthday! 🎂🎈😊";
       let titleLetter = "To you";
       let charArrDate = datetxt.split('');
@@ -541,24 +367,35 @@
       let currentIndex = 0;
       let currentIndexLetter = 0;
       let currentIndexTitle = 0;
+      
+      let isMobile = window.innerWidth <= 800;
       let date__of__birth = document.querySelector(".date__of__birth span");
+      let date__of__birth_mob = document.querySelector(".date__of__birth_mob span");
       let text__letter = document.querySelector(".text__letter p");
+      
+      let targetDate = isMobile ? date__of__birth_mob : date__of__birth;
 
-      if(date__of__birth) {
+      // 🌟 أنيميشن ظهور التاريخ حرفاً حرفاً في الهاتف والحاسوب 🌟
+      if(targetDate) {
         setTimeout(function(){
           timeDatetxt = setInterval(function(){
             if(currentIndex < charArrDate.length){
-              date__of__birth.textContent += charArrDate[currentIndex];
+              targetDate.textContent += charArrDate[currentIndex];
               currentIndex++;
             } else {
-              let i = document.createElement("i");
-              i.className = "fa-solid fa-star";
-              document.querySelector(".date__of__birth").prepend(i);
-              document.querySelector(".date__of__birth").appendChild(i.cloneNode(true));
+              let i1 = document.createElement("i");
+              i1.className = "fa-solid fa-star";
+              i1.style.marginRight = "8px";
+              let i2 = document.createElement("i");
+              i2.className = "fa-solid fa-star";
+              i2.style.marginLeft = "8px";
+              
+              targetDate.parentElement.prepend(i1);
+              targetDate.parentElement.appendChild(i2);
               clearInterval(timeDatetxt);
             }
-          },100)
-        },12000);
+          }, 100)
+        }, isMobile ? 4500 : 12000); // يبدأ أسرع على الهاتف ليتناسب مع وقت ظهور التصميم
       }
 
       var intervalContent;
@@ -626,6 +463,9 @@
       var wrapper = document.getElementById('wrapper');
       var mobileWrapper = document.getElementById('mobile-wrapper');
       
+      // 🌟 إطالة مدة الألعاب النارية في الهاتف 🌟
+      var delayBeforeSlide = window.innerWidth <= 800 ? 2500 : 1300;
+      
       setTimeout(function() {
         overlay.style.transition = 'transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 3s ease 3s';
         overlay.style.transform = 'translateY(100vh)'; 
@@ -665,7 +505,7 @@
           overlay.style.display = 'none';
         }, 6500);
 
-      }, 1300); 
+      }, delayBeforeSlide); 
     };
   </script>
 
