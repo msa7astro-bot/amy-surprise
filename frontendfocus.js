@@ -2,19 +2,18 @@ var winW = window.innerWidth,
     winH = window.innerHeight;
 
 var w = (c.width = winW),
-    h = (c.height = winH), // 💡 تم ضبط الارتفاع ليكون بحجم الشاشة بالضبط
+    h = (c.height = winH),
     ctx = c.getContext("2d"),
     hw = w / 2, 
-    hh = h / 2, // 💡 تم ضبط المركز ليكون في منتصف الشاشة تماماً
+    hh = h / 2,
     
-    // تحديد ما إذا كانت الشاشة هاتفاً محمولاً
-    isMobile = winW < 800,
+    isMobile = winW < 768,
     
     opts = {
-      strings: ["HAPPY", "BIRTHDAY", "Amy 🎉"],
-      charSize: isMobile ? 35 : 60,       // 💡 تكبير الخط في الهاتف ليكون واضحاً وجميلاً
-      charSpacing: isMobile ? 38 : 65,    // 💡 ضبط المسافة بين الحروف
-      lineHeight: isMobile ? 50 : 80,     // 💡 ضبط المسافة بين السطور
+      strings: ["HAPPY", "BIRTHDAY", "Amy! 🎉"],
+      charSize: isMobile ? 32 : 55,
+      charSpacing: isMobile ? 35 : 60,
+      lineHeight: isMobile ? 45 : 75,
 
       cx: w / 2,
       cy: h / 2,
@@ -52,15 +51,13 @@ var w = (c.width = winW),
       balloonAddedRadian: -1,
     },
     calc = {
-      // تم تصحيح المعادلة لتعتمد على spacing وليس size للحصول على عرض صحيح
       totalWidth: opts.charSpacing * Math.max(...opts.strings.map(s => Array.from(s).length)),
     },
     Tau = Math.PI * 2,
     TauQuarter = Tau / 4,
     letters = [];
 
-// 💡 استخدام خط احترافي للحروف يتناسب مع تصميم الموقع
-ctx.font = "bold " + opts.charSize + "px 'Titan One', 'Bubblegum Sans', sans-serif";
+ctx.font = opts.charSize + "px Verdana, sans-serif";
 
 function playFireworkPopSound() {
   try {
@@ -367,7 +364,7 @@ function generateBalloonPath(x, y, size) {
 function anim() {
   window.requestAnimationFrame(anim);
 
-  ctx.fillStyle = "#000"; // 💡 خلفية سوداء صريحة تغطي كامل الشاشة بلا فواصل
+  ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, w, h);
 
   ctx.translate(hw, hh);
@@ -394,8 +391,7 @@ for (var i = 0; i < opts.strings.length; ++i) {
     letters.push(
       new Letter(
         chars[j],
-        // 💡 تم تصحيح المعادلة هنا لتوسيط النص بدقة شديدة
-        j * opts.charSpacing + opts.charSpacing / 2 - (chars.length * opts.charSpacing) / 2, 
+        j * opts.charSpacing + opts.charSpacing / 2 - (chars.length * opts.charSpacing) / 2,
         i * opts.lineHeight + opts.lineHeight / 2 - (opts.strings.length * opts.lineHeight) / 2
       )
     );
@@ -411,6 +407,6 @@ window.addEventListener("resize", function () {
   h = c.height = winH;
   hw = w / 2;
   hh = h / 2;
-  isMobile = winW < 800;
-  ctx.font = "bold " + (isMobile ? 35 : 60) + "px 'Titan One', 'Bubblegum Sans', sans-serif";
+  isMobile = winW < 768;
+  ctx.font = (isMobile ? 32 : 55) + "px Verdana, sans-serif";
 });
