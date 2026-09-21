@@ -642,11 +642,11 @@ img {
     .btn button { font-size: 14px; padding: 8px 16px; }
 }
 
-/* إخفاء الأسهم في الحاسوب تماماً */
+/* إخفاء الأسهم في الحاسوب */
 .scroll-arrows { display: none; }
 
 /* =========================================
-   📱 رحلة الموبايل المعدلة (الشكل الدقيق واليساري)
+   📱 رحلة الموبايل (العنوان يسار، والباقي في المنتصف)
    ========================================= */
 @media screen and (max-width: 768px) {
   body {
@@ -657,48 +657,59 @@ img {
   .content {
     display: flex !important;
     flex-direction: column !important;
+    width: 100vw !important;
   }
 
+  /* فك ارتباط الأقسام لترتيبها بحرية */
   .left, .right {
     display: contents !important; 
   }
 
-  /* 1️⃣ القسم الأول: الكلمات (على اليسار مثل الحاسوب وبدون انكماش) */
+  /* 1️⃣ القسم الأول: العنوان والقبعة (محاذاة لليسار وحجم كبير جداً) */
   .title {
     order: 1;
     width: 100% !important;
-    min-height: 80vh !important;
+    min-height: 85vh !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    align-items: flex-start !important; /* محاذاة لليسار */
-    padding-left: 20px !important; /* إبعادها عن الحافة */
+    align-items: flex-start !important; /* إجبار المحاذاة لليسار */
+    padding-left: 20px !important; /* مسافة من الحافة */
+    position: relative !important;
   }
   
-  .title .happy, .title .birthday {
-    font-size: 2.8rem !important; /* تكبير الخط */
-    white-space: nowrap !important; /* منع انكماش الحروف ونزولها لسطر جديد */
-    margin: 5px 0 !important;
-    text-align: left !important;
+  /* تكبير الحروف ومنعها من الانكماش أو التداخل */
+  .title .happy span, .title .birthday span {
+    font-size: 3.5rem !important; 
+    display: inline-block !important;
+    line-height: 1.1 !important;
+  }
+  
+  /* إبعاد كلمة Birthday عن Happy قليلاً للأسفل */
+  .title .birthday {
+    margin-top: 15px !important;
   }
 
+  /* إخراج القبعة من زحمة الكلمات ووضعها في الأعلى يميناً */
   .title .hat {
-    position: relative !important;
-    left: 20px !important; /* ضبط مكان القبعة */
+    position: absolute !important;
+    top: 25% !important;
+    right: 30px !important;
+    transform: scale(1.4) !important; /* تكبير القبعة */
   }
 
-  /* إخفاء التاريخ ليكون التركيز على الكلمات فقط */
-  .date__of__birth { display: none !important; }
-
-  /* ظهور السهم الأول بعد 7 ثوانٍ (بعد اكتمال الكلمات) */
-  .arrow-one { 
-    order: 2; 
-    width: 100%; 
-    height: 20vh; 
-    animation: revealArrows 1s ease 7s both !important;
+  /* 2️⃣ السهم الأول (في المنتصف تماماً) */
+  .arrow-one {
+    order: 2;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-bottom: 50px !important;
+    animation: revealArrows 1s ease 6s both !important; /* يظهر بعد 6 ثوانٍ */
   }
 
-  /* 2️⃣ القسم الثاني: الصورة (إصلاح مكانها وحركتها) */
+  /* 3️⃣ الصورة (في المنتصف تماماً) */
   .box__account {
     order: 3;
     width: 100% !important;
@@ -707,26 +718,28 @@ img {
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    position: relative !important; /* إلغاء إعدادات الحاسوب التي أخفتها */
-    top: auto !important;
-    right: auto !important;
-    margin: 0 !important;
+    position: relative !important;
+    top: auto !important; right: auto !important; left: auto !important;
+    margin: 0 auto !important;
     transform: scale(1.1) !important;
-    animation: appearForMobile 2s ease-out 8s both !important; /* تظهر عندما تنزل للأسفل */
   }
 
-  .arrow-two { 
-    order: 4; 
-    width: 100%; 
-    height: 20vh; 
-    animation: revealArrows 1s ease 9s both !important;
+  /* 4️⃣ السهم الثاني (في المنتصف تماماً) */
+  .arrow-two {
+    order: 4;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-bottom: 50px !important;
+    animation: revealArrows 1s ease 2s both !important;
   }
 
-  /* 3️⃣ القسم الثالث: زر الرسالة (يأخذ شاشة كاملة وحده) */
+  /* 5️⃣ زر الرسالة (في المنتصف تماماً وشاشة كاملة) */
   .btn {
     order: 5;
     width: 100% !important;
-    min-height: 100vh !important; /* شاشة كاملة للزر */
+    min-height: 80vh !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -734,37 +747,25 @@ img {
   }
   
   #btn__letter {
-    transform: scale(1.3) !important; /* تكبير الزر ليكون بارزاً */
+    transform: scale(1.4) !important; /* تكبير الزر */
   }
 
-  /* 4️⃣ صندوق الرسالة (يفتح عند الضغط) */
-  .box__letter {
-    order: 6;
-    width: 95% !important;
-    margin: 0 auto 50px auto !important;
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-  }
-
-  /* إخفاء العناصر الجانبية المزعجة في الموبايل */
-  .cricle, .decorate_star, .decorate_flower--one, .decorate_flower--two, .decorate_flower--three, .decorate_bottom, .smiley__icon {
+  /* إخفاء الزخارف التي تسبب الفوضى */
+  .date__of__birth, .cricle, .decorate_star, .decorate_flower--one, .decorate_flower--two, .decorate_flower--three, .decorate_bottom, .smiley__icon {
     display: none !important;
   }
 
-  /* ⬇️ شكل الأسهم الجديد (أكبر وأوضح ولون زهري غامق) */
+  /* ⬇️ شكل الأسهم الكبيرة والواضحة */
   .scroll-arrows {
     display: flex !important;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
   }
   .scroll-arrows span {
     display: block;
     width: 25px !important;
     height: 25px !important;
-    border-bottom: 5px solid #ff1493 !important; /* لون زهري قوي */
+    border-bottom: 5px solid #ff1493 !important;
     border-right: 5px solid #ff1493 !important;
     transform: rotate(45deg);
     animation: arrowBounce 1.5s infinite;
@@ -774,9 +775,7 @@ img {
   .scroll-arrows span:nth-child(3) { animation-delay: 0s; }
 }
 
-/* =========================================
-   🎬 حركات الموبايل 
-   ========================================= */
+/* 🎬 حركات الظهور للأسهم */
 @keyframes arrowBounce {
   0%, 100% { transform: rotate(45deg) translate(-5px, -5px); opacity: 0; }
   50% { transform: rotate(45deg) translate(5px, 5px); opacity: 1; }
@@ -784,8 +783,4 @@ img {
 @keyframes revealArrows {
   0% { opacity: 0; visibility: hidden; }
   100% { opacity: 1; visibility: visible; }
-}
-@keyframes appearForMobile {
-  0% { opacity: 0; transform: translateY(100px) scale(0.8); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
