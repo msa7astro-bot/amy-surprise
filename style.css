@@ -643,25 +643,75 @@ img {
 }
 
 /* =========================================
-   📱 تأثير ظهور الصورة من العدم للهواتف فقط
+   📱 تصميم رحلة التمرير (Storytelling Scroll) للهواتف فقط
    ========================================= */
-/* نستخدم max-device-width لاستهداف شاشة الموبايل الفعلية متجاهلين تعديل الـ viewport */
-@media screen and (max-device-width: 800px) {
-  /* استبدل .box__account باسم الكلاس الخاص بالصورة إذا كان مختلفاً */
-  .box__account { 
-    animation: appearFromNothing 2.5s ease-out forwards !important;
-    animation: appearFromNothing 2.5s ease-out 7s both !important;
+@media screen and (max-width: 768px) {
+  
+  /* السماح للصفحة بالتمرير الطولي بسلاسة */
+  html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+    scroll-behavior: smooth;
+    background-color: #0f0f1a; /* لون خلفية هادئ ومتناسق */
   }
-}
 
-/* تفاصيل حركة الظهور من العدم أثناء الصعود لأعلى */
-@keyframes appearFromNothing {
-  0% {
-    opacity: 0; /* مخفية تماماً (في العدم) */
-    transform: translateY(150px) scale(0.5); /* تبدأ من الأسفل وبحجم صغير */
+  /* 1️⃣ المحطة الأولى: شاشة الألعاب النارية وكلمات عيد الميلاد */
+  .content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
   }
-  100% {
-    opacity: 1; /* تظهر بالكامل */
-    transform: translateY(0) scale(1); /* تستقر في مكانها وحجمها الطبيعي */
+
+  /* 2️⃣ المحطة الثانية: مكان ظهور الصورة */
+  .box__account {
+    margin: 80px auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(1.1);
+    /* تأثير ظهور الصورة تدريجياً عند الوصول لها */
+    opacity: 0.9;
+    transition: transform 0.5s ease;
+  }
+
+  /* 3️⃣ المحطة الثالثة: أيقونة أو زر Click Here */
+  .click-here-btn, .love__btn {
+    display: block !important;
+    margin: 40px auto !important;
+    text-align: center;
+    padding: 12px 25px;
+    background: linear-gradient(45deg, #ff758c, #ff7eb3);
+    color: white;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+  }
+
+  /* 4️⃣ المحطة الرابعة: الرسالة (تظهر في الأسفل بمساحة مريحة للقراءة) */
+  .box__letter {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 92% !important;
+    margin: 50px auto 80px auto !important;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    padding: 20px;
+  }
+
+  .letter {
+    width: 100% !important;
+    min-height: auto !important;
+  }
+
+  /* إخفاء الزخارف المعقدة التي تسبب فوضى في التمرير الطولي */
+  .decorate_star, .decorate_flower--one, .decorate_flower--two, .decorate_flower--three {
+    display: none !important;
   }
 }
