@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Caveat:wght@700&family=Nunito:wght@700&display=swap" rel="stylesheet">
   
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Sriracha&family=Titan+One&display=swap" rel="stylesheet">
+  
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
   <style>
@@ -176,11 +178,9 @@
     }
     .title .happy span, .title .birthday span { position: relative !important; display: inline-block !important; margin: 0 2px !important; }
     .date__of__birth span, .name span { position: relative !important; display: inline-block !important; }
+    
     #wrapper { display: none; opacity: 0; transition: opacity 3s ease-in-out; }
 
-    /* =========================================
-       إعدادات صندوق الرسالة (تمرير سلس ونزول تلقائي)
-       ========================================= */
     .text__letter {
       max-height: 270px !important; 
       overflow-y: auto !important;
@@ -203,62 +203,24 @@
       margin: 0 !important;
     }
 
-    /* =========================================
-       📱 دعم شاشات الهواتف المحمولة (Responsive)
-       ========================================= */
     @media (max-width: 768px) {
-      /* 1. ترتيب الأعلام لتناسب الشاشة */
       .flag__birthday .flag__left, 
-      .flag__birthday .flag__right {
-        width: 120px !important;
-      }
-      
-      /* 2. جعل المحتوى عمودياً بدلاً من أفقي */
-      .content {
-        flex-direction: column !important;
-        align-items: center !important;
-        padding-top: 40px !important;
-      }
-      
-      .content .left, .content .right {
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        margin-bottom: 20px !important;
-      }
-
-      /* 3. تصغير العناوين */
+      .flag__birthday .flag__right { width: 120px !important; }
+      .content { flex-direction: column !important; align-items: center !important; padding-top: 40px !important; }
+      .content .left, .content .right { width: 100% !important; display: flex !important; flex-direction: column !important; align-items: center !important; margin-bottom: 20px !important; }
       .title .happy span, .title .birthday span { font-size: 2rem !important; }
       .hat { top: -20px !important; right: -10px !important; }
       .hat img { width: 70px !important; }
-      
-      /* 4. صندوق الحساب (الأفاتار) */
       .box__account { transform: scale(0.9) !important; margin: 0 auto !important; }
-      .cricle { display: none !important; } /* إخفاء الدائرة الدوارة لتوفير مساحة */
-      
-      /* 5. ضبط صندوق الرسالة الورقية ليناسب الهاتف */
-      .box__letter { 
-        width: 90% !important; 
-        left: 5% !important; 
-        margin-left: 0 !important; 
-        top: 10% !important; 
-        transform: none !important; 
-      }
+      .cricle { display: none !important; } 
+      .box__letter { width: 90% !important; left: 5% !important; margin-left: 0 !important; top: 10% !important; transform: none !important; }
       .letter__border { width: 100% !important; }
       .letter { width: 100% !important; height: auto !important; min-height: 60vh !important; padding: 15px !important; }
-      
-      /* 6. ترتيب محتوى الرسالة من الداخل */
       .content__letter { flex-direction: column !important; align-items: center !important; }
       .content__letter .left, .content__letter .right { width: 100% !important; text-align: center !important; }
       .love__img img { width: 150px !important; margin: 0 auto !important; }
-      
-      /* 7. إخفاء الزخارف الزائدة لمنع الزحام على الشاشة الصغيرة */
-      .decorate_star, .decorate_flower--one, .decorate_flower--two, .decorate_flower--three, .decorate_bottom, .smiley__icon {
-        display: none !important;
-      }
+      .decorate_star, .decorate_flower--one, .decorate_flower--two, .decorate_flower--three, .decorate_bottom, .smiley__icon { display: none !important; }
     }
-
   </style>
 
   <script type="text/javascript">
@@ -348,19 +310,15 @@
   <audio id="birthday-audio" src="./audio/birthday.mp3" loop></audio>
 
   <div id="start-screen">
-    
     <div class="party-grid"></div>
     <div class="ambient-glow"></div>
-
     <div class="bunting bunting-left">
       <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
     </div>
     <div class="bunting bunting-right">
       <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
     </div>
-
     <div class="confetti-layer" id="confetti-container"></div>
-
     <img src="./Images/balloon1.png" alt="Balloon" class="start-balloon balloon-left">
     <img src="./Images/balloon2.png" alt="Balloon" class="start-balloon balloon-right">
     
@@ -394,7 +352,6 @@
         <span class="note-icon">😉</span>
       </div>
     </div>
-
   </div>
 
   <div id="fireworks-overlay">
@@ -436,7 +393,6 @@
           <span></span>
         </div>
 
-        <!-- 🔥 المحطة الأولى: السهم الأول يرشدها للصورة 🔥 -->
         <div class="scroll-arrows arrow-one"><span></span><span></span><span></span></div>
 
         <div class="btn">
@@ -465,26 +421,11 @@
           </div>
         </div>
 
-        <!-- 🔥 المحطة الثانية: السهم الثاني يرشدها لزر الرسالة 🔥 -->
         <div class="scroll-arrows arrow-two"><span></span><span></span><span></span></div>
 
         <div class="cricle">
           <div class="text__cricle">
-            <span style="--i: 1;">h</span>
-            <span style="--i: 2;">a</span>
-            <span style="--i: 3;">p</span>
-            <span style="--i: 4;">p</span>
-            <span style="--i: 5;">y</span>
-            <span style="--i: 6;">-</span>
-            <span style="--i: 7;">b</span>
-            <span style="--i: 8;">i</span>
-            <span style="--i: 9;">r</span>
-            <span style="--i: 10;">t</span>
-            <span style="--i: 11;">h</span>
-            <span style="--i: 12;">d</span>
-            <span style="--i: 13;">a</span>
-            <span style="--i: 14;">y</span>
-            <span style="--i: 15;">-</span>
+            <span style="--i: 1;">h</span><span style="--i: 2;">a</span><span style="--i: 3;">p</span><span style="--i: 4;">p</span><span style="--i: 5;">y</span><span style="--i: 6;">-</span><span style="--i: 7;">b</span><span style="--i: 8;">i</span><span style="--i: 9;">r</span><span style="--i: 10;">t</span><span style="--i: 11;">h</span><span style="--i: 12;">d</span><span style="--i: 13;">a</span><span style="--i: 14;">y</span><span style="--i: 15;">-</span>
           </div>
           <i class="fa-solid fa-heart"></i>
         </div>
@@ -544,6 +485,126 @@
     </div>
   </div>
 
+
+  <style>
+    @media screen and (max-width: 800px) {
+      #wrapper { display: none !important; }
+      #mobile-wrapper {
+        --font-display: "Titan One", sans-serif;
+        --font-hand: "Sriracha", cursive;
+        --font-letter: "Dancing Script", cursive;
+        --background: oklch(0.95 0.03 17);
+        --foreground: oklch(0.2 0.025 280);
+        --primary: oklch(0.7 0.17 18);
+        --secondary: oklch(0.98 0.018 22);
+        --destructive: oklch(0.58 0.23 25);
+        --border: oklch(0.32 0.025 280);
+        --shadow: oklch(0.2 0.025 280 / 22%);
+        --card: oklch(0.99 0.012 70);
+        --grid-line: oklch(1 0 0 / 58%);
+        display: block; width: 100%;
+      }
+      #mobile-wrapper .birthday-page {
+        min-height: 100svh; background-color: var(--background);
+        background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        background-size: 38px 38px; color: var(--foreground); font-family: sans-serif;
+      }
+      #mobile-wrapper .birthday-scene {
+        position: relative; display: flex; min-height: 100svh; width: 100%; flex-direction: column; align-items: center; justify-content: center;
+        scroll-snap-align: start; scroll-snap-stop: always; padding: 2rem 1rem; overflow: hidden;
+      }
+      #mobile-wrapper .birthday-title { font-family: var(--font-display); font-size: 4rem; line-height: 1.1; text-align: center; margin: 0; }
+      #mobile-wrapper .birthday-title span { display: block; opacity: 0; transform: translateY(35px); animation: title-arrive .75s forwards; -webkit-text-stroke: 1px var(--foreground); filter: drop-shadow(3px 4px 0 var(--foreground)); }
+      #mobile-wrapper .birthday-title span:first-child { color: var(--secondary); }
+      #mobile-wrapper .birthday-title span:last-child { color: var(--primary); animation-delay: .35s; }
+      #mobile-wrapper .party-hat { position: absolute; top: -100px; right: 10px; width: 80px; transform: translateY(-100vh); animation: hat-drop 1.15s 1s forwards; z-index: 5; }
+      #mobile-wrapper .party-hat img { width: 100%; transform: rotate(14deg); filter: drop-shadow(2px 4px 0px rgba(0,0,0,0.3)); }
+      #mobile-wrapper .birthday-date { margin-top: 2rem; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: .5rem 1rem; font: 700 1.1rem var(--font-hand); box-shadow: 0 5px 0 var(--shadow); animation: date-pop .65s 1.6s both; }
+      #mobile-wrapper .scroll-cue { position: absolute; bottom: 30px; display: flex; flex-direction: column; color: var(--primary); font-size: 1.5rem; text-decoration: none; }
+      #mobile-wrapper .scroll-cue i { margin-top: -8px; animation: cue-down 1.5s infinite; }
+      #mobile-wrapper .scroll-cue i:nth-child(2) { animation-delay: .15s; }
+      #mobile-wrapper .scroll-cue i:nth-child(3) { animation-delay: .3s; }
+      #mobile-wrapper .photo-reveal { width: 85vw; opacity: 0; transform: scale(.5); filter: blur(10px); transition: all 1s; }
+      #mobile-wrapper .photo-reveal.is-visible { opacity: 1; transform: scale(1); filter: blur(0); }
+      #mobile-wrapper .photo-frame { aspect-ratio: 1; border: 5px solid var(--border); border-radius: 50%; background: var(--secondary); box-shadow: 0 10px 0 var(--shadow); overflow: hidden; }
+      #mobile-wrapper .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+      #mobile-wrapper .princess-label { display: flex; justify-content: center; align-items: center; gap: 10px; width: 90%; margin: -15px auto 0; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: .5rem; font: 700 1.1rem var(--font-hand); box-shadow: 0 5px 0 var(--shadow); position: relative; z-index: 2; }
+      #mobile-wrapper .princess-label i { color: var(--destructive); }
+      #mobile-wrapper .balloon { position: absolute; width: 80px; animation: balloon-float 3s infinite ease-in-out; z-index: -1; }
+      #mobile-wrapper .balloon-left { top: 15%; left: 10px; transform: rotate(-10deg); }
+      #mobile-wrapper .balloon-right { bottom: 25%; right: 10px; transform: rotate(10deg); animation-delay: -1.5s; }
+      #mobile-wrapper .letter-button { display: flex; align-items: center; justify-content: center; gap: 10px; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: 1rem 2rem; font: 700 1.3rem var(--font-hand); box-shadow: 0 8px 0 var(--foreground); cursor: pointer; transition: 0.2s; outline: none; margin: 0 auto; color: var(--foreground); }
+      #mobile-wrapper .letter-button:active { transform: translateY(5px); box-shadow: 0 3px 0 var(--foreground); }
+      #mobile-wrapper .letter-backdrop { position: fixed; inset: 0; z-index: 50000; display: none; place-items: center; background: rgba(0,0,0,0.8); padding: 1rem; }
+      #mobile-wrapper .letter-paper { width: 100%; max-height: 90vh; overflow-y: auto; border: 5px solid var(--secondary); border-radius: 15px; background: var(--card); padding: 2rem 1.5rem; text-align: left; position: relative; animation: letter-open .5s both; }
+      #mobile-wrapper .letter-close { position: absolute; top: 10px; right: 10px; width: 35px; height: 35px; border: 2px solid var(--border); border-radius: 50%; background: var(--secondary); font-size: 1.2rem; cursor: pointer; display:flex; justify-content:center; align-items:center; color: var(--foreground); }
+      #mobile-wrapper h2 { font: 700 2.2rem var(--font-letter); text-align: center; margin-bottom: 15px; color: var(--foreground); }
+      #mobile-wrapper p { font: 700 1.2rem/1.6 var(--font-letter); color: var(--foreground); margin-top: 0; }
+      
+      @keyframes title-arrive { to { opacity: 1; transform: translateY(0); } }
+      @keyframes hat-drop { to { transform: translateY(0); } }
+      @keyframes date-pop { from { opacity: 0; transform: scaleX(.2); } to { opacity: 1; transform: scaleX(1); } }
+      @keyframes cue-down { 0%,100% { opacity: .3; transform: translateY(-3px); } 50% { opacity: 1; transform: translateY(5px); } }
+      @keyframes balloon-float { 50% { transform: translateY(-15px); } }
+      @keyframes letter-open { from { opacity: 0; transform: scale(.8); } }
+    }
+  </style>
+
+  <div id="mobile-wrapper" style="display: none; opacity: 0; transition: opacity 2s ease-in-out;">
+    <main class="birthday-page">
+      <section class="birthday-scene" id="welcome">
+        <div style="position: relative;">
+          <div class="party-hat"><img src="./Images/hat.png" alt="Hat"></div>
+          <h1 class="birthday-title">
+            <span>Happy</span>
+            <span>Birthday</span>
+          </h1>
+        </div>
+        <div class="birthday-date"><span>★</span> 19 September 2002 <span>★</span></div>
+        <a class="scroll-cue" href="#amy">
+          <i class="fa-solid fa-chevron-down"></i>
+          <i class="fa-solid fa-chevron-down"></i>
+          <i class="fa-solid fa-chevron-down"></i>
+        </a>
+      </section>
+
+      <section class="birthday-scene" id="amy">
+        <img src="./Images/balloon1.png" class="balloon balloon-left" alt="">
+        <img src="./Images/balloon2.png" class="balloon balloon-right" alt="">
+        <div id="photo-reveal" class="photo-reveal">
+          <div class="photo-frame">
+            <img src="./Images/amy.png" alt="Amy">
+          </div>
+          <div class="princess-label">
+            <i class="fa-solid fa-heart"></i>
+            <span>Our Princess 🥳</span>
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        </div>
+        <a class="scroll-cue" href="#letter-mob">
+          <i class="fa-solid fa-chevron-down"></i>
+          <i class="fa-solid fa-chevron-down"></i>
+          <i class="fa-solid fa-chevron-down"></i>
+        </a>
+      </section>
+
+      <section class="birthday-scene" id="letter-mob">
+        <h2 style="font-family: var(--font-letter); font-size: 2.5rem; margin-bottom: 20px;">One last surprise…</h2>
+        <button class="letter-button" id="open-btn-mob">
+          <i class="fa-regular fa-envelope"></i> Click here
+        </button>
+      </section>
+
+      <div class="letter-backdrop" id="modal-mob">
+        <section class="letter-paper">
+          <button class="letter-close" id="close-btn-mob"><i class="fa-solid fa-xmark"></i></button>
+          <h2>For Amy, with love</h2>
+          <div style="width: 60px; height: 3px; background: var(--primary); margin: 0 auto 15px;"></div>
+          <p>Happy Birthday, Amy! 🎉✨ Your amazing content and fun personality never fail to brighten up our days. I wanted to do something special, so I designed this little magical surprise specifically for you. I truly hope it brings a big smile to your face, and I hope you like it and enjoy this gift! Wishing you endless happiness, good health, and all the success in achieving everything you dream of this year. Keep shining, and have the most amazing birthday! 🎂🎈😊</p>
+        </section>
+      </div>
+    </main>
+  </div>
   <script src="frontendfocus.js"></script>
 
   <script>
@@ -576,7 +637,6 @@
     function startCelebration() {
       let datetxt = "19 September 2002";
       
-      // هنا تكمن الرسالة الصحيحة تماماً وبدون الخطوط الإضافية
       let datatxtletter = "---------------------------------------------------------------Happy Birthday, Amy! 🎉✨ Your amazing content and fun personality never fail to brighten up our days. I wanted to do something special, so I designed this little magical surprise specifically for you. I truly hope it brings a big smile to your face, and I hope you like it and enjoy this gift! Wishing you endless happiness, good health, and all the success in achieving everything you dream of this year. Keep shining, and have the most amazing birthday! 🎂🎈😊";
       let titleLetter = "To you";
       let charArrDate = datetxt.split('');
@@ -628,17 +688,13 @@
           document.querySelectorAll(".heart").forEach((item)=>{ item.classList.add("animation"); })
         },3500);
         
-        // 💡 كتابة الرسالة مع النزول التلقائي السلس لأسفل
         setTimeout(function(){
-          let containerBox = document.querySelector(".text__letter"); // الحاوية التي تنزل لأسفل
+          let containerBox = document.querySelector(".text__letter"); 
           
           intervalContent = setInterval(function(){
             if(currentIndexLetter < charArrDateLetter.length){
               text__letter.textContent += charArrDateLetter[currentIndexLetter];
-              
-              // التمرير التلقائي لأسفل مع كل حرف ينكتب
               containerBox.scrollTop = containerBox.scrollHeight;
-
               currentIndexLetter++;
             } else { 
               clearInterval(intervalContent); 
@@ -662,6 +718,7 @@
       });
     }
 
+    // 🔥 تعديل دالة الانتقال الذكية 🔥
     var transitionTriggered = false;
     window.startBirthdayTransition = function() {
       if (transitionTriggered) return; 
@@ -669,6 +726,7 @@
 
       var overlay = document.getElementById('fireworks-overlay');
       var wrapper = document.getElementById('wrapper');
+      var mobileWrapper = document.getElementById('mobile-wrapper');
       
       setTimeout(function() {
         
@@ -677,16 +735,38 @@
         overlay.style.opacity = '0';
         
         setTimeout(function() {
-          wrapper.style.display = 'block'; 
           
-          setTimeout(function() {
-            wrapper.style.opacity = '1'; 
-            startCelebration(); 
+          // الكود السحري: هل الشاشة هاتف أم حاسوب؟
+          if (window.innerWidth <= 800) {
+            mobileWrapper.style.display = 'block';
+            setTimeout(function() {
+              mobileWrapper.style.opacity = '1';
+              
+              var bdAudio = document.getElementById("birthday-audio");
+              bdAudio.play().catch(e=>{});
 
-            var bdAudio = document.getElementById("birthday-audio");
-            bdAudio.play();
+              // تفعيل حركة الصورة للهاتف
+              const photo = document.getElementById('photo-reveal');
+              const observer = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) photo.classList.add('is-visible');
+              }, { threshold: 0.4 });
+              if(photo) observer.observe(photo);
 
-          }, 50);
+              // تفعيل زر الرسالة للهاتف
+              const modal = document.getElementById('modal-mob');
+              document.getElementById('open-btn-mob').onclick = () => { modal.style.display = 'grid'; document.body.classList.add('letter-is-open'); };
+              document.getElementById('close-btn-mob').onclick = () => { modal.style.display = 'none'; document.body.classList.remove('letter-is-open'); };
+            }, 50);
+
+          } else {
+            wrapper.style.display = 'block'; 
+            setTimeout(function() {
+              wrapper.style.opacity = '1'; 
+              startCelebration(); 
+              var bdAudio = document.getElementById("birthday-audio");
+              bdAudio.play().catch(e=>{});
+            }, 50);
+          }
 
         }, 3500); 
 
