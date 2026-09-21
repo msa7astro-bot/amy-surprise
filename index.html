@@ -70,17 +70,29 @@
     @keyframes soft-pulse { 0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.92); } 50% { opacity: 0.95; transform: translate(-50%, -50%) scale(1.08); } }
     @keyframes popInNote { 0% { transform: translateY(40px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
     
-    #fireworks-overlay { position: fixed; top: -100vh; left: 0; width: 100%; height: 200vh; background-color: #000; z-index: 999999; }
+    /* 🌟 إصلاح خلفية الألعاب النارية لتمتد بدون فواصل 🌟 */
+    #fireworks-overlay { position: fixed; top: -150vh; left: 0; width: 100%; height: 300vh; background-color: #0b0213; z-index: 999999; }
     #wrapper { display: none; opacity: 0; transition: opacity 3s ease-in-out; }
 
     /* =========================================
-       إعدادات صندوق الرسالة (للحاسوب فقط)
+       إعدادات صندوق الرسالة والتاريخ (للحاسوب)
        ========================================= */
     .text__letter { max-height: 270px !important; overflow-y: auto !important; padding-right: 8px; }
     .text__letter::-webkit-scrollbar { width: 5px; }
     .text__letter::-webkit-scrollbar-track { background: transparent; }
     .text__letter::-webkit-scrollbar-thumb { background-color: #ff7882; border-radius: 10px; }
     .text__letter p { line-height: 1.5 !important; margin: 0 !important; }
+
+    .date__of__birth {
+      white-space: nowrap !important;
+      width: max-content !important;
+      min-width: 320px !important;
+      padding: 12px 35px !important;
+    }
+    .date__of__birth span {
+      white-space: nowrap !important;
+      display: inline-block !important;
+    }
 
     /* =========================================
        تصميم الهاتف الكامل والمزين
@@ -90,7 +102,6 @@
       #wrapper { display: none !important; }
       .box__letter { display: none !important; }
       
-      /* إرجاع الألعاب النارية لحجمها الطبيعي المريح */
       #fireworks-overlay canvas { transform: none; transform-origin: center center; }
 
       #mobile-wrapper {
@@ -117,7 +128,8 @@
       #mobile-wrapper .title span {
         font-size: clamp(3.5rem, 16vw, 6rem) !important; position: relative; z-index: 40;
         display: inline-block; transform: translateY(50px); opacity: 0; visibility: hidden;
-        animation: txtTranslateY 0.5s var(--t) forwards; margin: 0 -2px;
+        /* 🌟 إصلاح سرعة الأنيميشن لتصبح ناعمة 🌟 */
+        animation: txtTranslateY 1s var(--t) forwards; margin: 0 -2px;
         text-shadow: 3px 3px #333, -3px 3px #333, 3px -3px #333, -3px -3px #333, 3px 8px 0 #333;
       }
       #mobile-wrapper .title .happy span { color: #fff; }
@@ -161,7 +173,7 @@
       #mobile-wrapper .heart-one { top: 25%; left: 15%; transform: rotate(-15deg); }
       #mobile-wrapper .heart-two { right: 15%; bottom: 25%; transform: rotate(15deg); animation-delay: .55s; }
 
-      /* 🌟 تصميم الرسالة المسطرة المطابق لـ Lovable 🌟 */
+      /* تصميم الرسالة المسطرة (Lovable Design) */
       #mobile-letter-backdrop {
         position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.8);
         display: none; place-items: center; padding: 1.5rem;
@@ -169,7 +181,6 @@
       }
       .letter-paper-mob {
         background-color: #fffef9; 
-        /* سطور الدفتر الوردية */
         background-image: repeating-linear-gradient(transparent, transparent 34px, rgba(255, 120, 130, 0.4) 34px, rgba(255, 120, 130, 0.4) 35px);
         background-attachment: local;
         width: 100%; max-width: 450px; max-height: 85vh;
@@ -204,14 +215,12 @@
       .letter-rule-mob { width: 60px; height: 3px; background: #ff7882; margin: 5px auto 20px; }
       .letter-gif-mob { display: block; margin: 0 auto 20px; max-width: 100%; height: auto; border-radius: 5px; }
       
-      /* ضبط النص ليمشي مع السطور بالضبط */
       .letter-text-container-mob { 
         font-family: 'Sriracha', cursive; font-size: 1.15rem; line-height: 35px; 
         color: #333; text-align: left; margin-bottom: 20px; min-height: 100px;
       }
       .letter-text-container-mob p { margin: 0; padding: 0; }
       
-      /* 🌟 الختم الصغير في النهاية 🌟 */
       .letter-signoff-mob { 
         font-family: 'Dancing Script', cursive; 
         font-size: 1.2rem; 
@@ -372,7 +381,7 @@
 
     <main class="birthday-page">
       
-      <!-- القسم الأول: مليء بالزينة والكلمات العملاقة -->
+      <!-- القسم الأول -->
       <section class="birthday-scene" id="welcome">
         <div class="mob-decor decorate_star" style="width:35px; height:35px; top:18%; left:8%; animation-delay: 1.5s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
         <div class="mob-decor decorate_star" style="width:25px; height:25px; top:25%; right:12%; animation-delay: 2s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
@@ -396,7 +405,7 @@
         </a>
       </section>
 
-      <!-- القسم الثاني: الصورة والبالونات والسمايلي -->
+      <!-- القسم الثاني -->
       <section class="birthday-scene" id="amy">
         <div class="mob-decor decorate_star" style="width:25px; height:25px; top:10%; left:25%; animation-delay: 0.5s; background-color: #e91e63; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
         <div class="mob-decor decorate_star" style="width:30px; height:30px; bottom:15%; right:22%; animation-delay: 1s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
@@ -421,7 +430,7 @@
         </a>
       </section>
 
-      <!-- القسم الثالث: الزر -->
+      <!-- القسم الثالث -->
       <section class="birthday-scene" id="letter-mob">
         <div class="mob-decor decorate_star" style="width:35px; height:35px; top:12%; right:15%; animation-delay: 0.5s; background-color: #ff7882; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
         <div class="mob-decor decorate_star" style="width:25px; height:25px; bottom:32%; left:10%; animation-delay: 1s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
@@ -440,7 +449,7 @@
         </button>
       </section>
 
-      <!-- 🌟 تصميم رسالة الهاتف المسطرة (Lovable Design) 🌟 -->
+      <!-- رسالة الهاتف المسطرة (Lovable Design) -->
       <div id="mobile-letter-backdrop">
         <section class="letter-paper-mob">
           
@@ -458,10 +467,7 @@
             <p id="mobile-letter-text"></p>
           </div>
           
-          <!-- 🌟 صورة البطريق السفلية تظهر بعد انتهاء النص 🌟 -->
           <img id="bottom-img-mob" class="letter-gif-mob" src="https://media4.giphy.com/media/W4jyjmIpnw6e38B6Qc/giphy.gif" alt="" style="width: 220px; opacity: 0; transition: opacity 1s ease;">
-          
-          <!-- 🌟 ختم Happy Birthday الصغير جداً في اليمين 🌟 -->
           <div id="signoff-mob" class="letter-signoff-mob">Happy Birthday! ♡</div>
           
         </section>
@@ -593,7 +599,7 @@
       });
 
       // ==========================================
-      // 🌟 برمجة الرسالة للهاتف (Lovable Style) 🌟
+      // 🌟 برمجة الرسالة للهاتف 🌟
       // ==========================================
       let datatxtletterMobile = "Happy Birthday, Amy! 🎉✨ Your amazing content and fun personality never fail to brighten up our days. I wanted to do something special, so I designed this little magical surprise specifically for you. I truly hope it brings a big smile to your face, and I hope you like it and enjoy this gift! Wishing you endless happiness, good health, and all the success in achieving everything you dream of this year. Keep shining, and have the most amazing birthday! 🎂🎈😊";
       let charArrDateLetterMobile = datatxtletterMobile.split('');
@@ -604,7 +610,6 @@
         let mobText = document.querySelector("#mobile-letter-text");
         let containerBoxMob = document.querySelector(".letter-paper-mob");
         
-        // إظهار الرسالة
         $("#mobile-letter-backdrop").css("display", "grid");
         setTimeout(() => $("#mobile-letter-backdrop").css("opacity", "1"), 10);
         
@@ -612,7 +617,6 @@
         $("#bottom-img-mob").css("opacity", "0");
         $("#signoff-mob").css("opacity", "0");
         
-        // كتابة النص والنزول التلقائي مع السطور
         setTimeout(function(){
           intervalContentMob = setInterval(function(){
             if(currentIndexLetterMob < charArrDateLetterMobile.length){
@@ -621,10 +625,8 @@
               currentIndexLetterMob++;
             } else { 
               clearInterval(intervalContentMob); 
-              // إظهار المفاجأة بعد الانتهاء
               $("#bottom-img-mob").css("opacity", "1");
               $("#signoff-mob").css("opacity", "1");
-              // سحب الشاشة قليلاً للأسفل لرؤية المفاجأة
               setTimeout(() => { containerBoxMob.scrollTo({ top: containerBoxMob.scrollHeight, behavior: 'smooth' }); }, 150);
             }
           }, 45); 
@@ -652,9 +654,10 @@
       
       var delayBeforeSlide = window.innerWidth <= 800 ? 2500 : 1300;
       
+      // 🌟 التعديل هنا: سحب الشاشة للأسفل بمسافة 150vh لتتأكد من إخفاءها 🌟
       setTimeout(function() {
         overlay.style.transition = 'transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 3s ease 3s';
-        overlay.style.transform = 'translateY(100vh)'; 
+        overlay.style.transform = 'translateY(150vh)'; 
         overlay.style.opacity = '0';
         
         setTimeout(function() {
