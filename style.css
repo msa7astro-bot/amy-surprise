@@ -642,31 +642,91 @@ img {
     .btn button { font-size: 14px; padding: 8px 16px; }
 }
 
+/* إخفاء الأسهم تماماً عند الفتح من الحاسوب */
+.scroll-arrows { display: none; }
+
 /* =========================================
-   📱 إعدادات الصفحات الأولى (الألعاب النارية) للهاتف
+   📱 رحلة الموبايل: 3 أقسام متتالية + أسهم متحركة
    ========================================= */
 @media screen and (max-width: 768px) {
-  .fireworks-container, .intro-section {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
+  
+  /* السماح بالتمرير العمودي فقط */
+  body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
   }
+  
+  .content {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  /* 🔹 القسم الأول (الكلمات) والقسم الثاني (الصورة): كل منهما يأخذ شاشة كاملة */
+  .left, .right {
+    width: 100% !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* 🔹 القسم الثاني: ظهور الصورة من العدم */
+  .box__account {
+    animation: appearFromNothing 2s ease-out forwards !important;
+    margin: 0 auto !important;
+  }
+
+  /* 🔹 القسم الثالث: صندوق الرسالة والزر */
+  .box__letter {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 90% !important;
+    margin: 0 auto 50px auto !important;
+  }
+
+  /* إخفاء الزخارف الجانبية لمنع الازدحام في الموبايل */
+  .decorate_star, .decorate_flower--one, .decorate_flower--two, .decorate_flower--three, .flag__left, .flag__right {
+    display: none !important;
+  }
+
+  /* ⬇️ تصميم الـ 3 أسهم المتحركة للموبايل فقط */
+  .scroll-arrows {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+  
+  .scroll-arrows span {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-bottom: 4px solid #ff7eb3; /* لون الأسهم */
+    border-right: 4px solid #ff7eb3;
+    transform: rotate(45deg);
+    animation: arrowBounce 1.5s infinite;
+  }
+  
+  /* تأخير حركة كل سهم لعمل تأثير النبض المتتالي */
+  .scroll-arrows span:nth-child(1) { animation-delay: -0.4s; }
+  .scroll-arrows span:nth-child(2) { animation-delay: -0.2s; }
+  .scroll-arrows span:nth-child(3) { animation-delay: 0s; }
 }
 
 /* =========================================
-   💻 إجبار صفحة الاحتفال على عرض الحاسوب الحقيقي في الهاتف
+   🎬 الحركات (Animations)
    ========================================= */
-@media screen and (max-width: 768px) {
-  /* السماح للشاشة بالتمرير الأفقي بشكل دائم لكي تظهر تفاصيل الحاسوب بحجمها الكامل */
-  body {
-    overflow-x: auto !important;
-    width: 100vw;
-  }
+@keyframes arrowBounce {
+  0%, 100% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+  50% { opacity: 1; transform: rotate(45deg) translate(5px, 5px); }
+}
 
-  /* تثبيت عرض صندوق الاحتفال على مقاس الحاسوب الثابت */
-  .content {
-    width: 1100px !important;
-    min-width: 1100px !important;
-    max-width: none !important;
-  }
+@keyframes appearFromNothing {
+  0% { opacity: 0; transform: translateY(100px) scale(0.5); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
