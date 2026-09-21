@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Amy!</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Sriracha&family=Titan+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --font-display: "Titan One", sans-serif;
+      --font-hand: "Sriracha", cursive;
+      --font-letter: "Dancing Script", cursive;
+      --background: oklch(0.95 0.03 17);
+      --foreground: oklch(0.2 0.025 280);
+      --primary: oklch(0.7 0.17 18);
+      --secondary: oklch(0.98 0.018 22);
+      --muted: oklch(0.91 0.035 18);
+      --accent: oklch(0.84 0.15 82);
+      --card: oklch(0.99 0.012 70);
+      --border: oklch(0.32 0.025 280);
+      --destructive: oklch(0.58 0.23 25);
+      --grid-line: oklch(1 0 0 / 58%);
+      --shadow: oklch(0.2 0.025 280 / 22%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body { background: var(--background); color: var(--foreground); overflow-x: hidden; font-family: sans-serif; }
+    body.letter-is-open { overflow: hidden; }
+
+    .birthday-page {
+      min-height: 100svh;
+      background-color: var(--background);
+      background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 38px 38px;
+    }
+
+    .birthday-scene {
+      position: relative; display: flex; min-height: 100svh; width: 100%;
+      flex-direction: column; align-items: center; justify-content: center;
+      scroll-snap-align: start; scroll-snap-stop: always; padding: 2rem 1rem;
+    }
+
+    .birthday-title { font-family: var(--font-display); font-size: 4rem; line-height: 1.1; text-align: center; }
+    .birthday-title span { display: block; opacity: 0; transform: translateY(35px); animation: title-arrive .75s forwards; -webkit-text-stroke: 1px var(--foreground); filter: drop-shadow(3px 4px 0 var(--foreground)); }
+    .birthday-title span:first-child { color: var(--secondary); }
+    .birthday-title span:last-child { color: var(--primary); animation-delay: .35s; }
+
+    .party-hat { position: absolute; top: -100px; right: 10px; width: 80px; transform: translateY(-100vh); animation: hat-drop 1.15s 1s forwards; }
+    .party-hat img { width: 100%; transform: rotate(14deg); filter: drop-shadow(2px 4px 0px rgba(0,0,0,0.3)); }
+
+    .birthday-date { margin-top: 2rem; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: .5rem 1rem; font: 700 1.1rem var(--font-hand); box-shadow: 0 5px 0 var(--shadow); animation: date-pop .65s 1.6s both; }
+
+    .scroll-cue { position: absolute; bottom: 30px; display: flex; flex-direction: column; color: var(--primary); font-size: 1.5rem; text-decoration: none; }
+    .scroll-cue i { margin-top: -8px; animation: cue-down 1.5s infinite; }
+    .scroll-cue i:nth-child(2) { animation-delay: .15s; }
+    .scroll-cue i:nth-child(3) { animation-delay: .3s; }
+
+    .photo-reveal { width: 85vw; opacity: 0; transform: scale(.5); filter: blur(10px); transition: all 1s; }
+    .photo-reveal.is-visible { opacity: 1; transform: scale(1); filter: blur(0); }
+    .photo-frame { aspect-ratio: 1; border: 5px solid var(--border); border-radius: 50%; background: var(--secondary); box-shadow: 0 10px 0 var(--shadow); overflow: hidden; }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .princess-label { display: flex; justify-content: center; align-items: center; gap: 10px; width: 90%; margin: -15px auto 0; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: .5rem; font: 700 1.1rem var(--font-hand); box-shadow: 0 5px 0 var(--shadow); position: relative; z-index: 2; }
+    .princess-label i { color: var(--destructive); }
+
+    .balloon { position: absolute; width: 80px; animation: balloon-float 3s infinite ease-in-out; z-index: -1; }
+    .balloon-left { top: 15%; left: 10px; transform: rotate(-10deg); }
+    .balloon-right { bottom: 25%; right: 10px; transform: rotate(10deg); animation-delay: -1.5s; }
+
+    .letter-button { display: flex; align-items: center; gap: 10px; border: 3px solid var(--border); border-radius: 999px; background: var(--primary); padding: 1rem 2rem; font: 700 1.3rem var(--font-hand); box-shadow: 0 8px 0 var(--foreground); cursor: pointer; transition: 0.2s; outline: none; }
+    .letter-button:active { transform: translateY(5px); box-shadow: 0 3px 0 var(--foreground); }
+
+    .letter-backdrop { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; background: rgba(0,0,0,0.8); padding: 1rem; }
+    .letter-paper { width: 100%; max-height: 90vh; overflow-y: auto; border: 5px solid var(--secondary); border-radius: 15px; background: var(--card); padding: 2rem 1.5rem; text-align: left; position: relative; animation: letter-open .5s both; }
+    .letter-close { position: absolute; top: 10px; right: 10px; width: 35px; height: 35px; border: 2px solid var(--border); border-radius: 50%; background: var(--secondary); font-size: 1.2rem; cursor: pointer; }
+    .letter-paper h2 { font: 700 2.2rem var(--font-letter); text-align: center; margin-bottom: 15px; }
+    .letter-paper p { font: 700 1.2rem/1.6 var(--font-letter); }
+
+    @keyframes title-arrive { to { opacity: 1; transform: translateY(0); } }
+    @keyframes hat-drop { to { transform: translateY(0); } }
+    @keyframes date-pop { from { opacity: 0; transform: scaleX(.2); } to { opacity: 1; transform: scaleX(1); } }
+    @keyframes cue-down { 0%,100% { opacity: .3; transform: translateY(-3px); } 50% { opacity: 1; transform: translateY(5px); } }
+    @keyframes balloon-float { 50% { transform: translateY(-15px); } }
+    @keyframes letter-open { from { opacity: 0; transform: scale(.8); } }
+  </style>
+</head>
+<body>
+
+  <main class="birthday-page">
+    <!-- المحطة 1: الترحيب -->
+    <section class="birthday-scene" id="welcome">
+      <div style="position: relative;">
+        <div class="party-hat"><img src="./Images/hat.png" alt="Hat"></div>
+        <h1 class="birthday-title">
+          <span>Happy</span>
+          <span>Birthday</span>
+        </h1>
+      </div>
+      <div class="birthday-date"><span>★</span> 19 September 2002 <span>★</span></div>
+      <a class="scroll-cue" href="#amy">
+        <i class="fa-solid fa-chevron-down"></i>
+        <i class="fa-solid fa-chevron-down"></i>
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+    </section>
+
+    <!-- المحطة 2: الصورة -->
+    <section class="birthday-scene" id="amy">
+      <img src="./Images/balloon1.png" class="balloon balloon-left" alt="">
+      <img src="./Images/balloon2.png" class="balloon balloon-right" alt="">
+      
+      <div id="photo-reveal" class="photo-reveal">
+        <div class="photo-frame">
+          <img src="./Images/amy.png" alt="Amy">
+        </div>
+        <div class="princess-label">
+          <i class="fa-solid fa-heart"></i>
+          <span>Our Princess 🥳</span>
+          <i class="fa-solid fa-heart"></i>
+        </div>
+      </div>
+      
+      <a class="scroll-cue" href="#letter">
+        <i class="fa-solid fa-chevron-down"></i>
+        <i class="fa-solid fa-chevron-down"></i>
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+    </section>
+
+    <!-- المحطة 3: الرسالة -->
+    <section class="birthday-scene" id="letter">
+      <h2 style="font-family: var(--font-letter); font-size: 2.5rem; margin-bottom: 20px;">One last surprise…</h2>
+      <button class="letter-button" id="open-btn">
+        <i class="fa-regular fa-envelope"></i> Click here
+      </button>
+    </section>
+
+    <!-- الرسالة المنبثقة -->
+    <div class="letter-backdrop" id="modal">
+      <section class="letter-paper">
+        <button class="letter-close" id="close-btn"><i class="fa-solid fa-xmark"></i></button>
+        <h2>For Amy, with love</h2>
+        <div style="width: 60px; height: 3px; background: var(--primary); margin: 0 auto 15px;"></div>
+        <p>Happy Birthday, Amy! 🎉✨ Your amazing content and fun personality never fail to brighten up our days. I wanted to do something special, so I designed this little magical surprise specifically for you. I truly hope it brings a big smile to your face, and I hope you like it and enjoy this gift! Wishing you endless happiness, good health, and all the success in achieving everything you dream of this year. Keep shining, and have the most amazing birthday! 🎂🎈😊</p>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // تفعيل حركة الصورة عند الوصول لها
+    const photo = document.getElementById('photo-reveal');
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) photo.classList.add('is-visible');
+    }, { threshold: 0.4 });
+    observer.observe(photo);
+
+    // تفعيل الرسالة
+    const modal = document.getElementById('modal');
+    document.getElementById('open-btn').onclick = () => { modal.style.display = 'grid'; document.body.classList.add('letter-is-open'); };
+    document.getElementById('close-btn').onclick = () => { modal.style.display = 'none'; document.body.classList.remove('letter-is-open'); };
+  </script>
+</body>
+</html>
