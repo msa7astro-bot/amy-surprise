@@ -650,7 +650,7 @@ img {
   /* استبدل .box__account باسم الكلاس الخاص بالصورة إذا كان مختلفاً */
   .box__account { 
     animation: appearFromNothing 2.5s ease-out forwards !important;
-    animation: appearFromNothing 2.5s ease-out 8s both !important;
+    animation: appearFromNothing 2.5s ease-out 10s both !important;
   }
 }
 
