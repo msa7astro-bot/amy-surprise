@@ -92,19 +92,64 @@
       html, body { overflow-x: hidden !important; overflow-y: auto !important; height: auto !important; min-height: 100vh; }
       #wrapper { display: none !important; }
       
-      /* 🌟 جعل الرسالة تظهر كما في الحاسوب تماماً (بشكل أفقي) وتصغيرها لتظهر الخلفية 🌟 */
+      /* تكبير الألعاب النارية للهاتف */
+      #fireworks-overlay canvas { transform: scale(1.6); transform-origin: center center; }
+
+      /* 🌟 إصلاح شكل الرسالة لتملأ الشاشة وتكون واضحة للقراءة 🌟 */
       .box__letter {
         position: fixed !important;
         top: 50% !important;
         left: 50% !important;
-        width: 750px !important; /* إجبارها على أخذ عرض الحاسوب */
+        width: 92% !important; /* تملأ معظم عرض الهاتف */
+        max-width: 450px !important;
         margin: 0 !important;
-        transform: translate(-50%, -50%) scale(0.48) !important; /* تصغيرها لترى الزينة الجانبية */
-        transform-origin: center center !important;
-        z-index: 999999 !important; /* حل مشكلة تداخل الخلفية */
+        transform: translate(-50%, -50%) !important; /* إلغاء التصغير المبالغ فيه */
+        z-index: 999999 !important;
+      }
+      .letter__border { width: 100% !important; }
+      .letter { 
+        width: 100% !important; 
+        height: auto !important; 
+        max-height: 85vh !important; /* لا تتعدى طول الشاشة */
+        padding: 25px 15px !important; 
+        overflow-y: auto !important; 
+        overflow-x: hidden !important;
+      }
+      .content__letter { 
+        flex-direction: column !important; /* الترتيب العمودي لتناسب الهاتف */
+        align-items: center !important; 
+        gap: 10px !important; 
+      }
+      .content__letter .left, .content__letter .right { 
+        width: 100% !important; 
+        display: flex !important; 
+        flex-direction: column !important; 
+        align-items: center !important; 
+        text-align: center !important; 
+      }
+      #heart__letter { width: 90px !important; margin-bottom: 10px !important; }
+      .heart { display: none !important; } /* إخفاء القلوب الصغيرة الجانبية لمنع الزحام */
+      .love__img img { width: 160px !important; margin: 0 auto !important; }
+      .text__letter { 
+        width: 100% !important; 
+        margin-top: 15px !important; 
+        max-height: 250px !important; 
+        overflow-y: auto !important; 
+      }
+      .text__letter p { 
+        font-size: 1.15rem !important; 
+        line-height: 1.6 !important; 
+        text-align: left !important; /* لسهولة قراءة الإنجليزية */
+      }
+      #mewmew { width: 60px !important; margin-top: 15px !important; }
+      .close { 
+        top: 10px !important; 
+        right: 10px !important; 
+        font-size: 1.5rem !important; 
+        z-index: 100 !important; 
       }
 
-      /* تنسيقات واجهة الهاتف الساحرة بألوان HEX آمنة */
+      /* تنسيقات واجهة الهاتف الساحرة */
       #mobile-wrapper {
         display: none; opacity: 0; transition: opacity 2s ease-in-out;
         background-color: #ffeef2;
@@ -127,7 +172,7 @@
       .mob-decor { position: absolute; z-index: 1; opacity: 0; animation: popDecor 1s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
       /* 🌟 الكلمات العملاقة لتملأ الشاشة 🌟 */
-      #mobile-wrapper .title { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; z-index: 40; } /* Z-index أعلى من القبعة */
+      #mobile-wrapper .title { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; z-index: 40; }
       #mobile-wrapper .title .happy, #mobile-wrapper .title .birthday { display: flex; justify-content: center; font-family: "Titan One", sans-serif; width: 100%; }
       #mobile-wrapper .title span {
         font-size: clamp(3.5rem, 16vw, 6rem) !important; position: relative; z-index: 40;
@@ -140,7 +185,7 @@
       
       /* 🌟 القبعة: تظهر من خلف الكلمات وتستقر فوقها 🌟 */
       #mobile-wrapper .hat {
-        position: absolute; right: 5%; top: -35px; z-index: 30; /* القبعة خلف الحروف (z-index أقل) */
+        position: absolute; right: 5%; top: -35px; z-index: 30; /* القبعة خلف الحروف */
         animation: mobileHatPop 1.5s 3.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0;
       }
       #mobile-wrapper .hat img { width: clamp(100px, 28vw, 150px) !important; filter: drop-shadow(2px 5px 0px rgba(0,0,0,0.4)); }
