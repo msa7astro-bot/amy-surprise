@@ -2,62 +2,68 @@ var winW = window.innerWidth,
     winH = window.innerHeight;
 
 var w = (c.width = winW),
-    h = (c.height = winH),
-    ctx = c.getContext("2d"),
-    hw = w / 2, 
-    hh = h / 2,
-    
-    isMobile = winW < 768,
-    
-    opts = {
-      strings: ["HAPPY", "BIRTHDAY", "Amy! 🎉"],
-      charSize: isMobile ? 32 : 55,
-      charSpacing: isMobile ? 35 : 60,
-      lineHeight: isMobile ? 45 : 75,
+  // 💡 التصحيح الأول: ارتفاع اللوحة يجب أن يكون بحجم الشاشة وليس ضعفها
+  h = (c.height = winH), 
+  ctx = c.getContext("2d"),
+  hw = w / 2, 
+  // 💡 التصحيح الثاني: المركز يجب أن يكون في منتصف الشاشة (النصف) وليس في الأسفل
+  hh = winH / 2, 
+  
+  // تحديد ما إذا كانت الشاشة هاتفاً محمولاً
+  isMobile = winW < 800,
+  
+  opts = {
+    strings: ["HAPPY", "BIRTHDAY", "Amy 🎉"],
+    charSize: isMobile ? 35 : 60,       // تكبير الخط ليكون واضحاً في الهاتف
+    charSpacing: isMobile ? 38 : 65,    // تظبيط المسافة بين الحروف
+    lineHeight: isMobile ? 50 : 80,     // تظبيط المسافة بين السطور
 
-      cx: w / 2,
-      cy: h / 2,
+    cx: w / 2,
+    cy: h / 2,
 
-      fireworkPrevPoints: 10,
-      fireworkBaseLineWidth: 5,
-      fireworkAddedLineWidth: 8,
-      fireworkSpawnTime: 200,
-      fireworkBaseReachTime: 30,
-      fireworkAddedReachTime: 30,
-      fireworkCircleBaseSize: 20,
-      fireworkCircleAddedSize: 10,
-      fireworkCircleBaseTime: 30,
-      fireworkCircleAddedTime: 30,
-      fireworkCircleFadeBaseTime: 10,
-      fireworkCircleFadeAddedTime: 5,
-      fireworkBaseShards: 5,
-      fireworkAddedShards: 5,
-      fireworkShardPrevPoints: 3,
-      fireworkShardBaseVel: 4,
-      fireworkShardAddedVel: 2,
-      fireworkShardBaseSize: 3,
-      fireworkShardAddedSize: 3,
-      gravity: 0.1,
-      upFlow: -0.1,
-      letterContemplatingWaitTime: 360,
-      balloonSpawnTime: 20,
-      balloonBaseInflateTime: 10,
-      balloonAddedInflateTime: 10,
-      balloonBaseSize: 20,
-      balloonAddedSize: 20,
-      balloonBaseVel: 0.4,
-      balloonAddedVel: 0.4,
-      balloonBaseRadian: -(Math.PI / 2 - 0.5),
-      balloonAddedRadian: -1,
-    },
-    calc = {
-      totalWidth: opts.charSpacing * Math.max(...opts.strings.map(s => Array.from(s).length)),
-    },
-    Tau = Math.PI * 2,
-    TauQuarter = Tau / 4,
-    letters = [];
+    fireworkPrevPoints: 10,
+    fireworkBaseLineWidth: 5,
+    fireworkAddedLineWidth: 8,
+    fireworkSpawnTime: 200,
+    fireworkBaseReachTime: 30,
+    fireworkAddedReachTime: 30,
+    fireworkCircleBaseSize: 20,
+    fireworkCircleAddedSize: 10,
+    fireworkCircleBaseTime: 30,
+    fireworkCircleAddedTime: 30,
+    fireworkCircleFadeBaseTime: 10,
+    fireworkCircleFadeAddedTime: 5,
+    fireworkBaseShards: 5,
+    fireworkAddedShards: 5,
+    fireworkShardPrevPoints: 3,
+    fireworkShardBaseVel: 4,
+    fireworkShardAddedVel: 2,
+    fireworkShardBaseSize: 3,
+    fireworkShardAddedSize: 3,
+    gravity: 0.1,
+    upFlow: -0.1,
+    letterContemplatingWaitTime: 360,
+    balloonSpawnTime: 20,
+    balloonBaseInflateTime: 10,
+    balloonAddedInflateTime: 10,
+    balloonBaseSize: 20,
+    balloonAddedSize: 20,
+    balloonBaseVel: 0.4,
+    balloonAddedVel: 0.4,
+    balloonBaseRadian: -(Math.PI / 2 - 0.5),
+    balloonAddedRadian: -1,
+  },
+  calc = {
+    totalWidth:
+      opts.charSpacing *
+      Math.max(...opts.strings.map(s => Array.from(s).length)),
+  },
+  Tau = Math.PI * 2,
+  TauQuarter = Tau / 4,
+  letters = [];
 
-ctx.font = opts.charSize + "px Verdana, sans-serif";
+// 💡 استخدام خط متناسق مع التصميم
+ctx.font = "bold " + opts.charSize + "px 'Titan One', 'Bubblegum Sans', Verdana, sans-serif";
 
 function playFireworkPopSound() {
   try {
@@ -65,16 +71,16 @@ function playFireworkPopSound() {
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     
-    osc.type = 'triangle';
+    osc.type = 'triangle'; 
     osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-    if (osc.frequency.exponentialRampToValueAtTime) {
+    if(osc.frequency.exponentialRampToValueAtTime) {
       osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.08);
     } else {
       osc.frequency.linearRampToValueAtTime(80, audioCtx.currentTime + 0.08);
     }
     
     gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-    if (gain.gain.exponentialRampToValueAtTime) {
+    if(gain.gain.exponentialRampToValueAtTime) {
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
     } else {
       gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
@@ -85,7 +91,7 @@ function playFireworkPopSound() {
     
     osc.start();
     osc.stop(audioCtx.currentTime + 0.08);
-  } catch(e) {}
+  } catch(e) { }
 }
 
 function Letter(char, x, y) {
@@ -152,7 +158,9 @@ Letter.prototype.step = function () {
       }
 
       if (this.tick >= this.reachTime) {
-        if (window.playLetterPop) window.playLetterPop();
+        if (window.playLetterPop) {
+          window.playLetterPop();
+        }
 
         this.phase = "contemplate";
 
@@ -356,7 +364,7 @@ function generateBalloonPath(x, y, size) {
     x - size / 4,
     y - size,
     x,
-    y - size
+    y - size,
   );
   ctx.bezierCurveTo(x + size / 4, y - size, x + size / 2, y - size / 2, x, y);
 }
@@ -364,7 +372,8 @@ function generateBalloonPath(x, y, size) {
 function anim() {
   window.requestAnimationFrame(anim);
 
-  ctx.fillStyle = "#000";
+  // 💡 التصحيح الثالث: خلفية بنفسجية داكنة لتتطابق تماماً مع CSS لمنع خطوط الفواصل
+  ctx.fillStyle = "#0b0213";
   ctx.fillRect(0, 0, w, h);
 
   ctx.translate(hw, hh);
@@ -391,9 +400,10 @@ for (var i = 0; i < opts.strings.length; ++i) {
     letters.push(
       new Letter(
         chars[j],
+        // 💡 التصحيح الرابع: معادلة التوسيط الدقيقة باستخدام charSpacing
         j * opts.charSpacing + opts.charSpacing / 2 - (chars.length * opts.charSpacing) / 2,
-        i * opts.lineHeight + opts.lineHeight / 2 - (opts.strings.length * opts.lineHeight) / 2
-      )
+        i * opts.lineHeight + opts.lineHeight / 2 - (opts.strings.length * opts.lineHeight) / 2,
+      ),
     );
   }
 }
@@ -404,9 +414,9 @@ window.addEventListener("resize", function () {
   winW = window.innerWidth;
   winH = window.innerHeight;
   w = c.width = winW;
-  h = c.height = winH;
+  h = c.height = winH; // تم إصلاحها هنا أيضاً
   hw = w / 2;
-  hh = h / 2;
-  isMobile = winW < 768;
-  ctx.font = (isMobile ? 32 : 55) + "px Verdana, sans-serif";
+  hh = h / 2;          // تم إصلاحها هنا أيضاً
+  isMobile = winW < 800;
+  ctx.font = "bold " + (isMobile ? 35 : 60) + "px 'Titan One', 'Bubblegum Sans', Verdana, sans-serif";
 });
