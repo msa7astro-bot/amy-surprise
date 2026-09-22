@@ -12,9 +12,9 @@ var w = (c.width = winW),
   
   opts = {
     strings: ["HAPPY", "BIRTHDAY", "Amy🎉"],
-    charSize: isMobile ? 22 : 30,       // حجم مناسب للهاتف
-    charSpacing: isMobile ? 24 : 35,    // مسافة تمنع التداخل
-    lineHeight: isMobile ? 30 : 40,     
+    charSize: isMobile ? 18 : 30,       // تصغير الخط في الموبايل
+    charSpacing: isMobile ? 20 : 35,    // تقليل المسافة بين الحروف في الموبايل
+    lineHeight: isMobile ? 25 : 40,     // تقليل المسافة بين السطور في الموبايل
 
     cx: w / 2,
     cy: h / 2,
@@ -62,13 +62,14 @@ var w = (c.width = winW),
 
 ctx.font = opts.charSize + "px Verdana";
 
+/* 💡 دالة توليد صوت الانفجار المتزامن تماماً مع ظهور الحرف في السماء */
 function playFireworkPopSound() {
   try {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     
-    osc.type = 'triangle'; 
+    osc.type = 'triangle'; // صوت أشبه بانفجار الألعاب النارية الخفيف
     osc.frequency.setValueAtTime(300, audioCtx.currentTime);
     osc.frequency.exponentialRampToValueValueAtTime ? osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.08) : osc.frequency.linearRampToValueAtTime(80, audioCtx.currentTime + 0.08);
     
@@ -80,7 +81,9 @@ function playFireworkPopSound() {
     
     osc.start();
     osc.stop(audioCtx.currentTime + 0.08);
-  } catch(e) { }
+  } catch(e) {
+    // تجاهل القيود الأمنية للمتصفح قبل تفاعل المستخدم
+  }
 }
 
 function Letter(char, x, y) {
@@ -107,8 +110,11 @@ Letter.prototype.reset = function () {
   this.tick = 0;
   this.spawned = false;
   this.spawningTime = (opts.fireworkSpawnTime * Math.random()) | 0;
-  this.reachTime = (opts.fireworkBaseReachTime + opts.fireworkAddedReachTime * Math.random()) | 0;
-  this.lineWidth = opts.fireworkBaseLineWidth + opts.fireworkAddedLineWidth * Math.random();
+  this.reachTime =
+    (opts.fireworkBaseReachTime + opts.fireworkAddedReachTime * Math.random()) |
+    0;
+  this.lineWidth =
+    opts.fireworkBaseLineWidth + opts.fireworkAddedLineWidth * Math.random();
   this.prevPoints = [[0, hh, 0]];
 };
 Letter.prototype.step = function () {
@@ -138,7 +144,10 @@ Letter.prototype.step = function () {
         var point = this.prevPoints[i],
           point2 = this.prevPoints[i - 1];
 
-        ctx.strokeStyle = this.alphaColor.replace("alp", i / this.prevPoints.length);
+        ctx.strokeStyle = this.alphaColor.replace(
+          "alp",
+          i / this.prevPoints.length,
+        );
         ctx.lineWidth = point[2] * lineWidthProportion * i;
         ctx.beginPath();
         ctx.moveTo(point[0], point[1]);
@@ -146,37 +155,51 @@ Letter.prototype.step = function () {
         ctx.stroke();
       }
 
+      // 💡 اللحظة الحاسمة: عندما يصل الصاروخ إلى مكانه وينفجر لتشكيل الحرف
       if (this.tick >= this.reachTime) {
+        // 💡 تشغيل صوت fireworks1.mp3 الحقيقي فور وصول الحرف وانفجاره
         if (window.playLetterPop) {
           window.playLetterPop();
         }
 
         this.phase = "contemplate";
+        // ... باقي الكود الخاص بانفجار الدائرة والقطع المتطايرة
 
-        this.circleFinalSize = opts.fireworkCircleBaseSize + opts.fireworkCircleAddedSize * Math.random();
-        this.circleCompleteTime = (opts.fireworkCircleBaseTime + opts.fireworkCircleAddedTime * Math.random()) | 0;
+        this.circleFinalSize =
+          opts.fireworkCircleBaseSize +
+          opts.fireworkCircleAddedSize * Math.random();
+        this.circleCompleteTime =
+          (opts.fireworkCircleBaseTime +
+            opts.fireworkCircleAddedTime * Math.random()) |
+          0;
         this.circleCreating = true;
         this.circleFading = false;
 
-        this.circleFadeTime = (opts.fireworkCircleFadeBaseTime + opts.fireworkCircleFadeAddedTime * Math.random()) | 0;
+        this.circleFadeTime =
+          (opts.fireworkCircleFadeBaseTime +
+            opts.fireworkCircleFadeAddedTime * Math.random()) |
+          0;
         this.tick = 0;
         this.tick2 = 0;
 
         this.shards = [];
 
-        var shardCount = (opts.fireworkBaseShards + opts.fireworkAddedShards * Math.random()) | 0,
+        var shardCount =
+            (opts.fireworkBaseShards +
+              opts.fireworkAddedShards * Math.random()) |
+            0,
           angle = Tau / shardCount,
           cos = Math.cos(angle),
           sin = Math.sin(angle),
-          xx = 1,
-          yy = 0;
+          x = 1,
+          y = 0;
 
         for (var i = 0; i < shardCount; ++i) {
-          var x1 = xx;
-          xx = xx * cos - yy * sin;
-          yy = yy * cos + x1 * sin;
+          var x1 = x;
+          x = x * cos - y * sin;
+          y = y * cos + x1 * sin;
 
-          this.shards.push(new Shard(this.x, this.y, xx, yy, this.alphaColor));
+          this.shards.push(new Shard(this.x, this.y, x, y, this.alphaColor));
         }
       }
     }
@@ -189,7 +212,9 @@ Letter.prototype.step = function () {
         armonic = -Math.cos(proportion * Math.PI) / 2 + 0.5;
 
       ctx.beginPath();
-      ctx.fillStyle = this.lightAlphaColor.replace("light", 50 + 50 * proportion).replace("alp", proportion);
+      ctx.fillStyle = this.lightAlphaColor
+        .replace("light", 50 + 50 * proportion)
+        .replace("alp", proportion);
       ctx.beginPath();
       ctx.arc(this.x, this.y, armonic * this.circleFinalSize, 0, Tau);
       ctx.fill();
@@ -208,7 +233,9 @@ Letter.prototype.step = function () {
         armonic = -Math.cos(proportion * Math.PI) / 2 + 0.5;
 
       ctx.beginPath();
-      ctx.fillStyle = this.lightAlphaColor.replace("light", 100).replace("alp", 1 - armonic);
+      ctx.fillStyle = this.lightAlphaColor
+        .replace("light", 100)
+        .replace("alp", 1 - armonic);
       ctx.arc(this.x, this.y, this.circleFinalSize, 0, Tau);
       ctx.fill();
 
@@ -234,10 +261,15 @@ Letter.prototype.step = function () {
       this.spawning = true;
       this.spawnTime = (opts.balloonSpawnTime * Math.random()) | 0;
       this.inflating = false;
-      this.inflateTime = (opts.balloonBaseInflateTime + opts.balloonAddedInflateTime * Math.random()) | 0;
-      this.size = (opts.balloonBaseSize + opts.balloonAddedSize * Math.random()) | 0;
+      this.inflateTime =
+        (opts.balloonBaseInflateTime +
+          opts.balloonAddedInflateTime * Math.random()) |
+        0;
+      this.size =
+        (opts.balloonBaseSize + opts.balloonAddedSize * Math.random()) | 0;
 
-      var rad = opts.balloonBaseRadian + opts.balloonAddedRadian * Math.random(),
+      var rad =
+          opts.balloonBaseRadian + opts.balloonAddedRadian * Math.random(),
         vel = opts.balloonBaseVel + opts.balloonAddedVel * Math.random();
 
       this.vx = Math.cos(rad) * vel;
@@ -304,7 +336,8 @@ Letter.prototype.step = function () {
 };
 
 function Shard(x, y, vx, vy, color) {
-  var vel = opts.fireworkShardBaseVel + opts.fireworkShardAddedVel * Math.random();
+  var vel =
+    opts.fireworkShardBaseVel + opts.fireworkShardAddedVel * Math.random();
 
   this.vx = vx * vel;
   this.vy = vy * vel;
@@ -317,7 +350,8 @@ function Shard(x, y, vx, vy, color) {
 
   this.alive = true;
 
-  this.size = opts.fireworkShardBaseSize + opts.fireworkShardAddedSize * Math.random();
+  this.size =
+    opts.fireworkShardBaseSize + opts.fireworkShardAddedSize * Math.random();
 }
 Shard.prototype.step = function () {
   this.x += this.vx;
@@ -361,7 +395,7 @@ function generateBalloonPath(x, y, size) {
 function anim() {
   window.requestAnimationFrame(anim);
 
-  ctx.fillStyle = "#111"; // لون سماء الليل الموحد
+  ctx.fillStyle = "#111";
   ctx.fillRect(0, 0, w, h);
 
   ctx.translate(hw, hh);
@@ -388,9 +422,12 @@ for (var i = 0; i < opts.strings.length; ++i) {
     letters.push(
       new Letter(
         chars[j],
-        // الحل السحري لتوسيط الحروف أفقياً ومنع التداخل
-        j * opts.charSpacing + opts.charSpacing / 2 - (chars.length * opts.charSpacing) / 2,
-        i * opts.lineHeight + opts.lineHeight / 2 - (opts.strings.length * opts.lineHeight) / 2,
+        j * opts.charSpacing +
+          opts.charSpacing / 2 -
+          (chars.length * opts.charSize) / 2,
+        i * opts.lineHeight +
+          opts.lineHeight / 2 -
+          (opts.strings.length * opts.lineHeight) / 2,
       ),
     );
   }
@@ -405,7 +442,5 @@ window.addEventListener("resize", function () {
   h = c.height = winH * 2;
   hw = w / 2;
   hh = winH * 1.5;
-  isMobile = winW < 768;
-  opts.charSize = isMobile ? 22 : 30;
   ctx.font = opts.charSize + "px Verdana";
 });
