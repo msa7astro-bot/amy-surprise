@@ -7,13 +7,14 @@ var w = (c.width = winW),
   hw = w / 2, 
   hh = winH * 1.5, 
   
-  isMobile = winW < 800,
+  // تحديد ما إذا كانت الشاشة هاتفاً محمولاً
+  isMobile = winW < 768,
   
   opts = {
     strings: ["HAPPY", "BIRTHDAY", "Amy🎉"],
-    charSize: isMobile ? 24 : 30,       
-    charSpacing: isMobile ? 26 : 35,    
-    lineHeight: isMobile ? 35 : 40,     
+    charSize: isMobile ? 22 : 30,       
+    charSpacing: isMobile ? 24 : 35,    
+    lineHeight: isMobile ? 30 : 40,     
 
     cx: w / 2,
     cy: h / 2,
@@ -22,13 +23,18 @@ var w = (c.width = winW),
     fireworkBaseLineWidth: 5,
     fireworkAddedLineWidth: 8,
     fireworkSpawnTime: 200,
-    // 💡 إبطاء سرعة انطلاق وتجمع الصواريخ في الهاتف
-    fireworkBaseReachTime: isMobile ? 50 : 30,
-    fireworkAddedReachTime: isMobile ? 40 : 30,
+    
+    // 💡 إبطاء صعود الصواريخ في الهاتف فقط
+    fireworkBaseReachTime: isMobile ? 60 : 30,
+    fireworkAddedReachTime: isMobile ? 60 : 30,
+    
     fireworkCircleBaseSize: 20,
     fireworkCircleAddedSize: 10,
-    fireworkCircleBaseTime: 30,
-    fireworkCircleAddedTime: 30,
+    
+    // 💡 إبطاء الانفجار في الهاتف فقط
+    fireworkCircleBaseTime: isMobile ? 50 : 30,
+    fireworkCircleAddedTime: isMobile ? 50 : 30,
+    
     fireworkCircleFadeBaseTime: 10,
     fireworkCircleFadeAddedTime: 5,
     fireworkBaseShards: 5,
@@ -40,16 +46,23 @@ var w = (c.width = winW),
     fireworkShardAddedSize: 3,
     gravity: 0.1,
     upFlow: -0.1,
-    // 💡 زيادة وقت بقاء الكلمة متجمعة في الهاتف قبل الطيران
-    letterContemplatingWaitTime: isMobile ? 480 : 360,
-    balloonSpawnTime: isMobile ? 30 : 20,
-    balloonBaseInflateTime: isMobile ? 15 : 10,
-    balloonAddedInflateTime: isMobile ? 15 : 10,
+    
+    // 💡 زيادة وقت بقاء الكلمة في الهاتف فقط لتقرأها براحة (700 للهاتف، 360 للحاسوب)
+    letterContemplatingWaitTime: isMobile ? 700 : 360,
+    
+    balloonSpawnTime: isMobile ? 40 : 20,
+    
+    // 💡 إبطاء تكون البالونات في الهاتف فقط
+    balloonBaseInflateTime: isMobile ? 20 : 10,
+    balloonAddedInflateTime: isMobile ? 20 : 10,
+    
     balloonBaseSize: 20,
     balloonAddedSize: 20,
-    // 💡 إبطاء سرعة طيران الكلمات للأعلى في الهاتف لتأخذ راحتها
-    balloonBaseVel: isMobile ? 0.2 : 0.4,
-    balloonAddedVel: isMobile ? 0.2 : 0.4,
+    
+    // 💡 إبطاء سرعة الطيران للأعلى في الهاتف فقط (0.15 بطيء للهاتف، 0.4 سريع للحاسوب)
+    balloonBaseVel: isMobile ? 0.15 : 0.4,
+    balloonAddedVel: isMobile ? 0.15 : 0.4,
+    
     balloonBaseRadian: -(Math.PI / 2 - 0.5),
     balloonAddedRadian: -1,
   },
@@ -410,7 +423,9 @@ window.addEventListener("resize", function () {
   h = c.height = winH * 2;
   hw = w / 2;
   hh = winH * 1.5;
-  isMobile = winW < 800;
-  opts.charSize = isMobile ? 24 : 30;
+  isMobile = winW < 768;
+  opts.charSize = isMobile ? 22 : 30;
+  opts.charSpacing = isMobile ? 24 : 35;
+  opts.lineHeight = isMobile ? 30 : 40;
   ctx.font = opts.charSize + "px Verdana";
 });
