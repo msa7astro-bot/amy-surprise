@@ -7,8 +7,7 @@ var w = (c.width = winW),
   hw = w / 2, 
   hh = winH * 1.5, 
   
-  // تحديد ما إذا كانت الشاشة هاتفاً محمولاً
-  isMobile = winW < 768,
+  isMobile = winW < 800,
   
   opts = {
     strings: ["HAPPY", "BIRTHDAY", "Amy🎉"],
@@ -22,18 +21,21 @@ var w = (c.width = winW),
     fireworkPrevPoints: 10,
     fireworkBaseLineWidth: 5,
     fireworkAddedLineWidth: 8,
-    fireworkSpawnTime: 200,
     
-    // 💡 إبطاء صعود الصواريخ في الهاتف فقط
-    fireworkBaseReachTime: isMobile ? 60 : 30,
-    fireworkAddedReachTime: isMobile ? 60 : 30,
+    // إبطاء وقت بدء الانطلاق بين كل حرف والآخر في الهاتف
+    fireworkSpawnTime: isMobile ? 300 : 200,
+    
+    // 👇 هنا سرعة "تكوّن الحروف" (صعود الصواريخ)
+    // 70 للهاتف (بطيء ومريح) : 30 للحاسوب (سريع كما هو)
+    fireworkBaseReachTime: isMobile ? 70 : 30,
+    fireworkAddedReachTime: isMobile ? 70 : 30,
     
     fireworkCircleBaseSize: 20,
     fireworkCircleAddedSize: 10,
     
-    // 💡 إبطاء الانفجار في الهاتف فقط
-    fireworkCircleBaseTime: isMobile ? 50 : 30,
-    fireworkCircleAddedTime: isMobile ? 50 : 30,
+    // 👇 هنا سرعة الانفجار للكشف عن الحرف
+    fireworkCircleBaseTime: isMobile ? 60 : 30,
+    fireworkCircleAddedTime: isMobile ? 60 : 30,
     
     fireworkCircleFadeBaseTime: 10,
     fireworkCircleFadeAddedTime: 5,
@@ -47,19 +49,16 @@ var w = (c.width = winW),
     gravity: 0.1,
     upFlow: -0.1,
     
-    // 💡 زيادة وقت بقاء الكلمة في الهاتف فقط لتقرأها براحة (700 للهاتف، 360 للحاسوب)
-    letterContemplatingWaitTime: isMobile ? 700 : 360,
+    // 👇 زيادة وقت بقاء الحروف مقروءة على الشاشة قبل الطيران للهاتف فقط
+    letterContemplatingWaitTime: isMobile ? 600 : 360,
     
-    balloonSpawnTime: isMobile ? 40 : 20,
-    
-    // 💡 إبطاء تكون البالونات في الهاتف فقط
-    balloonBaseInflateTime: isMobile ? 20 : 10,
-    balloonAddedInflateTime: isMobile ? 20 : 10,
-    
+    balloonSpawnTime: 20,
+    balloonBaseInflateTime: 10,
+    balloonAddedInflateTime: 10,
     balloonBaseSize: 20,
     balloonAddedSize: 20,
     
-    // 💡 إبطاء سرعة الطيران للأعلى في الهاتف فقط (0.15 بطيء للهاتف، 0.4 سريع للحاسوب)
+    // 👇 إبطاء سرعة طيران الحروف للأعلى في النهاية للهاتف فقط (0.15 بطيء : 0.4 سريع)
     balloonBaseVel: isMobile ? 0.15 : 0.4,
     balloonAddedVel: isMobile ? 0.15 : 0.4,
     
@@ -423,9 +422,7 @@ window.addEventListener("resize", function () {
   h = c.height = winH * 2;
   hw = w / 2;
   hh = winH * 1.5;
-  isMobile = winW < 768;
-  opts.charSize = isMobile ? 22 : 30;
-  opts.charSpacing = isMobile ? 24 : 35;
-  opts.lineHeight = isMobile ? 30 : 40;
+  isMobile = winW < 800;
+  opts.charSize = isMobile ? 24 : 30;
   ctx.font = opts.charSize + "px Verdana";
 });
