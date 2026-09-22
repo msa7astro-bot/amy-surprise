@@ -2,21 +2,19 @@ var winW = window.innerWidth,
     winH = window.innerHeight;
 
 var w = (c.width = winW),
-  // 💡 التصحيح الأول: ارتفاع اللوحة يجب أن يكون بحجم الشاشة وليس ضعفها
-  h = (c.height = winH), 
+  h = (c.height = winH * 2), 
   ctx = c.getContext("2d"),
   hw = w / 2, 
-  // 💡 التصحيح الثاني: المركز يجب أن يكون في منتصف الشاشة (النصف) وليس في الأسفل
-  hh = winH / 2, 
+  hh = winH * 1.5, 
   
   // تحديد ما إذا كانت الشاشة هاتفاً محمولاً
-  isMobile = winW < 800,
+  isMobile = winW < 768,
   
   opts = {
-    strings: ["HAPPY", "BIRTHDAY", "Amy 🎉"],
-    charSize: isMobile ? 35 : 60,       // تكبير الخط ليكون واضحاً في الهاتف
-    charSpacing: isMobile ? 38 : 65,    // تظبيط المسافة بين الحروف
-    lineHeight: isMobile ? 50 : 80,     // تظبيط المسافة بين السطور
+    strings: ["HAPPY", "BIRTHDAY", "Amy🎉"],
+    charSize: isMobile ? 18 : 30,       
+    charSpacing: isMobile ? 22 : 35,    
+    lineHeight: isMobile ? 30 : 40,     
 
     cx: w / 2,
     cy: h / 2,
@@ -62,9 +60,9 @@ var w = (c.width = winW),
   TauQuarter = Tau / 4,
   letters = [];
 
-// 💡 استخدام خط متناسق مع التصميم
-ctx.font = "bold " + opts.charSize + "px 'Titan One', 'Bubblegum Sans', Verdana, sans-serif";
+ctx.font = opts.charSize + "px Verdana";
 
+/* 💡 دالة توليد صوت الانفجار المتزامن تماماً مع ظهور الحرف في السماء */
 function playFireworkPopSound() {
   try {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -73,18 +71,10 @@ function playFireworkPopSound() {
     
     osc.type = 'triangle'; 
     osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-    if(osc.frequency.exponentialRampToValueAtTime) {
-      osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.08);
-    } else {
-      osc.frequency.linearRampToValueAtTime(80, audioCtx.currentTime + 0.08);
-    }
+    osc.frequency.exponentialRampToValueValueAtTime ? osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.08) : osc.frequency.linearRampToValueAtTime(80, audioCtx.currentTime + 0.08);
     
     gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-    if(gain.gain.exponentialRampToValueAtTime) {
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
-    } else {
-      gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
-    }
+    gain.gain.exponentialRampToValueAtTime ? gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08) : gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
     
     osc.connect(gain);
     gain.connect(audioCtx.destination);
@@ -372,8 +362,7 @@ function generateBalloonPath(x, y, size) {
 function anim() {
   window.requestAnimationFrame(anim);
 
-  // 💡 التصحيح الثالث: خلفية بنفسجية داكنة لتتطابق تماماً مع CSS لمنع خطوط الفواصل
-  ctx.fillStyle = "#0b0213";
+  ctx.fillStyle = "#111";
   ctx.fillRect(0, 0, w, h);
 
   ctx.translate(hw, hh);
@@ -400,7 +389,7 @@ for (var i = 0; i < opts.strings.length; ++i) {
     letters.push(
       new Letter(
         chars[j],
-        // 💡 التصحيح الرابع: معادلة التوسيط الدقيقة باستخدام charSpacing
+        // 💡 التعديل الوحيد هنا لتوسيط الحروف أفقياً بدون أي تداخل
         j * opts.charSpacing + opts.charSpacing / 2 - (chars.length * opts.charSpacing) / 2,
         i * opts.lineHeight + opts.lineHeight / 2 - (opts.strings.length * opts.lineHeight) / 2,
       ),
@@ -414,9 +403,10 @@ window.addEventListener("resize", function () {
   winW = window.innerWidth;
   winH = window.innerHeight;
   w = c.width = winW;
-  h = c.height = winH; // تم إصلاحها هنا أيضاً
+  h = c.height = winH * 2;
   hw = w / 2;
-  hh = h / 2;          // تم إصلاحها هنا أيضاً
-  isMobile = winW < 800;
-  ctx.font = "bold " + (isMobile ? 35 : 60) + "px 'Titan One', 'Bubblegum Sans', Verdana, sans-serif";
+  hh = winH * 1.5;
+  isMobile = winW < 768;
+  opts.charSize = isMobile ? 18 : 30;
+  ctx.font = opts.charSize + "px Verdana";
 });
