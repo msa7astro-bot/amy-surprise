@@ -1,20 +1,20 @@
 var winW = window.innerWidth,
     winH = window.innerHeight;
 
+// إعطاء أبعاد منطقية تتناسب مع الهاتف والحاسوب
 var w = (c.width = winW),
-  h = (c.height = winH * 2), 
+  h = (c.height = winH), 
   ctx = c.getContext("2d"),
   hw = w / 2, 
-  hh = winH * 1.5, 
+  hh = winH / 2, 
   
-  // تحديد ما إذا كانت الشاشة هاتفاً محمولاً
   isMobile = winW < 768,
   
   opts = {
     strings: ["HAPPY", "BIRTHDAY", "Amy🎉"],
-    charSize: isMobile ? 18 : 30,       
-    charSpacing: isMobile ? 22 : 35,    
-    lineHeight: isMobile ? 30 : 40,     
+    charSize: isMobile ? 30 : 40,       // 💡 حجم خط أوضح للهاتف
+    charSpacing: isMobile ? 32 : 45,    // 💡 مسافة مضبوطة تمنع التداخل
+    lineHeight: isMobile ? 40 : 55,     // 💡 مسافة بين السطور تمنع التداخل
 
     cx: w / 2,
     cy: h / 2,
@@ -60,9 +60,8 @@ var w = (c.width = winW),
   TauQuarter = Tau / 4,
   letters = [];
 
-ctx.font = opts.charSize + "px Verdana";
+ctx.font = "bold " + opts.charSize + "px Verdana";
 
-/* 💡 دالة توليد صوت الانفجار المتزامن تماماً مع ظهور الحرف في السماء */
 function playFireworkPopSound() {
   try {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -362,6 +361,7 @@ function generateBalloonPath(x, y, size) {
 function anim() {
   window.requestAnimationFrame(anim);
 
+  // 💡 خلفية موحدة لمنع الفواصل في الهاتف
   ctx.fillStyle = "#111";
   ctx.fillRect(0, 0, w, h);
 
@@ -389,7 +389,7 @@ for (var i = 0; i < opts.strings.length; ++i) {
     letters.push(
       new Letter(
         chars[j],
-        // 💡 التعديل الوحيد هنا لتوسيط الحروف أفقياً بدون أي تداخل
+        // 💡 تظبيط رياضيات المسافات لتتوسط الحروف
         j * opts.charSpacing + opts.charSpacing / 2 - (chars.length * opts.charSpacing) / 2,
         i * opts.lineHeight + opts.lineHeight / 2 - (opts.strings.length * opts.lineHeight) / 2,
       ),
@@ -403,10 +403,10 @@ window.addEventListener("resize", function () {
   winW = window.innerWidth;
   winH = window.innerHeight;
   w = c.width = winW;
-  h = c.height = winH * 2;
+  h = c.height = winH;
   hw = w / 2;
-  hh = winH * 1.5;
+  hh = winH / 2;
   isMobile = winW < 768;
-  opts.charSize = isMobile ? 18 : 30;
-  ctx.font = opts.charSize + "px Verdana";
+  opts.charSize = isMobile ? 30 : 40;
+  ctx.font = "bold " + opts.charSize + "px Verdana";
 });

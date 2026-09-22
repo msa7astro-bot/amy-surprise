@@ -1,7 +1,19 @@
+/* 💡 إجبار الشاشة على عدم التمدد وتوحيد الخلفية */
+#fireworks-overlay {
+    position: fixed;
+    top: -10vh;
+    left: 0;
+    width: 100vw;
+    height: 120vh;
+    background-color: #111;
+    z-index: 999999;
+}
 #fireworks-overlay canvas {
     position: absolute;
-    top: 0;
+    top: 10vh;
     left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 #fireworks-overlay p {
     margin: 0 0;
@@ -23,5 +35,5 @@
     font-size: 20px;
 }
 body {
-    overflow: hidden;
+    overflow-x: hidden;
 }
