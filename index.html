@@ -72,12 +72,27 @@
     #fireworks-overlay { position: fixed; top: -100vh; left: 0; width: 100%; height: 200vh; background-color: #111; z-index: 999999; }
     #wrapper { display: none; opacity: 0; transition: opacity 3s ease-in-out; }
 
-    /* إعدادات صندوق رسالة الحاسوب الأصلية */
+    /* =========================================
+       إعدادات صندوق الرسالة (للحاسوب)
+       ========================================= */
     .text__letter { max-height: 270px !important; overflow-y: auto !important; padding-right: 8px; }
     .text__letter::-webkit-scrollbar { width: 5px; }
     .text__letter::-webkit-scrollbar-track { background: transparent; }
     .text__letter::-webkit-scrollbar-thumb { background-color: #ff7882; border-radius: 10px; }
     .text__letter p { line-height: 1.5 !important; margin: 0 !important; }
+
+    /* 🌟 إصلاح شكل التاريخ للحاسوب ليظهر على سطر واحد بدون كسر الأنيميشن 🌟 */
+    .date__of__birth { 
+      border: 3px solid var(--color-black); position: relative; transform: translateY(-100px); 
+      z-index: -1; opacity: 0; visibility: hidden; width: 0px; 
+      animation: dateOfBirth 5s 9s forwards; white-space: nowrap; justify-content: center; 
+    }
+    @keyframes dateOfBirth { 
+      20%, 40% { width: 0px; height: 0; transform: translateY(0px); opacity: 1; visibility: visible; } 
+      45% { transform: translateY(0px); opacity: 1; visibility: visible; width: 350px; height: 0px; } 
+      50%, 100% { transform: translateY(0px); opacity: 1; visibility: visible; width: 350px; height: 50px; } 
+    }
+    .date__of__birth span, .name span { font-weight: bold; margin: 0px 15px; white-space: nowrap; }
 
     /* =========================================
        تصميم الهاتف الكامل والمزين
@@ -365,6 +380,7 @@
 
     <main class="birthday-page">
       
+      <!-- القسم الأول -->
       <section class="birthday-scene" id="welcome">
         <div class="mob-decor decorate_star" style="width:35px; height:35px; top:18%; left:8%; animation-delay: 1.5s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
         <div class="mob-decor decorate_star" style="width:25px; height:25px; top:25%; right:12%; animation-delay: 2s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
@@ -388,6 +404,7 @@
         </a>
       </section>
 
+      <!-- القسم الثاني -->
       <section class="birthday-scene" id="amy">
         <div class="mob-decor decorate_star" style="width:25px; height:25px; top:10%; left:25%; animation-delay: 0.5s; background-color: #e91e63; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
         <div class="mob-decor decorate_star" style="width:30px; height:30px; bottom:15%; right:22%; animation-delay: 1s; background-color: #ffc107; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
@@ -412,6 +429,7 @@
         </a>
       </section>
 
+      <!-- القسم الثالث -->
       <section class="birthday-scene" id="letter-mob">
         <div class="mob-decor decorate_star" style="width:35px; height:35px; top:12%; right:15%; animation-delay: 0.5s; background-color: #ff7882; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
         <div class="mob-decor decorate_star" style="width:25px; height:25px; bottom:32%; left:10%; animation-delay: 1s; background-color: #0b0213; clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);"></div>
