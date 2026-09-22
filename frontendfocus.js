@@ -23,19 +23,19 @@ var w = (c.width = winW),
     fireworkAddedLineWidth: 8,
     
     // إبطاء وقت بدء الانطلاق بين كل حرف والآخر في الهاتف
-    fireworkSpawnTime: isMobile ? 300 : 200,
+    fireworkSpawnTime: isMobile ? 200 : 200,
     
     // 👇 هنا سرعة "تكوّن الحروف" (صعود الصواريخ)
     // 70 للهاتف (بطيء ومريح) : 30 للحاسوب (سريع كما هو)
-    fireworkBaseReachTime: isMobile ? 100 : 30,
-    fireworkAddedReachTime: isMobile ? 100 : 30,
+    fireworkBaseReachTime: isMobile ? 30 : 30,
+    fireworkAddedReachTime: isMobile ? 30 : 30,
     
     fireworkCircleBaseSize: 20,
     fireworkCircleAddedSize: 10,
     
     // 👇 هنا سرعة الانفجار للكشف عن الحرف
-    fireworkCircleBaseTime: isMobile ? 60 : 30,
-    fireworkCircleAddedTime: isMobile ? 60 : 30,
+    fireworkCircleBaseTime: isMobile ? 30 : 30,
+    fireworkCircleAddedTime: isMobile ? 30 : 30,
     
     fireworkCircleFadeBaseTime: 10,
     fireworkCircleFadeAddedTime: 5,
@@ -50,7 +50,7 @@ var w = (c.width = winW),
     upFlow: -0.1,
     
     // 👇 زيادة وقت بقاء الحروف مقروءة على الشاشة قبل الطيران للهاتف فقط
-    letterContemplatingWaitTime: isMobile ? 800 : 360,
+    letterContemplatingWaitTime: isMobile ? 360 : 360,
     
     balloonSpawnTime: 20,
     balloonBaseInflateTime: 10,
@@ -59,8 +59,8 @@ var w = (c.width = winW),
     balloonAddedSize: 20,
     
     // 👇 إبطاء سرعة طيران الحروف للأعلى في النهاية للهاتف فقط (0.15 بطيء : 0.4 سريع)
-    balloonBaseVel: isMobile ? 0.1 : 0.4,
-    balloonAddedVel: isMobile ? 0.1 : 0.4,
+    balloonBaseVel: isMobile ? 0.4 : 0.4,
+    balloonAddedVel: isMobile ? 0.4 : 0.4,
     
     balloonBaseRadian: -(Math.PI / 2 - 0.5),
     balloonAddedRadian: -1,
